@@ -268,6 +268,63 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// Auto-scroll for promise cards on mobile
+if (window.innerWidth <= 768) {
+    const promiseGrid = document.querySelector('.promise-grid');
+    if (promiseGrid) {
+        let scrollPosition = 0;
+        const cardWidth = 152; // 140px + 12px gap
+        const maxScroll = promiseGrid.scrollWidth - promiseGrid.clientWidth;
+        
+        setInterval(() => {
+            scrollPosition += cardWidth;
+            if (scrollPosition > maxScroll) {
+                scrollPosition = 0;
+            }
+            promiseGrid.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        }, 3000);
+        
+        // Pause auto-scroll on touch
+        let autoScrollPaused = false;
+        promiseGrid.addEventListener('touchstart', () => {
+            autoScrollPaused = true;
+        });
+        
+        promiseGrid.addEventListener('touchend', () => {
+            setTimeout(() => {
+                autoScrollPaused = false;
+            }, 5000);
+        });
+    }
+    
+    // Auto-scroll for activity cards
+    const activitiesGrid = document.querySelector('.activities-grid');
+    if (activitiesGrid) {
+        let scrollPosition = 0;
+        const cardWidth = 152;
+        const maxScroll = activitiesGrid.scrollWidth - activitiesGrid.clientWidth;
+        
+        setInterval(() => {
+            scrollPosition += cardWidth;
+            if (scrollPosition > maxScroll) {
+                scrollPosition = 0;
+            }
+            activitiesGrid.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        }, 3500);
+        
+        // Pause on touch
+        activitiesGrid.addEventListener('touchstart', () => {
+            clearInterval();
+        });
+    }
+}
+
 // Mobile-specific enhancements
 if (window.innerWidth <= 768) {
     // Prevent zoom on double tap

@@ -1750,36 +1750,47 @@
             h2 { font-size: 24px; }
             h3 { font-size: 20px; }
             
-            /* Modern card improvements */
+            /* Compact mobile cards */
             .home-card {
-                margin-bottom: 24px;
-                border-radius: 20px;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+                margin-bottom: 16px;
+                border-radius: 16px;
+                box-shadow: 0 6px 20px rgba(0,0,0,0.12);
                 background: white;
                 overflow: hidden;
             }
             
             .home-image {
-                height: 220px;
+                height: 140px;
                 position: relative;
             }
             
             .home-content {
-                padding: 24px;
+                padding: 12px;
             }
             
             .home-header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                margin-bottom: 8px;
+            }
+            
+            .home-header h3 {
+                font-size: 18px;
+                margin: 0;
+            }
+            
+            .home-content p {
+                font-size: 14px;
+                line-height: 1.4;
                 margin-bottom: 12px;
             }
             
             .home-rating {
                 display: flex;
                 align-items: center;
-                gap: 4px;
-                font-size: 14px;
+                gap: 2px;
+                font-size: 12px;
                 color: #ffa500;
             }
             
