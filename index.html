@@ -802,6 +802,11 @@
 <i class="fas fa-chevron-up"></i>
 </button>
 
+<!-- PWA Install Button -->
+<button class="pwa-install-btn" id="installBtn" onclick="installApp()">
+<i class="fas fa-download"></i>
+</button>
+
 <!-- Modal Overlay -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
 <div class="modal-content" onclick="event.stopPropagation()">
@@ -1052,44 +1057,7 @@ function closeModal() {
     document.body.style.overflow = 'auto';
 }
 </script>
-<!-- PWA Install Button -->
-<button class="mobile-floating-menu" onclick="installApp()" id="installBtn">
-    <i class="fas fa-download"></i>
-</button>
 
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('assets/js/sw.js')
-    .then(() => {
-      console.log('Service Worker Registered');
-    });
-}
-
-let deferredPrompt;
-const installBtn = document.getElementById('installBtn');
-
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
-  installBtn.style.display = 'flex';
-});
-
-function installApp() {
-  if (deferredPrompt) {
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((result) => {
-      if (result.outcome === 'accepted') {
-        installBtn.style.display = 'none';
-      }
-      deferredPrompt = null;
-    });
-  }
-}
-
-window.addEventListener('appinstalled', () => {
-  installBtn.style.display = 'none';
-});
-</script>
 
 </body>
 </html>

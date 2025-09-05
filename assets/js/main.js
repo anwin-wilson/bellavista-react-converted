@@ -203,6 +203,25 @@ backToTop.addEventListener('click', () => {
 let deferredPrompt;
 let installButton;
 
+// Global function for onclick
+window.installApp = function() {
+    console.log('Install button clicked');
+    
+    if (deferredPrompt) {
+        console.log('Showing install prompt');
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((result) => {
+            console.log('Install result:', result.outcome);
+            if (result.outcome === 'accepted') {
+                alert('App installed successfully!');
+            }
+            deferredPrompt = null;
+        });
+    } else {
+        console.log('PWA not available - try on mobile Chrome/Edge');
+    }
+};
+
 // Create install button
 function createInstallButton() {
     installButton = document.createElement('button');
@@ -210,19 +229,8 @@ function createInstallButton() {
     installButton.innerHTML = '<i class="fas fa-download"></i>';
     installButton.setAttribute('aria-label', 'Install App');
     installButton.title = 'Install Bellavista App';
+    installButton.onclick = window.installApp;
     document.body.appendChild(installButton);
-    
-    installButton.addEventListener('click', async () => {
-        if (deferredPrompt) {
-            deferredPrompt.prompt();
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') {
-                console.log('PWA installed');
-            }
-            deferredPrompt = null;
-            installButton.style.display = 'none';
-        }
-    });
 }
 
 // Listen for beforeinstallprompt event

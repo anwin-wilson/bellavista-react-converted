@@ -440,10 +440,10 @@ input, select, textarea {
 /* PWA Install Button */
 .pwa-install-btn {
     position: fixed;
-    bottom: 80px;
+    bottom: 140px;
     right: 15px;
-    background: var(--primary-blue);
-    color: white;
+    background: var(--primary-blue) !important;
+    color: white !important;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -453,18 +453,28 @@ input, select, textarea {
     justify-content: center;
     cursor: pointer;
     box-shadow: 0 4px 15px rgba(0,102,204,0.3);
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
     z-index: 1000;
     font-size: 18px;
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .pwa-install-btn {
+        display: flex;
+    }
 }
 
 .pwa-install-btn:hover {
-    background: var(--primary-teal);
     transform: scale(1.1);
 }
 
-.pwa-install-btn.show {
-    display: flex;
+.pwa-install-btn:active {
+    transform: scale(0.95);
+}
+
+.pwa-install-btn:focus {
+    outline: none;
 }
 
 /* Mobile Performance Optimizations */
