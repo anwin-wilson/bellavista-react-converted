@@ -19,6 +19,69 @@ input, select, textarea {
     }
 }
 
+/* Mobile Typography Improvements */
+@media (max-width: 768px) {
+    body {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    h1 { font-size: 24px !important; }
+    h2 { font-size: 20px !important; }
+    h3 { font-size: 18px !important; }
+    h4 { font-size: 16px !important; }
+    
+    .section-title {
+        font-size: 22px !important;
+        margin-bottom: 10px;
+    }
+    
+    .hero h1 {
+        font-size: 28px !important;
+    }
+    
+    .hero-tagline {
+        font-size: 18px !important;
+    }
+    
+    .hero p {
+        font-size: 14px !important;
+    }
+}
+
+/* Mobile Icon Sizes */
+@media (max-width: 768px) {
+    .logo-icon {
+        font-size: 24px !important;
+    }
+    
+    .left-menu-toggle {
+        font-size: 20px !important;
+        padding: 8px !important;
+    }
+    
+    .mobile-menu {
+        font-size: 20px !important;
+        padding: 8px !important;
+    }
+    
+    .activity-icon,
+    .promise-icon,
+    .facility-info i {
+        font-size: 20px !important;
+    }
+    
+    .home-badge {
+        font-size: 10px !important;
+        padding: 3px 8px !important;
+    }
+    
+    .news-category {
+        font-size: 10px !important;
+        padding: 2px 8px !important;
+    }
+}
+
 /* Swipe gestures for cards */
 @media (max-width: 768px) {
     .homes-grid,
@@ -26,17 +89,38 @@ input, select, textarea {
     .news-grid {
         overflow-x: auto;
         display: flex;
-        gap: 20px;
-        padding-bottom: 20px;
+        gap: 15px;
+        padding-bottom: 15px;
         scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
     }
     
     .home-card,
     .testimonial-card,
     .news-card {
-        min-width: 280px;
+        min-width: 260px;
         flex-shrink: 0;
         scroll-snap-align: start;
+    }
+    
+    .activities-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .activity-card {
+        padding: 15px;
+        text-align: center;
+    }
+    
+    .promise-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+    }
+    
+    .promise-card {
+        padding: 15px;
+        text-align: center;
     }
 }
 
@@ -46,27 +130,52 @@ input, select, textarea {
     pointer-events: none;
 }
 
+/* Loading spinner */
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid var(--primary-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-right: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 /* Better mobile forms */
 @media (max-width: 768px) {
     .contact-form,
     .enquiry-form {
-        padding: 20px;
+        padding: 15px;
         margin: 0 10px;
     }
     
     .form-group {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
     
     .form-control {
-        border-radius: 12px;
+        border-radius: 8px;
         border: 2px solid #e0e0e0;
         transition: border-color 0.3s ease;
+        padding: 12px;
+        font-size: 14px;
     }
     
     .form-control:focus {
         border-color: var(--primary-blue);
         box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
+    }
+    
+    .btn {
+        padding: 12px 20px;
+        font-size: 14px;
+        border-radius: 20px;
     }
 }
 
@@ -79,60 +188,300 @@ input, select, textarea {
     
     .home-image,
     .news-image {
-        height: 200px;
-    }
-}
-
-/* Pull-to-refresh indicator */
-.ptr-indicator {
-    position: fixed;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--primary-blue);
-    color: white;
-    padding: 10px 20px;
-    border-radius: 0 0 15px 15px;
-    font-size: 14px;
-    z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.ptr-indicator.active {
-    opacity: 1;
-}
-
-/* Mobile navigation improvements */
-@media (max-width: 768px) {
-    .mobile-nav-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.5);
-        z-index: 999;
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
+        height: 180px;
     }
     
-    .mobile-nav-overlay.active {
-        opacity: 1;
-        visibility: visible;
+    .hero-slideshow {
+        height: 300px;
+    }
+}
+
+/* Mobile Hero Improvements */
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 0 40px;
+        min-height: 60vh;
+    }
+    
+    .hero-actions {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+    }
+    
+    .hero-stats {
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 30px;
+        gap: 10px;
+    }
+    
+    .stat-item {
+        text-align: center;
+        flex: 1;
+    }
+    
+    .stat-number {
+        font-size: 18px !important;
+    }
+    
+    .stat-label {
+        font-size: 12px !important;
+    }
+}
+
+/* Mobile Section Spacing */
+@media (max-width: 768px) {
+    section {
+        padding: 30px 0 !important;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+    
+    .section-header {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .section-subtitle {
+        font-size: 14px;
+        margin-bottom: 15px;
+    }
+}
+
+/* Mobile Card Improvements */
+@media (max-width: 768px) {
+    .home-card,
+    .news-card,
+    .testimonial-card {
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .home-content,
+    .news-content {
+        padding: 15px;
+    }
+    
+    .home-content h3,
+    .news-content h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+    
+    .home-content p,
+    .news-content p {
+        font-size: 13px;
+        line-height: 1.4;
+        margin-bottom: 10px;
+    }
+}
+
+/* Mobile Navigation Improvements */
+@media (max-width: 768px) {
+    .side-dropdown-menu {
+        width: 260px;
+    }
+    
+    .side-dropdown-menu li a {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+    
+    .nav-category {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--primary-blue);
+        padding: 10px 20px 5px;
+        margin-top: 15px;
+        border-bottom: 1px solid #eee;
+    }
+}
+
+/* Mobile Chat Widget */
+@media (max-width: 768px) {
+    .chat-widget {
+        bottom: 20px;
+        right: 15px;
+    }
+    
+    .chat-button {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+    }
+    
+    .chat-popup {
+        width: 280px;
+        right: 0;
+        bottom: 70px;
+    }
+    
+    .chat-option {
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile Footer */
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .footer-col {
+        text-align: center;
+    }
+    
+    .footer-col h3 {
+        font-size: 16px;
+        margin-bottom: 15px;
+    }
+    
+    .footer-links a {
+        font-size: 14px;
+    }
+    
+    .newsletter {
+        padding: 20px;
+        margin-top: 20px;
+    }
+    
+    .newsletter h3 {
+        font-size: 16px;
+    }
+    
+    .newsletter p {
+        font-size: 13px;
+    }
+    
+    .newsletter-form {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .newsletter-input,
+    .newsletter-btn {
+        border-radius: 20px;
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+}
+
+/* Mobile Facility Tabs */
+@media (max-width: 768px) {
+    .facility-tabs {
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .tab-btn {
+        white-space: nowrap;
+        padding: 8px 15px;
+        font-size: 12px;
+        border-radius: 15px;
+        min-width: auto;
+    }
+    
+    .facilities-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .facility-card {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .facility-image {
+        width: 80px;
+        height: 60px;
+        flex-shrink: 0;
+    }
+    
+    .facility-info h4 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+    
+    .facility-info p {
+        font-size: 12px;
+        margin: 0;
     }
 }
 
 /* Safe area handling for notched devices */
 @supports (padding: max(0px)) {
     .header-container {
-        padding-left: max(20px, env(safe-area-inset-left));
-        padding-right: max(20px, env(safe-area-inset-right));
+        padding-left: max(15px, env(safe-area-inset-left));
+        padding-right: max(15px, env(safe-area-inset-right));
+        padding-top: max(15px, env(safe-area-inset-top));
     }
     
-    .mobile-floating-menu {
-        bottom: max(140px, calc(140px + env(safe-area-inset-bottom)));
-        right: max(20px, env(safe-area-inset-right));
+    .chat-widget {
+        bottom: max(20px, calc(20px + env(safe-area-inset-bottom)));
+        right: max(15px, env(safe-area-inset-right));
+    }
+    
+    .back-to-top {
+        bottom: max(80px, calc(80px + env(safe-area-inset-bottom)));
+        right: max(15px, env(safe-area-inset-right));
+    }
+}
+
+/* PWA Install Button */
+.pwa-install-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 15px;
+    background: var(--primary-blue);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,102,204,0.3);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    font-size: 18px;
+}
+
+.pwa-install-btn:hover {
+    background: var(--primary-teal);
+    transform: scale(1.1);
+}
+
+.pwa-install-btn.show {
+    display: flex;
+}
+
+/* Mobile Performance Optimizations */
+@media (max-width: 768px) {
+    * {
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    .home-card,
+    .news-card,
+    .btn {
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+    }
+    
+    img {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
     }
 }

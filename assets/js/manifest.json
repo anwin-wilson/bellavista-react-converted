@@ -2,21 +2,27 @@
   "name": "Bellavista Care Homes",
   "short_name": "Bellavista",
   "description": "Premium residential & nursing care across South Wales",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0066cc",
   "orientation": "portrait-primary",
+  "scope": "./",
+  "categories": ["health", "medical", "lifestyle"],
+  "lang": "en",
+  "dir": "ltr",
   "icons": [
     {
-      "src": "assets/images/icon-192.png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' fill='%230066cc'/%3E%3Cpath d='M96 40c-8.8 0-16 7.2-16 16v24H56c-8.8 0-16 7.2-16 16v40c0 8.8 7.2 16 16 16h24v24c0 8.8 7.2 16 16 16h40c8.8 0 16-7.2 16-16v-24h24c8.8 0 16-7.2 16-16V96c0-8.8-7.2-16-16-16h-24V56c0-8.8-7.2-16-16-16H96z' fill='white'/%3E%3C/svg%3E",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     },
     {
-      "src": "assets/images/icon-512.png",
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' fill='%230066cc'/%3E%3Cpath d='M256 100c-23.5 0-42.7 19.2-42.7 42.7v64H149.3c-23.5 0-42.7 19.2-42.7 42.7v106.6c0 23.5 19.2 42.7 42.7 42.7h64v64c0 23.5 19.2 42.7 42.7 42.7h106.6c23.5 0 42.7-19.2 42.7-42.7v-64h64c23.5 0 42.7-19.2 42.7-42.7V249.3c0-23.5-19.2-42.7-42.7-42.7h-64v-64c0-23.5-19.2-42.7-42.7-42.7H256z' fill='white'/%3E%3C/svg%3E",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ]
 }

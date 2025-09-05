@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Test - Bellavista</title>
+    <link rel="manifest" href="./assets/js/manifest.json">
+    <meta name="theme-color" content="#0066cc">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .test-section {
+            background: #f5f5f5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .info { background: #d1ecf1; color: #0c5460; }
+        button {
+            background: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0052a3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Bellavista PWA Test Page</h1>
+    
+    <div class="test-section">
+        <h2>PWA Installation Test</h2>
+        <div id="pwa-status" class="status info">Checking PWA support...</div>
+        <button id="install-btn" style="display: none;">Install App</button>
+        <button onclick="testServiceWorker()">Test Service Worker</button>
+        <button onclick="testManifest()">Test Manifest</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>Mobile Features Test</h2>
+        <button onclick="testTouch()">Test Touch Events</button>
+        <button onclick="testViewport()">Test Viewport</button>
+        <div id="mobile-status" class="status info">Mobile features ready</div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Results</h2>
+        <div id="results"></div>
+    </div>
+    
+    <p><a href="index.html">← Back to Main Site</a></p>
+
+    <script>
+        let deferredPrompt;
+        const results = document.getElementById('results');
+        const pwaStatus = document.getElementById('pwa-status');
+        const installBtn = document.getElementById('install-btn');
+        
+        function addResult(message, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `status ${type}`;
+            div.textContent = message;
+            results.appendChild(div);
+        }
+        
+        // Test PWA support
+        window.addEventListener('load', () => {
+            if ('serviceWorker' in navigator) {
+                addResult('✓ Service Worker supported', 'success');
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => addResult('✓ Service Worker registered', 'success'))
+                    .catch(err => addResult('✗ Service Worker registration failed: ' + err, 'error'));
+            } else {
+                addResult('✗ Service Worker not supported', 'error');
+            }
+            
+            if (window.matchMedia('(display-mode: standalone)').matches) {
+                addResult('✓ Running as PWA', 'success');
+                pwaStatus.textContent = 'App is installed and running as PWA';
+                pwaStatus.className = 'status success';
+            } else {
+                pwaStatus.textContent = 'App not installed - install prompt will appear if supported';
+            }
+        });
+        
+        // Listen for install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'inline-block';
+            addResult('✓ Install prompt available', 'success');
+            pwaStatus.textContent = 'Ready to install - click Install App button';
+            pwaStatus.className = 'status success';
+        });
+        
+        // Install button click
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                const { outcome } = await deferredPrompt.userChoice;
+                addResult(`Install prompt result: ${outcome}`, outcome === 'accepted' ? 'success' : 'info');
+                deferredPrompt = null;
+                installBtn.style.display = 'none';
+            }
+        });
+        
+        // Test functions
+        function testServiceWorker() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(registrations => {
+                    addResult(`Service Workers: ${registrations.length} registered`, 'info');
+                    registrations.forEach((reg, i) => {
+                        addResult(`SW ${i+1}: ${reg.scope}`, 'info');
+                    });
+                });
+            }
+        }
+        
+        function testManifest() {
+            fetch('./assets/js/manifest.json')
+                .then(response => response.json())
+                .then(manifest => {
+                    addResult(`✓ Manifest loaded: ${manifest.name}`, 'success');
+                    addResult(`Icons: ${manifest.icons.length}`, 'info');
+                    addResult(`Display: ${manifest.display}`, 'info');
+                })
+                .catch(err => addResult('✗ Manifest load failed: ' + err, 'error'));
+        }
+        
+        function testTouch() {
+            if ('ontouchstart' in window) {
+                addResult('✓ Touch events supported', 'success');
+            } else {
+                addResult('✗ Touch events not supported', 'error');
+            }
+        }
+        
+        function testViewport() {
+            const viewport = window.innerWidth + 'x' + window.innerHeight;
+            const pixelRatio = window.devicePixelRatio || 1;
+            addResult(`Viewport: ${viewport}, Pixel Ratio: ${pixelRatio}`, 'info');
+            
+            if (window.innerWidth <= 768) {
+                addResult('✓ Mobile viewport detected', 'success');
+            } else {
+                addResult('Desktop viewport', 'info');
+            }
+        }
+        
+        // Auto-run basic tests
+        setTimeout(() => {
+            testTouch();
+            testViewport();
+        }, 1000);
+    </script>
+</body>
+</html>

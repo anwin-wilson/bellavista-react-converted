@@ -75,28 +75,35 @@
             });
         });
         
-        // Form submission
+        // Form submission with loading state
         document.querySelectorAll('.form-btn, .newsletter-btn').forEach(button => {
             button.addEventListener('click', function(e) {
 				if (this.closest('form')?.id === 'loginForm') return;
                 e.preventDefault();
                 
-                // // Show success message
-                // const originalText = this.textContent;
-                // this.textContent = 'Thank you! Message sent.';
-                // this.style.background = 'linear-gradient(135deg, #06ffa5, #00b4d8)';
+                // Show loading state
+                const originalText = this.textContent;
+                this.innerHTML = '<span class="loading-spinner"></span>Sending...';
+                this.disabled = true;
                 
-                // Reset form
-                const form = this.closest('form');
-                if (form) {
-                    form.reset();
-                }
-                
-                // Reset button after 3 seconds
+                // Simulate form submission
                 setTimeout(() => {
-                    this.textContent = originalText;
-                    this.style.background = '';
-                }, 3000);
+                    this.innerHTML = '✓ Thank you! Message sent.';
+                    this.style.background = 'linear-gradient(135deg, #06ffa5, #00b4d8)';
+                    
+                    // Reset form
+                    const form = this.closest('form');
+                    if (form) {
+                        form.reset();
+                    }
+                    
+                    // Reset button after 3 seconds
+                    setTimeout(() => {
+                        this.textContent = originalText;
+                        this.style.background = '';
+                        this.disabled = false;
+                    }, 3000);
+                }, 1500);
             });
         });
         
@@ -155,10 +162,10 @@
             });
         });
         
-        // Add animation on scroll
+        // Add animation on scroll (optimized for mobile)
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            threshold: window.innerWidth <= 768 ? 0.05 : 0.1,
+            rootMargin: window.innerWidth <= 768 ? '0px 0px -50px 0px' : '0px 0px -100px 0px'
         };
         
         const observer = new IntersectionObserver(function(entries) {
@@ -191,3 +198,155 @@ backToTop.addEventListener('click', () => {
         behavior: 'smooth'
     });
 });
+
+// PWA Installation
+let deferredPrompt;
+let installButton;
+
+// Create install button
+function createInstallButton() {
+    installButton = document.createElement('button');
+    installButton.className = 'pwa-install-btn';
+    installButton.innerHTML = '<i class="fas fa-download"></i>';
+    installButton.setAttribute('aria-label', 'Install App');
+    installButton.title = 'Install Bellavista App';
+    document.body.appendChild(installButton);
+    
+    installButton.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                console.log('PWA installed');
+            }
+            deferredPrompt = null;
+            installButton.style.display = 'none';
+        }
+    });
+}
+
+// Listen for beforeinstallprompt event
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    
+    if (!installButton) {
+        createInstallButton();
+    }
+    installButton.classList.add('show');
+});
+
+// Hide install button after installation
+window.addEventListener('appinstalled', () => {
+    console.log('PWA was installed');
+    if (installButton) {
+        installButton.style.display = 'none';
+    }
+    deferredPrompt = null;
+});
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then((registration) => {
+                console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+                console.log('SW registration failed: ', registrationError);
+            });
+    });
+}
+
+// Chat Widget Functionality
+function toggleChat() {
+    const chatPopup = document.getElementById('chatPopup');
+    chatPopup.classList.toggle('active');
+}
+
+// Close chat when clicking outside
+document.addEventListener('click', function(event) {
+    const chatWidget = document.getElementById('chatWidget');
+    const chatPopup = document.getElementById('chatPopup');
+    
+    if (chatWidget && !chatWidget.contains(event.target)) {
+        chatPopup.classList.remove('active');
+    }
+});
+
+// Mobile-specific enhancements
+if (window.innerWidth <= 768) {
+    // Prevent zoom on double tap
+    let lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+        const now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+    
+    // Add touch feedback
+    document.addEventListener('touchstart', function(e) {
+        if (e.target.classList.contains('btn') || 
+            e.target.classList.contains('home-card') ||
+            e.target.classList.contains('news-card')) {
+            e.target.style.transform = 'scale(0.98)';
+        }
+    });
+    
+    document.addEventListener('touchend', function(e) {
+        if (e.target.classList.contains('btn') || 
+            e.target.classList.contains('home-card') ||
+            e.target.classList.contains('news-card')) {
+            setTimeout(() => {
+                e.target.style.transform = '';
+            }, 150);
+        }
+    });
+    
+    // Optimize scrolling for mobile
+    document.addEventListener('touchmove', function(e) {
+        if (e.target.closest('.homes-grid') || 
+            e.target.closest('.news-grid') ||
+            e.target.closest('.testimonials-grid')) {
+            e.stopPropagation();
+        }
+    }, { passive: true });
+}
+
+// Lazy loading for images
+if ('IntersectionObserver' in window) {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    observer.unobserve(img);
+                }
+            }
+        });
+    });
+    
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+}
+
+// Performance optimization for mobile
+if (window.innerWidth <= 768) {
+    // Reduce animation complexity on mobile
+    const style = document.createElement('style');
+    style.textContent = `
+        * {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
+        .animate__animated {
+            animation-duration: 0.5s !important;
+        }
+    `;
+    document.head.appendChild(style);
+}
