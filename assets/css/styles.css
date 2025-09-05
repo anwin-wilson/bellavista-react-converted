@@ -1750,8 +1750,39 @@
             h2 { font-size: 24px; }
             h3 { font-size: 20px; }
             
-            /* Card improvements */
-            .home-card,
+            /* Modern card improvements */
+            .home-card {
+                margin-bottom: 24px;
+                border-radius: 20px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+                background: white;
+                overflow: hidden;
+            }
+            
+            .home-image {
+                height: 220px;
+                position: relative;
+            }
+            
+            .home-content {
+                padding: 24px;
+            }
+            
+            .home-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 12px;
+            }
+            
+            .home-rating {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                font-size: 14px;
+                color: #ffa500;
+            }
+            
             .testimonial-card,
             .news-card,
             .career-card {
@@ -1781,7 +1812,11 @@
         
         /* Responsive Design */
         @media (max-width: 992px) {
-            .homes-grid,
+            .homes-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 24px;
+            }
+            
             .career-grid,
             .testimonials-grid,
             .news-grid,

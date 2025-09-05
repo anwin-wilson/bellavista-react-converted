@@ -36,9 +36,30 @@ input, select, textarea {
     }
 }
 
-/* Swipe gestures for cards */
+/* Modern mobile card layout */
 @media (max-width: 768px) {
-    .homes-grid,
+    .homes-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 10px;
+    }
+    
+    .home-card {
+        width: 100%;
+        margin: 0;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+        background: white;
+        transition: all 0.3s ease;
+    }
+    
+    .home-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0,0,0,0.16);
+    }
+    
     .testimonials-grid,
     .news-grid {
         overflow-x: auto;
@@ -48,7 +69,6 @@ input, select, textarea {
         scroll-snap-type: x mandatory;
     }
     
-    .home-card,
     .testimonial-card,
     .news-card {
         min-width: 280px;
