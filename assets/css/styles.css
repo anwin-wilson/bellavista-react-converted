@@ -1518,7 +1518,7 @@
   transform: translateY(-3px);
 }
 
-/* PWA Install Button */
+/* PWA Install Button - Mobile Only */
 .pwa-install-btn {
   position: fixed;
   bottom: 160px;
@@ -1538,6 +1538,12 @@
   border: none;
   outline: none;
   font-size: 16px;
+}
+
+@media (min-width: 769px) {
+  .pwa-install-btn {
+    display: none !important;
+  }
 }
 
 .pwa-install-btn.show {
