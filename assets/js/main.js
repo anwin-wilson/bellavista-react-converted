@@ -218,6 +218,23 @@ function createInstallButton() {
     });
 }
 
+// Check if app is already installed
+function isAppInstalled() {
+    return window.matchMedia('(display-mode: standalone)').matches || 
+           window.navigator.standalone === true;
+}
+
+// Initialize install button on mobile devices
+if (window.innerWidth <= 768 && !isAppInstalled()) {
+    // Create button immediately on mobile
+    setTimeout(() => {
+        if (!installButton) {
+            createInstallButton();
+            installButton.classList.add('show');
+        }
+    }, 2000); // Show after 2 seconds
+}
+
 // Listen for beforeinstallprompt event
 window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
@@ -267,7 +284,8 @@ if (window.innerWidth <= 768) {
     document.addEventListener('touchstart', function(e) {
         if (e.target.classList.contains('btn') || 
             e.target.classList.contains('home-card') ||
-            e.target.classList.contains('news-card')) {
+            e.target.classList.contains('news-card') ||
+            e.target.classList.contains('pwa-install-btn')) {
             e.target.style.transform = 'scale(0.98)';
         }
     });
@@ -275,7 +293,8 @@ if (window.innerWidth <= 768) {
     document.addEventListener('touchend', function(e) {
         if (e.target.classList.contains('btn') || 
             e.target.classList.contains('home-card') ||
-            e.target.classList.contains('news-card')) {
+            e.target.classList.contains('news-card') ||
+            e.target.classList.contains('pwa-install-btn')) {
             setTimeout(() => {
                 e.target.style.transform = '';
             }, 150);

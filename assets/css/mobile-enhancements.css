@@ -10,6 +10,23 @@ input, select, textarea {
     font-size: 16px !important;
 }
 
+/* Ensure PWA install button is visible on mobile */
+@media (max-width: 768px) {
+    .pwa-install-btn {
+        display: flex !important;
+        bottom: 160px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+        box-shadow: 0 4px 15px rgba(0,102,204,0.4);
+    }
+    
+    .pwa-install-btn.show {
+        display: flex !important;
+    }
+}
+
 /* Mobile-friendly hover states */
 @media (hover: none) {
     .btn:hover,
