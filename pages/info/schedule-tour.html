@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule a Tour - Bellavista Care Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <style>
+        .tour-container {
+            max-width: 600px;
+            margin: 60px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--bg-dark);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
+        }
+        .booking-success {
+            display: none;
+            text-align: center;
+            padding: 30px;
+            background: var(--success-bg, #f0fff4);
+            border-radius: 10px;
+            border: 1px solid var(--primary-green);
+        }
+        .booking-id {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo" onclick="window.location.href='../../index.html'" style="cursor: pointer;">
+                <div class="logo-icon"><i class="fas fa-home"></i></div>
+                <div class="logo-text-group">
+                    <div class="logo-text">Bellavista <span>Nursing Homes</span></div>
+                    <div class="tagline">A Home From Home</div>
+                </div>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../homes/our-homes.html">Our Homes</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section style="padding: 60px 0; background: var(--bg-light);">
+        <div class="container">
+            <div class="tour-container">
+                <div id="bookingForm">
+                    <h2 class="section-title">Schedule a Tour</h2>
+                    <p style="text-align: center; margin-bottom: 30px; color: var(--text-medium);">
+                        Book a personalized tour of our facilities and meet our caring staff.
+                    </p>
+                    
+                    <form id="tourForm">
+                        <div class="form-group">
+                            <label for="name">Full Name *</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tourDate">Preferred Tour Date *</label>
+                            <input type="date" id="tourDate" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="tourTime">Preferred Time *</label>
+                            <select id="tourTime" class="form-control" required>
+                                <option value="">Select a time</option>
+                                <option value="09:00">9:00 AM</option>
+                                <option value="10:00">10:00 AM</option>
+                                <option value="11:00">11:00 AM</option>
+                                <option value="14:00">2:00 PM</option>
+                                <option value="15:00">3:00 PM</option>
+                                <option value="16:00">4:00 PM</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="homeLocation">Preferred Location</label>
+                            <select id="homeLocation" class="form-control">
+                                <option value="">Any location</option>
+                                <option value="cardiff">Bellavista Cardiff</option>
+                                <option value="barry">Bellavista Barry</option>
+                                <option value="waverley">Waverley Care Centre</option>
+                                <option value="college-fields">College Fields</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="notes">Additional Notes</label>
+                            <textarea id="notes" class="form-control" rows="3" placeholder="Any specific requirements or questions..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">
+                            <i class="fas fa-calendar-check"></i> Schedule Tour
+                        </button>
+                    </form>
+                </div>
+                
+                <div id="bookingSuccess" class="booking-success">
+                    <i class="fas fa-check-circle" style="font-size: 48px; color: var(--primary-green); margin-bottom: 20px;"></i>
+                    <h3>Tour Scheduled Successfully!</h3>
+                    <p>Your booking ID is:</p>
+                    <div class="booking-id" id="bookingId"></div>
+                    <p style="margin-top: 20px;">We'll contact you within 24 hours to confirm your tour details.</p>
+                    <button class="btn ghost" onclick="window.location.href='../../index.html'" style="margin-top: 20px;">
+                        Return to Home
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="copyright">
+                <p>© 2024 Bellavista Nursing Homes. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set minimum date to today
+        document.getElementById('tourDate').min = new Date().toISOString().split('T')[0];
+        
+        document.getElementById('tourForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const tourDate = document.getElementById('tourDate').value;
+            const tourTime = document.getElementById('tourTime').value;
+            const homeLocation = document.getElementById('homeLocation').value;
+            const notes = document.getElementById('notes').value;
+            
+            // Generate booking ID
+            const bookingId = 'BV' + Date.now().toString().slice(-6);
+            
+            // Store booking data
+            const booking = {
+                firstName: name.split(' ')[0] || name,
+                lastName: name.split(' ').slice(1).join(' ') || '',
+                email: email,
+                phone: phone,
+                visitDate: tourDate,
+                visitTime: tourTime,
+                careType: 'General Tour',
+                message: notes,
+                timestamp: new Date().toISOString()
+            };
+            
+            // Save to localStorage - only to tourBookings to avoid duplicates
+            const finalBooking = {...booking, location: homeLocation || 'general', id: bookingId};
+            const bookings = JSON.parse(localStorage.getItem('tourBookings') || '[]');
+            bookings.push(finalBooking);
+            localStorage.setItem('tourBookings', JSON.stringify(bookings));
+            
+            // Show success message
+            document.getElementById('bookingForm').style.display = 'none';
+            document.getElementById('bookingSuccess').style.display = 'block';
+            document.getElementById('bookingId').textContent = bookingId;
+        });
+    </script>
+</body>
+</html>

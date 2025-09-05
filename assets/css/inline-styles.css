@@ -1,0 +1,10 @@
+/* Newsletter button styles */
+.newsletter-btn {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+
+/* Logo cursor pointer */
+.logo {
+  cursor: pointer;
+}

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Dashboard - Bellavista Care Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard-enhanced.css">
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --primary-orange: #ff9500;
+            --primary-green: #06ffa5;
+            --primary-purple: #8b5cf6;
+            --white: #ffffff;
+            --bg-light: #f8f9fa;
+            --bg-medium: #e9ecef;
+            --text-dark: #2c3e50;
+            --text-medium: #6c757d;
+            --text-light: #adb5bd;
+            --border-light: #f0f0f0;
+        }
+        
+        /* Fix sidebar navigation */
+        .dashboard-nav ul {
+            display: flex !important;
+            flex-direction: column !important;
+            list-style: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        .dashboard-nav li {
+            margin: 0 !important;
+            margin-bottom: 5px !important;
+            width: 100% !important;
+        }
+        
+        /* Fixed header on zoom */
+        header {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 1000 !important;
+            width: 100% !important;
+        }
+        
+        body {
+            padding-top: 80px !important;
+        }
+        
+        .sidebar {
+            top: 80px !important;
+            height: calc(100vh - 80px) !important;
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-home"></i></div>
+                <div class="logo-text-group">
+                    <div class="logo-text">Bellavista <span>Nursing Homes</span></div>
+                    <div class="tagline">Staff Portal</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Staff Portal</h3>
+                <p>Welcome, <span id="staffName">Loading...</span></p>
+            </div>
+            <nav class="dashboard-nav">
+                <ul>
+                    <li><a href="#overview" class="nav-link active" onclick="showSection('overview')"><i class="fas fa-tachometer-alt"></i> Overview</a></li>
+                    <li><a href="#residents" class="nav-link" onclick="showSection('residents')"><i class="fas fa-users"></i> My Residents</a></li>
+                    <li><a href="#medications" class="nav-link" onclick="showSection('medications')"><i class="fas fa-pills"></i> Medications</a></li>
+                    <li><a href="#care-notes" class="nav-link" onclick="showSection('care-notes')"><i class="fas fa-clipboard"></i> Care Notes</a></li>
+                    <li><a href="#activities" class="nav-link" onclick="showSection('activities')"><i class="fas fa-calendar"></i> Activities</a></li>
+                    <li><a href="#incidents" class="nav-link" onclick="showSection('incidents')"><i class="fas fa-exclamation-triangle"></i> Incidents</a></li>
+                    <li><a href="#handover" class="nav-link" onclick="showSection('handover')"><i class="fas fa-exchange-alt"></i> Handover</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="dashboard-main">
+            <section id="overview" class="dashboard-section active">
+                <h2>Today's Overview</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-users" style="color: var(--primary-blue);"></i>
+                        <h3 id="totalResidents">12</h3>
+                        <p>Residents Assigned</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-pills" style="color: var(--primary-orange);"></i>
+                        <h3 id="medsDue">8</h3>
+                        <p>Medications Due</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-calendar" style="color: var(--primary-green);"></i>
+                        <h3 id="todayActivities">3</h3>
+                        <p>Activities Today</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-clipboard-check" style="color: var(--primary-purple);"></i>
+                        <h3 id="pendingTasks">5</h3>
+                        <p>Tasks Pending</p>
+                    </div>
+                </div>
+                
+                <div class="panel">
+                    <h3>Quick Actions</h3>
+                    <div class="resident-actions">
+                        <button class="btn" onclick="showSection('medications')">
+                            <i class="fas fa-pills"></i> View Medications
+                        </button>
+                        <button class="btn ghost" onclick="showSection('care-notes')">
+                            <i class="fas fa-plus"></i> Add Care Note
+                        </button>
+                        <button class="btn warn" onclick="showSection('incidents')">
+                            <i class="fas fa-exclamation-triangle"></i> Report Incident
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Today's Schedule</h3>
+                    <div id="todaySchedule">
+                        <p><i class="fas fa-clock"></i> 9:00 AM - Morning medication rounds</p>
+                        <p><i class="fas fa-dumbbell"></i> 10:00 AM - Exercise class with Mrs. Johnson</p>
+                        <p><i class="fas fa-clipboard"></i> 11:30 AM - Care plan review meeting</p>
+                        <p><i class="fas fa-music"></i> 2:00 PM - Music therapy session</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="residents" class="dashboard-section">
+                <h2>My Residents</h2>
+                <div class="content-grid">
+                    <div class="content-card">
+                        <div class="content-card-header">
+                            <h3>Mrs. Margaret Johnson</h3>
+                        </div>
+                        <div class="content-card-body">
+                            <p><strong>Room:</strong> 12A | <strong>Age:</strong> 78</p>
+                            <p><strong>Care Level:</strong> Nursing Care</p>
+                            <p><strong>Condition:</strong> Stable, requires assistance with mobility</p>
+                            <p><strong>Last Update:</strong> 2 hours ago</p>
+                            <div class="resident-actions">
+                                <button class="btn ghost small" onclick="viewCarePlan('margaret')">View Care Plan</button>
+                                <button class="btn small" onclick="addCareNote('margaret')">Add Note</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="content-card">
+                        <div class="content-card-header">
+                            <h3>Mr. Robert Smith</h3>
+                        </div>
+                        <div class="content-card-body">
+                            <p><strong>Room:</strong> 15B | <strong>Age:</strong> 82</p>
+                            <p><strong>Care Level:</strong> Assisted Living</p>
+                            <p><strong>Condition:</strong> Independent, medication reminders needed</p>
+                            <p><strong>Last Update:</strong> 1 hour ago</p>
+                            <div class="resident-actions">
+                                <button class="btn ghost small" onclick="viewCarePlan('robert')">View Care Plan</button>
+                                <button class="btn small" onclick="addCareNote('robert')">Add Note</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="content-card">
+                        <div class="content-card-header">
+                            <h3>Mrs. Helen Davis</h3>
+                        </div>
+                        <div class="content-card-body">
+                            <p><strong>Room:</strong> 8C | <strong>Age:</strong> 75</p>
+                            <p><strong>Care Level:</strong> Memory Care</p>
+                            <p><strong>Condition:</strong> Dementia, requires close supervision</p>
+                            <p><strong>Last Update:</strong> 30 minutes ago</p>
+                            <div class="resident-actions">
+                                <button class="btn ghost small" onclick="viewCarePlan('helen')">View Care Plan</button>
+                                <button class="btn small" onclick="addCareNote('helen')">Add Note</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="medications" class="dashboard-section">
+                <h2>Medication Schedule</h2>
+                <div class="medication-list">
+                    <div class="medication-item pending">
+                        <div class="medication-info">
+                            <h4>Mrs. Johnson - Warfarin 2mg</h4>
+                            <p><i class="fas fa-clock"></i> Time: 2:00 PM | <i class="fas fa-route"></i> Route: Oral</p>
+                            <p><strong>Dosage:</strong> 2mg | <strong>Frequency:</strong> Once daily</p>
+                        </div>
+                        <button class="btn success small" onclick="markMedicationAdministered(this)">Mark Administered</button>
+                    </div>
+                    
+                    <div class="medication-item pending">
+                        <div class="medication-info">
+                            <h4>Mr. Smith - Metformin 500mg</h4>
+                            <p><i class="fas fa-clock"></i> Time: 2:30 PM | <i class="fas fa-route"></i> Route: Oral</p>
+                            <p><strong>Dosage:</strong> 500mg | <strong>Frequency:</strong> Twice daily</p>
+                        </div>
+                        <button class="btn success small" onclick="markMedicationAdministered(this)">Mark Administered</button>
+                    </div>
+                    
+                    <div class="medication-item administered">
+                        <div class="medication-info">
+                            <h4>Mrs. Davis - Aricept 10mg</h4>
+                            <p><i class="fas fa-clock"></i> Time: 9:00 AM | <i class="fas fa-route"></i> Route: Oral</p>
+                            <p><strong>Administered by:</strong> Sarah Wilson, RN | <strong>Time:</strong> 9:15 AM</p>
+                        </div>
+                        <span class="btn small" style="background: var(--primary-green); cursor: default;">✓ Completed</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="care-notes" class="dashboard-section">
+                <h2>Care Notes</h2>
+                <div style="margin-bottom: 20px;">
+                    <button class="btn" onclick="toggleNoteForm()">
+                        <i class="fas fa-plus"></i> Add New Note
+                    </button>
+                </div>
+                
+                <div id="noteForm" class="panel" style="display: none;">
+                    <h3>Add Care Note</h3>
+                    <div style="margin-bottom: 15px;">
+                        <label>Resident:</label>
+                        <select class="form-control" id="noteResident" style="margin-top: 5px;">
+                            <option value="margaret">Mrs. Margaret Johnson</option>
+                            <option value="robert">Mr. Robert Smith</option>
+                            <option value="helen">Mrs. Helen Davis</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label>Note Type:</label>
+                        <select class="form-control" id="noteType" style="margin-top: 5px;">
+                            <option>General Care</option>
+                            <option>Medication</option>
+                            <option>Behavioral</option>
+                            <option>Medical</option>
+                            <option>Family Communication</option>
+                        </select>
+                    </div>
+                    <textarea class="form-control" id="noteContent" rows="4" placeholder="Enter care note details..."></textarea>
+                    <div style="margin-top: 15px;">
+                        <button class="btn" onclick="saveCareNote()">Save Note</button>
+                        <button class="btn ghost" onclick="toggleNoteForm()">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="careNotesList">
+                    <div class="panel">
+                        <h4>Recent Care Notes</h4>
+                        <div style="border-left: 3px solid var(--primary-blue); padding-left: 15px; margin: 15px 0;">
+                            <p><strong>Mrs. Johnson</strong> - General Care</p>
+                            <p>Assisted with mobility exercises. Resident showed improvement in balance and was able to walk 10 meters with minimal assistance.</p>
+                            <small style="color: var(--text-medium);">Today, 1:30 PM - Sarah Johnson, RN</small>
+                        </div>
+                        <div style="border-left: 3px solid var(--primary-green); padding-left: 15px; margin: 15px 0;">
+                            <p><strong>Mr. Smith</strong> - Medication</p>
+                            <p>Patient took morning medications without issues. Blood pressure stable at 130/85. No adverse reactions noted.</p>
+                            <small style="color: var(--text-medium);">Today, 9:15 AM - Jennifer Martinez, LPN</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="activities" class="dashboard-section">
+                <h2>Today's Activities</h2>
+                <div class="panel">
+                    <h4><i class="fas fa-dumbbell"></i> Morning Exercise Class</h4>
+                    <p><i class="fas fa-clock"></i> 10:00 AM - 11:00 AM</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Recreation Room</p>
+                    <p><strong>Participants:</strong> Mrs. Johnson, Mr. Smith, Mrs. Davis</p>
+                    <button class="btn ghost small" onclick="markAttendance('exercise')">Mark Attendance</button>
+                </div>
+                
+                <div class="panel">
+                    <h4><i class="fas fa-music"></i> Music Therapy</h4>
+                    <p><i class="fas fa-clock"></i> 2:00 PM - 3:00 PM</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Main Hall</p>
+                    <p><strong>Participants:</strong> Mrs. Johnson, Mrs. Davis</p>
+                    <button class="btn ghost small" onclick="markAttendance('music')">Mark Attendance</button>
+                </div>
+                
+                <div class="panel">
+                    <h4><i class="fas fa-palette"></i> Arts & Crafts</h4>
+                    <p><i class="fas fa-clock"></i> 4:00 PM - 5:00 PM</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Activity Room</p>
+                    <p><strong>Participants:</strong> All residents</p>
+                    <button class="btn ghost small" onclick="markAttendance('arts')">Mark Attendance</button>
+                </div>
+            </section>
+
+            <section id="incidents" class="dashboard-section">
+                <h2>Incident Reports</h2>
+                <div style="margin-bottom: 20px;">
+                    <button class="btn warn" onclick="toggleIncidentForm()">
+                        <i class="fas fa-exclamation-triangle"></i> Report New Incident
+                    </button>
+                </div>
+                
+                <div id="incidentForm" class="panel" style="display: none;">
+                    <h3>Report Incident</h3>
+                    <div style="margin-bottom: 15px;">
+                        <label>Incident Type:</label>
+                        <select class="form-control" id="incidentType" style="margin-top: 5px;">
+                            <option>Fall</option>
+                            <option>Medication Error</option>
+                            <option>Behavioral Issue</option>
+                            <option>Medical Emergency</option>
+                            <option>Equipment Issue</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label>Resident Involved:</label>
+                        <select class="form-control" id="incidentResident" style="margin-top: 5px;">
+                            <option value="margaret">Mrs. Margaret Johnson</option>
+                            <option value="robert">Mr. Robert Smith</option>
+                            <option value="helen">Mrs. Helen Davis</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label>Incident Severity:</label>
+                        <select class="form-control" id="incidentSeverity" style="margin-top: 5px;">
+                            <option>Low</option>
+                            <option>Medium</option>
+                            <option>High</option>
+                            <option>Critical</option>
+                        </select>
+                    </div>
+                    <textarea class="form-control" id="incidentDetails" rows="4" placeholder="Describe the incident in detail..."></textarea>
+                    <div style="margin-top: 15px;">
+                        <button class="btn warn" onclick="saveIncident()">Submit Report</button>
+                        <button class="btn ghost" onclick="toggleIncidentForm()">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="incidentsList">
+                    <div class="panel">
+                        <h4>Recent Incidents</h4>
+                        <p style="color: var(--text-medium); font-style: italic;">No incidents reported today. Great job maintaining a safe environment!</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="handover" class="dashboard-section">
+                <h2>Shift Handover</h2>
+                <div class="panel">
+                    <h3>Key Information for Next Shift</h3>
+                    <textarea class="form-control" id="handoverNotes" rows="6" placeholder="Enter important information for the next shift...
+Examples:
+- Resident status updates
+- Medication changes
+- Behavioral observations
+- Family communications
+- Equipment issues"></textarea>
+                    <button class="btn" style="margin-top: 15px;" onclick="saveHandoverNotes()">
+                        <i class="fas fa-save"></i> Save Handover Notes
+                    </button>
+                </div>
+                
+                <div class="panel">
+                    <h4>Previous Shift Notes</h4>
+                    <div style="background: var(--bg-light); padding: 15px; border-radius: 8px;">
+                        <p><strong>Night Shift (11 PM - 7 AM):</strong></p>
+                        <p>Mrs. Johnson had a restful night. Medication administered as scheduled. Mr. Smith requested additional blanket around 3 AM. All residents stable.</p>
+                        <small style="color: var(--text-medium);">- Night Staff, RN</small>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/auth/auth-system.js"></script>
+    <script src="../../assets/js/demo-data.js"></script>
+    <script>
+        // Initialize the dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDashboard();
+            showSection('overview');
+        });
+
+        // Initialize dashboard with user data
+        function initializeDashboard() {
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                document.getElementById('staffName').textContent = currentUser.name || 'Staff Member';
+            } else {
+                // Redirect to login if not authenticated
+                window.location.href = '../auth/login.html';
+            }
+        }
+
+        // Get current user from auth system
+        function getCurrentUser() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const currentUserEmail = localStorage.getItem('currentUser');
+            return users.find(user => user.email === currentUserEmail);
+        }
+
+        // Navigation functionality
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.dashboard-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update navigation active state
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate the correct nav link
+            const activeLink = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // Close mobile menu if open
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Toggle note form
+        function toggleNoteForm() {
+            const noteForm = document.getElementById('noteForm');
+            noteForm.style.display = noteForm.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Toggle incident form
+        function toggleIncidentForm() {
+            const incidentForm = document.getElementById('incidentForm');
+            incidentForm.style.display = incidentForm.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('users');
+                window.location.href = '../../index.html';
+            }
+        }
+
+        // Mark medication as administered
+        function markMedicationAdministered(button) {
+            const medicationItem = button.closest('.medication-item');
+            medicationItem.classList.remove('pending');
+            medicationItem.classList.add('administered');
+            
+            const info = medicationItem.querySelector('.medication-info p');
+            info.innerHTML += ' | <i class="fas fa-check"></i> Administered by ' + getCurrentUser().name;
+            
+            button.outerHTML = '<span class="btn small" style="background: var(--primary-green); cursor: default;">✓ Completed</span>';
+            
+            // Update count
+            updateMedicationCount();
+        }
+
+        // Update medication count
+        function updateMedicationCount() {
+            const pendingMeds = document.querySelectorAll('.medication-item.pending').length;
+            document.getElementById('medsDue').textContent = pendingMeds;
+        }
+
+        // Save care note
+        function saveCareNote() {
+            const resident = document.getElementById('noteResident').value;
+            const type = document.getElementById('noteType').value;
+            const content = document.getElementById('noteContent').value;
+            
+            if (content.trim()) {
+                alert('Care note saved successfully!');
+                toggleNoteForm();
+                document.getElementById('noteContent').value = '';
+            } else {
+                alert('Please enter note content');
+            }
+        }
+
+        // Save incident report
+        function saveIncident() {
+            const type = document.getElementById('incidentType').value;
+            const resident = document.getElementById('incidentResident').value;
+            const severity = document.getElementById('incidentSeverity').value;
+            const details = document.getElementById('incidentDetails').value;
+            
+            if (details.trim()) {
+                alert('Incident report submitted successfully!');
+                toggleIncidentForm();
+                document.getElementById('incidentDetails').value = '';
+            } else {
+                alert('Please provide incident details');
+            }
+        }
+
+        // Save handover notes
+        function saveHandoverNotes() {
+            const notes = document.getElementById('handoverNotes').value;
+            if (notes.trim()) {
+                alert('Handover notes saved successfully!');
+            } else {
+                alert('Please enter handover notes');
+            }
+        }
+
+        // View care plan
+        function viewCarePlan(residentId) {
+            alert(`Viewing care plan for ${residentId}`);
+        }
+
+        // Add care note
+        function addCareNote(residentId) {
+            showSection('care-notes');
+            document.getElementById('noteResident').value = residentId;
+            toggleNoteForm();
+        }
+
+        // Mark attendance
+        function markAttendance(activity) {
+            alert(`Marking attendance for ${activity} activity`);
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (sidebar.classList.contains('active') && 
+                !sidebar.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bellavista - Contact Us</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/cardiff.css">
+
+</head>
+<body>
+<header>
+<div class="container header-container">
+<div class="left-menu-wrapper">
+<div class="left-menu-toggle">
+<i class="fas fa-bars"></i>
+</div>
+<div class="side-dropdown-menu" id="sideMenu">
+<div class="close-menu">
+<i class="fas fa-times"></i>
+</div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../homes/our-homes.html">Our Homes</a></li>
+<li><a href="../info/testimonials.html">Testimonials</a></li>
+<li><a href="../info/news.html">News</a></li>
+<li><a href="../info/faq.html">FAQ</a></li>
+<li><a href="../info/gallery.html">Gallery</a></li>
+<li><a href="../info/career.html">Career</a></li>
+<li><a href="../info/contact.html">Contact Us</a></li>
+</ul>
+</div>
+</div>
+<div class="logo" onclick="window.location.href='../../index.html'" style="cursor: pointer;">
+<div class="logo-icon">
+<i class="fas fa-home"></i>
+</div>
+<div class="logo-text-group">
+<div class="logo-text">Bellavista <span>Nursing Homes</span></div>
+<div class="tagline">A Home From Home</div>
+</div>
+</div>
+<div class="mobile-menu">
+<i class="fas fa-bars"></i>
+</div>
+<nav>
+<ul>
+<li class="has-dropdown">
+<a href="../homes/our-homes.html">Our Homes <i class="fas fa-chevron-down"></i></a>
+<ul class="dropdown-menu">
+<li><a href="../homes/cardiff.html">Cardiff</a></li>
+<li><a href="../homes/barry.html">Barry</a></li>
+<li><a href="../homes/waverley.html">Waverley</a></li>
+<li><a href="../homes/college-fields.html">College Fields</a></li>
+</ul>
+</li>
+<li><a href="../info/testimonials.html">Testimonials</a></li>
+<li><a href="../info/news.html">News</a></li>
+<li><a href="../info/faq.html">FAQ</a></li>
+<li><a href="../info/career.html">Career</a></li>
+<li><a href="../info/contact.html">Contact Us</a></li>
+<li>
+<div class="auth-links">
+<a class="auth-link" href="../auth/login.html">Login</a>
+<span>|</span>
+<a class="auth-link" href="../auth/signup.html">Signup</a>
+</div>
+</li>
+</ul>
+</nav>
+</div>
+</header>
+<section class="visit-hero">
+    <div class="container">
+      <h1><i class="fas fa-phone"></i> Contact Us</h1>
+      <h2>We're Here to Help</h2>
+      <p>Get in touch with our caring team. We're available 24/7 to answer your questions and provide support.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="visit-booking-layout">
+        <div class="visit-form-container">
+          <h3>Send us a Message</h3>
+          <form class="visit-form" id="contactForm">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" class="form-control" required>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" class="form-control" required>
+            </div>
+            
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" class="form-control">
+            </div>
+            
+            <div class="form-group">
+              <label for="subject">Subject *</label>
+              <select id="subject" class="form-control" required>
+                <option value="">Select Subject</option>
+                <option value="general">General Inquiry</option>
+                <option value="care">Care Information</option>
+                <option value="visit">Schedule Visit</option>
+                <option value="emergency">Emergency</option>
+                <option value="feedback">Feedback</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label for="message">Message *</label>
+              <textarea id="message" class="form-control" rows="5" placeholder="Please tell us how we can help you..." required></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">
+              <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+          </form>
+        </div>
+        
+        <div class="visit-info">
+          <div class="info-card">
+            <h4><i class="fas fa-phone"></i> Call Us</h4>
+            <p><strong>Main Line:</strong><br>(029) 2048 5000</p>
+            <p><strong>Emergency:</strong><br>(029) 2048 5001</p>
+          </div>
+          
+          <div class="info-card">
+            <h4><i class="fas fa-envelope"></i> Email</h4>
+            <p><strong>General:</strong><br>info@bellavistanursinghome.com</p>
+            <p><strong>Admissions:</strong><br>admissions@bellavistanursinghome.com</p>
+          </div>
+          
+          <div class="info-card">
+            <h4><i class="fas fa-map-marker-alt"></i> Our Homes</h4>
+            <p><strong>Cardiff Bay:</strong><br>Cardiff Bay, Cardiff</p>
+            <p><strong>Barry Seaside:</strong><br>Barry, Vale of Glamorgan</p>
+            <p><strong>Waverley Centre:</strong><br>Cardiff</p>
+            <p><strong>College Fields:</strong><br>Cardiff</p>
+          </div>
+          
+          <div class="info-card">
+            <h4><i class="fas fa-clock"></i> Response Times</h4>
+            <ul>
+              <li>Emergency: Immediate</li>
+              <li>General Inquiries: 24 hours</li>
+              <li>Care Information: 48 hours</li>
+              <li>Visit Requests: Same day</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<footer>
+<div class="container">
+<div class="footer-container">
+<div class="footer-col">
+<h3>Bellavista Nursing Homes</h3>
+<p>Providing exceptional care with a focus on comfort, dignity, and personalized attention in a beautiful, serene environment.</p>
+<div class="social-links">
+<a aria-label="Facebook" href="#"><i class="fab fa-facebook-f"></i></a>
+<a aria-label="Twitter" href="#"><i class="fab fa-twitter"></i></a>
+<a aria-label="Instagram" href="#"><i class="fab fa-instagram"></i></a>
+<a aria-label="LinkedIn" href="#"><i class="fab fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="footer-col">
+<h3>Quick Links</h3>
+<ul class="footer-links">
+<li><a href="#">Home</a></li>
+<li><a href="#">About Us</a></li>
+<li><a href="#">Services</a></li>
+<li><a href="#">Gallery</a></li>
+<li><a href="#">Testimonials</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h3>Our Services</h3>
+<ul class="footer-links">
+<li><a href="#">Residential Care</a></li>
+<li><a href="#">Nursing Care</a></li>
+<li><a href="#">Dementia Care</a></li>
+<li><a href="#">Respite Care</a></li>
+<li><a href="#">Activities &amp; Wellness</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h3>Contact Info</h3>
+<ul class="footer-links">
+<li><i class="fas fa-map-marker-alt"></i> 123 Elegant Avenue, Serenity Hills, CA 90210</li>
+<li><i class="fas fa-phone"></i> (555) 123-4567</li>
+<li><i class="fas fa-envelope"></i> info@bellavistanursinghome.com</li>
+</ul>
+</div>
+</div>
+<div class="newsletter">
+<h3>Subscribe to Our Newsletter</h3>
+<p>Stay updated with the latest news and events from Bellavista Nursing Homes</p>
+<div class="newsletter-form">
+<input class="newsletter-input" placeholder="Enter your email" type="email"/>
+<button class="newsletter-btn" type="submit">Subscribe</button>
+</div>
+</div>
+<div class="copyright">
+<p>© 2024 Bellavista Nursing Homes. All Rights Reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+
+
+
+</body>
+</html>

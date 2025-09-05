@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Care Services - Bellavista Nursing Homes</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/cardiff.css">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <div class="left-menu-wrapper">
+        <div class="left-menu-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <div class="side-dropdown-menu" id="sideMenu">
+          <div class="close-menu">
+            <i class="fas fa-times"></i>
+          </div>
+          <ul>
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../homes/our-homes.html">Our Homes</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="logo" onclick="window.location.href='../../index.html'">
+        <div class="logo-icon"><i class="fas fa-home"></i></div>
+        <div class="logo-text-group">
+          <div class="logo-text">Bellavista <span>Nursing Homes</span></div>
+          <div class="tagline">A Home From Home</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="../homes/our-homes.html">Our Homes</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="visit-hero">
+    <div class="container">
+      <h1><i class="fas fa-heart"></i> Care Services</h1>
+      <h2>Comprehensive Care Solutions</h2>
+      <p>Discover our range of specialized care services designed to meet individual needs with dignity and compassion.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="care-grid">
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-user-nurse"></i></div>
+          <h3>Nursing Care</h3>
+          <p>24/7 professional nursing care with qualified staff providing medical support and health monitoring.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-brain"></i></div>
+          <h3>Dementia Care</h3>
+          <p>Specialized dementia care in secure environments with memory-focused activities and therapies.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-home"></i></div>
+          <h3>Residential Care</h3>
+          <p>Comfortable residential care for those who need assistance with daily living activities.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-calendar-alt"></i></div>
+          <h3>Respite Care</h3>
+          <p>Short-term care solutions providing relief for family caregivers while maintaining quality care.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-stethoscope"></i></div>
+          <h3>Medical Care</h3>
+          <p>Comprehensive medical care including medication management and health assessments.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-spa"></i></div>
+          <h3>Wellness Programs</h3>
+          <p>Holistic wellness programs including physiotherapy, activities, and therapeutic services.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Bellavista Nursing Homes</h3>
+          <p>Providing exceptional care with a focus on comfort, dignity, and personalized attention.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="../homes/our-homes.html">Our Homes</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2024 Bellavista Nursing Homes. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    document.querySelector('.left-menu-toggle').addEventListener('click', function() {
+      document.getElementById('sideMenu').classList.toggle('active');
+    });
+    
+    document.querySelector('.close-menu').addEventListener('click', function() {
+      document.getElementById('sideMenu').classList.remove('active');
+    });
+  </script>
+</body>
+</html>

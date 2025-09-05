@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bellavista Barry - Seaside Nursing Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../../assets/css/cardiff.css">
+  <link rel="stylesheet" href="../../assets/css/news-modern.css">
+</head>
+<body>
+  <header>
+    <div class="container header-container">
+      <div class="left-menu-wrapper">
+        <div class="left-menu-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <div class="side-dropdown-menu" id="sideMenu">
+          <div class="nav-header">
+            <div class="nav-logo">
+              <i class="fas fa-home"></i>
+              <span>Bellavista Barry</span>
+            </div>
+          </div>
+          <div class="close-menu">
+            <i class="fas fa-times"></i>
+          </div>
+          <div class="nav-scrollable">
+            <ul>
+              <div class="nav-category">Main</div>
+              <li><a href="../../index.html">Home</a></li>
+              <li><a href="our-homes.html">Our Homes</a></li>
+              <div class="nav-category">Barry Services</div>
+              <li><a href="barry-enquiry.html">Care Enquiry</a></li>
+              <li><a href="barry-schedule-visit.html">Schedule Visit</a></li>
+              <li><a href="barry-news.html">Barry News</a></li>
+              <div class="nav-category">Information</div>
+              <li><a href="../info/contact.html">Contact Us</a></li>
+              <li><a href="../info/faq.html">FAQ</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="logo" onclick="window.location.href='../../index.html'">
+        <div class="logo-icon"><i class="fas fa-home"></i></div>
+        <div class="logo-text-group">
+          <div class="logo-text">Bellavista <span>Nursing Homes</span></div>
+          <div class="tagline">A Home From Home</div>
+        </div>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="../../index.html">Home</a></li>
+          <li><a href="our-homes.html">Our Homes</a></li>
+          <li><a href="../info/contact.html">Contact</a></li>
+          <li><a href="barry-enquiry.html">Care Enquiry</a></li>
+          <li><a href="barry-schedule-visit.html" class="schedule-visit-btn"><i class="fas fa-calendar-check"></i> Schedule Visit</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="home-hero" id="heroSection">
+    <div class="container">
+      <h1>Welcome to Bellavista Barry</h1>
+      <p>A coastal care home with spectacular sea views and therapeutic seaside environment. We provide high-quality residential, nursing, and dementia care in a beautiful seaside setting where the healing power of the ocean enhances our residents' wellbeing.</p>
+      
+      <button class="read-more-btn" id="readMoreBtn" onclick="toggleHeroContent()">
+        <i class="fas fa-chevron-down"></i> Read More
+      </button>
+      
+      <div class="hero-expanded-content" id="heroExpandedContent">
+        <div class="expanded-text">
+          <p>Bellavista Barry is uniquely positioned on the beautiful Welsh coast, offering residents the therapeutic benefits of sea air and stunning ocean views. Our home combines modern care facilities with the natural healing environment of the seaside.</p>
+          
+          <p>We believe in the restorative power of coastal living, where residents can enjoy gentle sea breezes, watch the changing tides, and participate in seaside activities that promote both physical and mental wellbeing.</p>
+          
+          <p>Our dedicated team understands the unique advantages of seaside care, incorporating coastal walks, beach therapy, and outdoor activities that take full advantage of our prime waterfront location.</p>
+          
+          <p>The home is registered to provide residential care, nursing care, dementia care, and respite services, all enhanced by our beautiful coastal setting that provides a naturally calming and therapeutic environment.</p>
+        </div>
+      </div>
+      
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number">38</span>
+          <span class="stat-label">Sea View Rooms</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">12</span>
+          <span class="stat-label">Coastal Suites</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">80+</span>
+          <span class="stat-label">Caring Staff</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="find-home">
+    <div class="container">
+      <div class="find-home-layout" id="findHomeLayout">
+        <div class="find-home-content" id="findHomeContent">
+          <h2 class="section-title">Find Us - Barry Seaside Location</h2>
+          <p>Located on the beautiful Welsh coast with stunning sea views</p>
+          <div class="find-home-search">
+            <input class="search-input" id="locationInput" placeholder="Enter your postcode to get directions" type="text"/>
+            <button class="search-btn" onclick="findDirections()"><i class="fas fa-directions"></i></button>
+          </div>
+          <div id="results" style="display: none; margin-top: 20px;"></div>
+        </div>
+        <div class="map-container" id="mapContainer" style="display: none;">
+          <div class="demo-map">
+            <div class="map-header">
+              <i class="fas fa-map-marked-alt"></i> Route to Barry Seaside Home
+              <button class="close-map-btn" onclick="closeMap()">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+            <div class="map-content">
+              <div class="route-line"></div>
+              <div class="location-marker user-marker">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Your Location</span>
+              </div>
+              <div class="location-marker home-marker">
+                <i class="fas fa-home"></i>
+                <span>Barry Seaside Home</span>
+              </div>
+            </div>
+            <div class="map-info">
+              <div class="info-item">
+                <i class="fas fa-route"></i>
+                <span id="distance">Distance</span>
+              </div>
+              <div class="info-item">
+                <i class="fas fa-clock"></i>
+                <span id="duration">Duration</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Our Care Services</h2>
+      <p class="section-subtitle">Comprehensive care services enhanced by our therapeutic seaside environment</p>
+      <div class="care-grid">
+        <div class="card clickable-card" onclick="openModal('residential')">
+          <i class="fas fa-home" style="font-size: 3rem; color: var(--primary-blue); margin-bottom: 20px;"></i>
+          <h4>Residential Care</h4>
+          <p>Comfortable seaside living with personalized care and ocean views</p>
+        </div>
+        <div class="card clickable-card" onclick="openModal('nursing')">
+          <i class="fas fa-user-nurse" style="font-size: 3rem; color: var(--primary-green); margin-bottom: 20px;"></i>
+          <h4>Nursing Care</h4>
+          <p>24/7 professional nursing care in a therapeutic coastal environment</p>
+        </div>
+        <div class="card clickable-card" onclick="openModal('dementia')">
+          <i class="fas fa-brain" style="font-size: 3rem; color: var(--primary-purple); margin-bottom: 20px;"></i>
+          <h4>Dementia Care</h4>
+          <p>Memory care enhanced by the calming effects of seaside living</p>
+        </div>
+        <div class="card clickable-card" onclick="openModal('respite')">
+          <i class="fas fa-umbrella-beach" style="font-size: 3rem; color: var(--primary-orange); margin-bottom: 20px;"></i>
+          <h4>Seaside Respite</h4>
+          <p>Short-term coastal breaks providing families with peace of mind</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Our Seaside Team</h2>
+      <p class="section-subtitle">Experienced professionals who understand the benefits of coastal care</p>
+      <div class="team-grid">
+        <div class="card">
+          <img src="https://picsum.photos/seed/barry-manager/200/200" alt="Michael Davies">
+          <h4>Michael Davies</h4>
+          <p>Home Manager</p>
+          <p>20+ years experience in seaside care facilities</p>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/barry-nurse1/200/200" alt="Dr. Helen Roberts">
+          <h4>Dr. Helen Roberts</h4>
+          <p>Senior Nurse</p>
+          <p>Specialist in coastal healthcare and wellness therapy</p>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/barry-nurse2/200/200" alt="Sarah Williams">
+          <h4>Sarah Williams</h4>
+          <p>Activities Coordinator</p>
+          <p>Organizing seaside activities and beach therapy sessions</p>
+        </div>
+        <div class="card">
+          <img src="https://picsum.photos/seed/barry-physio/200/200" alt="David Jones">
+          <h4>David Jones</h4>
+          <p>Physiotherapist</p>
+          <p>Specializing in coastal walks and sea air therapy</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Why Choose Barry Seaside?</h2>
+      <p class="section-subtitle">Unique coastal advantages for health, wellbeing, and quality of life</p>
+      <div class="care-grid">
+        <div class="card">
+          <i class="fas fa-water" style="font-size: 3rem; color: var(--primary-blue); margin-bottom: 20px;"></i>
+          <h4>Spectacular Sea Views</h4>
+          <p>Stunning ocean vistas from rooms and communal areas promoting tranquility and wellbeing</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-wind" style="font-size: 3rem; color: var(--primary-green); margin-bottom: 20px;"></i>
+          <h4>Therapeutic Sea Air</h4>
+          <p>Natural health benefits from fresh coastal air and maritime environment</p>
+        </div>
+        <div class="card">
+          <i class="fas fa-umbrella-beach" style="font-size: 3rem; color: var(--primary-orange); margin-bottom: 20px;"></i>
+          <h4>Beach Activities</h4>
+          <p>Supervised beach walks, coastal excursions, and seaside therapy programs</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="news" id="news">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Latest Barry Seaside News</h2>
+        <p class="section-subtitle">Stay connected with coastal developments, seaside events & wellness innovations</p>
+      </div>
+      <div class="news-showcase">
+        <div class="news-featured">
+          <div class="news-image-large">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Seaside Garden">
+            <div class="news-badge-large">🌊 Barry Seaside Update</div>
+          </div>
+          <div class="news-info-large">
+            <div class="news-meta">
+              <span class="news-category featured">Facility Enhancement</span>
+              <span class="news-date-large">Dec 15, 2024</span>
+            </div>
+            <h3>New Coastal Garden & Beach Access Path Opens</h3>
+            <p>Our beautiful new seaside garden with direct beach access is now open, featuring therapeutic coastal plants, sea-view seating areas, and accessible pathways for all residents to enjoy the healing benefits of our oceanfront location.</p>
+            <div class="news-stats">
+              <span><i class="fas fa-eye"></i> 2.8K views</span>
+              <span><i class="fas fa-heart" onclick="toggleLike(this)"></i> <span class="like-count">94</span> likes</span>
+              <span><i class="fas fa-share" onclick="shareNews()"></i> <span class="share-count">67</span> shares</span>
+            </div>
+            <a href="barry-news.html?id=coastal-garden" class="btn btn-primary">Read Full Update</a>
+          </div>
+        </div>
+      </div>
+      <div class="news-filters">
+        <button class="filter-btn active" data-filter="all">All Barry News</button>
+        <button class="filter-btn" data-filter="health">Health Updates</button>
+        <button class="filter-btn" data-filter="awards">Awards</button>
+        <button class="filter-btn" data-filter="events">Seaside Events</button>
+        <button class="filter-btn" data-filter="activities">Beach Activities</button>
+        <button class="filter-btn" data-filter="community">Community</button>
+      </div>
+      <div class="news-grid modern">
+        <div class="news-card modern news-visible" data-category="events">
+          <div class="news-image">
+            <img alt="Beach Christmas" src="https://images.unsplash.com/photo-1512389142860-9c449e58a543?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"/>
+          </div>
+          <div class="news-content">
+            <div class="news-category events">🎄 Seaside Events</div>
+            <h4>Christmas by the Sea Celebration</h4>
+            <p>Join us for festive seaside activities, carol singing with ocean views, and special holiday meals featuring fresh local seafood.</p>
+            <div class="news-engagement">
+              <span><i class="fas fa-calendar"></i> Dec 20-27</span>
+              <span><i class="fas fa-map-marker-alt"></i> Barry Seaside</span>
+            </div>
+            <a class="news-link modern" href="barry-news.html?id=seaside-christmas">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="news-card modern news-visible" data-category="awards">
+          <div class="news-image">
+            <img alt="Coastal Care Award" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"/>
+          </div>
+          <div class="news-content">
+            <div class="news-category awards">🏆 Awards</div>
+            <h4>Coastal Care Excellence Award 2024</h4>
+            <p>Bellavista Barry receives recognition for innovative seaside therapy programs and outstanding coastal care environment.</p>
+            <div class="news-engagement">
+              <span><i class="fas fa-trophy"></i> Regional Award</span>
+              <span><i class="fas fa-water"></i> Seaside Care</span>
+            </div>
+            <a class="news-link modern" href="barry-news.html?id=coastal-award">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+        <div class="news-card modern news-visible" data-category="activities">
+          <div class="news-image">
+            <img alt="Beach Therapy" src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"/>
+          </div>
+          <div class="news-content">
+            <div class="news-category activities">🏖️ Beach Activities</div>
+            <h4>New Beach Therapy Program Launch</h4>
+            <p>Introducing supervised beach walks, sand therapy sessions, and coastal meditation programs for enhanced resident wellbeing.</p>
+            <div class="news-engagement">
+              <span><i class="fas fa-umbrella-beach"></i> Beach Therapy</span>
+              <span><i class="fas fa-heart"></i> Wellness</span>
+            </div>
+            <a class="news-link modern" href="barry-news.html?id=beach-therapy">Read More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="news-cta">
+        <a href="barry-news.html" class="btn btn-outline">
+          <i class="fas fa-newspaper"></i> View All Barry News
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div class="chat-widget" id="chatWidget">
+    <div class="chat-button" onclick="toggleChat()">
+      <i class="fas fa-comments"></i>
+      <div class="chat-tooltip">How can we help you?</div>
+    </div>
+    <div class="chat-popup" id="chatPopup">
+      <div class="chat-header">
+        <h4>How can we help you?</h4>
+        <button class="chat-close" onclick="toggleChat()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="chat-options">
+        <div class="chat-option" onclick="window.location.href='barry-enquiry.html'">
+          <i class="fas fa-heart"></i>
+          <span>Care Enquiry</span>
+        </div>
+        <div class="chat-option" onclick="window.location.href='barry-schedule-visit.html'">
+          <i class="fas fa-calendar"></i>
+          <span>Schedule Tour</span>
+        </div>
+        <div class="chat-option" onclick="window.location.href='../info/contact.html'">
+          <i class="fas fa-phone"></i>
+          <span>Call Us</span>
+        </div>
+        <div class="chat-option" onclick="openModal('barry-faq')">
+          <i class="fas fa-question-circle"></i>
+          <span>Barry FAQ</span>
+        </div>
+        <div class="chat-option emergency" onclick="window.location.href='../info/emergency.html'">
+          <i class="fas fa-ambulance"></i>
+          <span>Emergency</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Contact Information</h2>
+      <div class="contact-info">
+        <div class="contact-item">
+          <i class="fas fa-map-marker-alt"></i>
+          <span>Barry Seaside, Vale of Glamorgan - Waterfront location with beach access</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-phone"></i>
+          <span>01446 735 200</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-envelope"></i>
+          <span>barry@bellavistanursinghome.com</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-clock"></i>
+          <span>Visiting Hours: 9:00 AM - 8:00 PM Daily (Extended for sunset viewing)</span>
+        </div>
+        <div class="contact-item">
+          <i class="fas fa-wheelchair"></i>
+          <span>Fully accessible with beach access ramps and coastal pathways</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-container">
+        <div class="footer-col">
+          <h3>Bellavista Barry</h3>
+          <p>Providing exceptional seaside care with the therapeutic benefits of coastal living and ocean views.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="../../index.html">Home</a></li>
+            <li><a href="our-homes.html">Our Homes</a></li>
+            <li><a href="../info/contact.html">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="newsletter">
+        <h3>Subscribe to Barry Seaside Updates</h3>
+        <p>Stay updated with the latest news and events from Bellavista Barry</p>
+        <div class="newsletter-form">
+          <input class="newsletter-input" placeholder="Enter your email" type="email"/>
+          <button class="newsletter-btn" type="submit">Subscribe</button>
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2024 Bellavista Nursing Homes. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modal Overlay -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modalTitle">Care Service Details</h3>
+        <button class="modal-close" onclick="closeModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Content will be populated by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <script src="../../assets/js/main.js"></script>
+  <script>
+    function openModal(serviceType) {
+      const modal = document.getElementById('modalOverlay');
+      const title = document.getElementById('modalTitle');
+      const body = document.getElementById('modalBody');
+      
+      const serviceDetails = {
+        residential: {
+          title: 'Seaside Residential Care',
+          content: `
+            <div class="service-detail">
+              <h4><i class="fas fa-home"></i> Coastal Living Environment</h4>
+              <p>Our residential care combines comfortable accommodation with the therapeutic benefits of seaside living, offering rooms with stunning ocean views.</p>
+              
+              <h4><i class="fas fa-water"></i> Seaside Benefits</h4>
+              <ul>
+                <li>Sea view rooms with natural light and ocean breezes</li>
+                <li>Direct access to coastal gardens and beach areas</li>
+                <li>Therapeutic sea air for respiratory health</li>
+                <li>Calming sounds of waves for better sleep</li>
+              </ul>
+              
+              <h4><i class="fas fa-heart"></i> Personalized Care</h4>
+              <p>Each resident receives individualized care plans that incorporate the unique advantages of our coastal location for enhanced wellbeing.</p>
+            </div>
+          `
+        },
+        nursing: {
+          title: 'Coastal Nursing Care',
+          content: `
+            <div class="service-detail">
+              <h4><i class="fas fa-user-nurse"></i> Professional Seaside Care</h4>
+              <p>24/7 nursing care enhanced by our therapeutic coastal environment, where sea air and ocean views contribute to healing and recovery.</p>
+              
+              <h4><i class="fas fa-stethoscope"></i> Medical Excellence</h4>
+              <ul>
+                <li>Qualified nursing staff with coastal care expertise</li>
+                <li>Specialized equipment for seaside healthcare</li>
+                <li>Integration of sea air therapy in treatment plans</li>
+                <li>Partnerships with local coastal health services</li>
+              </ul>
+              
+              <h4><i class="fas fa-wind"></i> Natural Healing</h4>
+              <p>Our coastal location provides natural therapeutic benefits that complement traditional nursing care for improved health outcomes.</p>
+            </div>
+          `
+        },
+        dementia: {
+          title: 'Seaside Dementia Care',
+          content: `
+            <div class="service-detail">
+              <h4><i class="fas fa-brain"></i> Coastal Memory Care</h4>
+              <p>Specialized dementia care in a calming seaside environment where the rhythm of the ocean and coastal views provide natural therapeutic benefits.</p>
+              
+              <h4><i class="fas fa-water"></i> Ocean Therapy</h4>
+              <ul>
+                <li>Sensory stimulation through ocean sounds and sea breezes</li>
+                <li>Coastal walking paths for gentle exercise</li>
+                <li>Beach-themed reminiscence activities</li>
+                <li>Calming sea views to reduce agitation</li>
+              </ul>
+              
+              <h4><i class="fas fa-umbrella-beach"></i> Seaside Activities</h4>
+              <p>Specially designed programs that use our coastal location to stimulate memory and provide comfort through familiar seaside experiences.</p>
+            </div>
+          `
+        },
+        respite: {
+          title: 'Seaside Respite Care',
+          content: `
+            <div class="service-detail">
+              <h4><i class="fas fa-umbrella-beach"></i> Coastal Breaks</h4>
+              <p>Short-term seaside respite care that provides families with peace of mind while their loved ones enjoy the therapeutic benefits of our coastal location.</p>
+              
+              <h4><i class="fas fa-calendar-alt"></i> Flexible Seaside Stays</h4>
+              <ul>
+                <li>Weekend coastal breaks to week-long stays</li>
+                <li>Access to all seaside activities and therapies</li>
+                <li>Sea view accommodation options</li>
+                <li>Beach access and coastal excursions</li>
+              </ul>
+              
+              <h4><i class="fas fa-heart"></i> Restorative Environment</h4>
+              <p>Our seaside setting provides a naturally restorative environment that benefits both temporary and permanent residents.</p>
+            </div>
+          `
+        },
+        'barry-faq': {
+          title: 'Barry Seaside FAQ',
+          content: `
+            <div class="service-detail">
+              <h4><i class="fas fa-map-marker-alt"></i> Seaside Location</h4>
+              <p>Located on the beautiful Welsh coast with direct beach access. Free parking, excellent transport links, fully accessible with coastal pathways.</p>
+              
+              <h4><i class="fas fa-clock"></i> Visiting Hours</h4>
+              <p>Daily: 9:00 AM - 8:00 PM (Extended for sunset viewing). No appointment needed. Sea view family rooms available.</p>
+              
+              <h4><i class="fas fa-water"></i> Seaside Features</h4>
+              <ul>
+                <li>Spectacular ocean views from all rooms</li>
+                <li>Direct beach access with supervised walks</li>
+                <li>Coastal gardens and therapy areas</li>
+                <li>Sea air therapy programs</li>
+              </ul>
+              
+              <h4><i class="fas fa-phone"></i> Contact</h4>
+              <p>Phone: 01446 735 200<br>Email: barry@bellavistanursinghome.com</p>
+            </div>
+          `
+        }
+      };
+      
+      const service = serviceDetails[serviceType];
+      title.textContent = service.title;
+      body.innerHTML = service.content;
+      
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+      const modal = document.getElementById('modalOverlay');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+    
+    function toggleHeroContent() {
+      const heroSection = document.getElementById('heroSection');
+      const expandedContent = document.getElementById('heroExpandedContent');
+      const readMoreBtn = document.getElementById('readMoreBtn');
+      
+      if (expandedContent.classList.contains('expanded')) {
+        expandedContent.classList.remove('expanded');
+        heroSection.classList.remove('expanded');
+        readMoreBtn.innerHTML = '<i class="fas fa-chevron-down"></i> Read More';
+      } else {
+        expandedContent.classList.add('expanded');
+        heroSection.classList.add('expanded');
+        readMoreBtn.innerHTML = '<i class="fas fa-chevron-up"></i> Read Less';
+      }
+    }
+    
+    // Navigation and functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const leftMenuToggle = document.querySelector('.left-menu-toggle');
+      const sideMenu = document.getElementById('sideMenu');
+      const closeMenu = document.querySelector('.close-menu');
+      
+      leftMenuToggle.addEventListener('click', function() {
+        sideMenu.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      });
+      
+      closeMenu.addEventListener('click', function() {
+        sideMenu.classList.remove('active');
+        document.body.style.overflow = 'auto';
+      });
+      
+      document.addEventListener('click', function(e) {
+        if (!sideMenu.contains(e.target) && !leftMenuToggle.contains(e.target)) {
+          sideMenu.classList.remove('active');
+          document.body.style.overflow = 'auto';
+        }
+      });
+      
+      // News filtering
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const newsCards = document.querySelectorAll('.news-card[data-category]');
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+          
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          
+          newsCards.forEach(card => {
+            if (filter === 'all') {
+              card.style.display = 'block';
+            } else if (card.dataset.category === filter) {
+              card.style.display = 'block';
+              card.style.animation = 'fadeInUp 0.5s ease';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+    
+    function toggleLike(button) {
+      const likeCount = button.parentElement.querySelector('.like-count');
+      const currentCount = parseInt(likeCount.textContent);
+      const isLiked = button.classList.contains('liked');
+      
+      if (isLiked) {
+        button.classList.remove('liked');
+        likeCount.textContent = currentCount - 1;
+        button.style.color = '#666';
+      } else {
+        button.classList.add('liked');
+        likeCount.textContent = currentCount + 1;
+        button.style.color = '#e74c3c';
+      }
+    }
+    
+    function shareNews() {
+      const shareCount = document.querySelector('.share-count');
+      const currentCount = parseInt(shareCount.textContent);
+      
+      if (navigator.share) {
+        navigator.share({
+          title: 'Barry Seaside Update - Bellavista Barry',
+          text: 'Latest news from Bellavista Barry Seaside',
+          url: window.location.href + '?id=coastal-garden'
+        });
+      } else {
+        navigator.clipboard.writeText(window.location.href + '?id=coastal-garden');
+        alert('Link copied to clipboard!');
+      }
+      
+      shareCount.textContent = currentCount + 1;
+    }
+    
+    function findDirections() {
+      const locationInput = document.getElementById('locationInput');
+      const mapContainer = document.getElementById('mapContainer');
+      const findHomeContent = document.getElementById('findHomeContent');
+      
+      if (locationInput.value.trim()) {
+        mapContainer.style.display = 'block';
+        findHomeContent.style.display = 'none';
+        
+        document.getElementById('distance').textContent = 'Calculating...';
+        document.getElementById('duration').textContent = 'Calculating...';
+        
+        setTimeout(() => {
+          document.getElementById('distance').textContent = Math.floor(Math.random() * 10 + 1) + ' miles';
+          document.getElementById('duration').textContent = Math.floor(Math.random() * 20 + 5) + ' minutes';
+        }, 1000);
+      }
+    }
+    
+    function closeMap() {
+      const mapContainer = document.getElementById('mapContainer');
+      const findHomeContent = document.getElementById('findHomeContent');
+      
+      mapContainer.style.display = 'none';
+      findHomeContent.style.display = 'block';
+    }
+    
+    function toggleChat() {
+      const chatPopup = document.getElementById('chatPopup');
+      const chatWidget = document.getElementById('chatWidget');
+      
+      if (chatPopup.style.display === 'block') {
+        chatPopup.style.display = 'none';
+        chatWidget.classList.remove('active');
+      } else {
+        chatPopup.style.display = 'block';
+        chatWidget.classList.add('active');
+      }
+    }
+  </script>
+</body>
+</html>

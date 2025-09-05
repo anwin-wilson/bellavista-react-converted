@@ -1,0 +1,138 @@
+/* Mobile-First Enhancements */
+
+/* Smooth scrolling for mobile */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Prevent zoom on input focus */
+input, select, textarea {
+    font-size: 16px !important;
+}
+
+/* Mobile-friendly hover states */
+@media (hover: none) {
+    .btn:hover,
+    .home-card:hover,
+    .testimonial-card:hover {
+        transform: none;
+    }
+}
+
+/* Swipe gestures for cards */
+@media (max-width: 768px) {
+    .homes-grid,
+    .testimonials-grid,
+    .news-grid {
+        overflow-x: auto;
+        display: flex;
+        gap: 20px;
+        padding-bottom: 20px;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .home-card,
+    .testimonial-card,
+    .news-card {
+        min-width: 280px;
+        flex-shrink: 0;
+        scroll-snap-align: start;
+    }
+}
+
+/* Mobile loading states */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Better mobile forms */
+@media (max-width: 768px) {
+    .contact-form,
+    .enquiry-form {
+        padding: 20px;
+        margin: 0 10px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-control {
+        border-radius: 12px;
+        border: 2px solid #e0e0e0;
+        transition: border-color 0.3s ease;
+    }
+    
+    .form-control:focus {
+        border-color: var(--primary-blue);
+        box-shadow: 0 0 0 3px rgba(0,102,204,0.1);
+    }
+}
+
+/* Mobile-optimized images */
+@media (max-width: 768px) {
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    .home-image,
+    .news-image {
+        height: 200px;
+    }
+}
+
+/* Pull-to-refresh indicator */
+.ptr-indicator {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--primary-blue);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 0 0 15px 15px;
+    font-size: 14px;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.ptr-indicator.active {
+    opacity: 1;
+}
+
+/* Mobile navigation improvements */
+@media (max-width: 768px) {
+    .mobile-nav-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-nav-overlay.active {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+/* Safe area handling for notched devices */
+@supports (padding: max(0px)) {
+    .header-container {
+        padding-left: max(20px, env(safe-area-inset-left));
+        padding-right: max(20px, env(safe-area-inset-right));
+    }
+    
+    .mobile-floating-menu {
+        bottom: max(140px, calc(140px + env(safe-area-inset-bottom)));
+        right: max(20px, env(safe-area-inset-right));
+    }
+}

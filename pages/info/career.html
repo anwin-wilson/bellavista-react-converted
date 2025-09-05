@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bellavista - Career Opportunities</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+<link rel="stylesheet" href="../../assets/css/styles.css">
+<link rel="stylesheet" href="../../assets/css/cardiff.css">
+
+</head>
+<body>
+<header>
+<div class="container header-container">
+<div class="left-menu-wrapper">
+<div class="left-menu-toggle">
+<i class="fas fa-bars"></i>
+</div>
+<div class="side-dropdown-menu" id="sideMenu">
+<div class="close-menu">
+<i class="fas fa-times"></i>
+</div>
+<ul>
+<li><a href="../../index.html">Home</a></li>
+<li><a href="../homes/our-homes.html">Our Homes</a></li>
+<li><a href="testimonials.html">Testimonials</a></li>
+<li><a href="news.html">News</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="career.html">Career</a></li>
+<li><a href="contact.html">Contact Us</a></li>
+</ul>
+</div>
+</div>
+<div class="logo" onclick="window.location.href='../../index.html'" style="cursor: pointer;">
+<div class="logo-icon">
+<i class="fas fa-home"></i>
+</div>
+<div class="logo-text-group">
+<div class="logo-text">Bellavista <span>Nursing Homes</span></div>
+<div class="tagline">A Home From Home</div>
+</div>
+</div>
+<div class="mobile-menu">
+<i class="fas fa-bars"></i>
+</div>
+<nav>
+<ul>
+<li class="has-dropdown">
+<a href="../homes/our-homes.html">Our Homes <i class="fas fa-chevron-down"></i></a>
+<ul class="dropdown-menu">
+<li><a href="../homes/cardiff.html">Cardiff</a></li>
+<li><a href="../homes/barry.html">Barry</a></li>
+<li><a href="../homes/waverley.html">Waverley</a></li>
+<li><a href="../homes/college-fields.html">College Fields</a></li>
+</ul>
+</li>
+<li><a href="testimonials.html">Testimonials</a></li>
+<li><a href="news.html">News</a></li>
+<li><a href="faq.html">FAQ</a></li>
+<li><a href="career.html">Career</a></li>
+<li><a href="contact.html">Contact Us</a></li>
+<li>
+<div class="auth-links">
+<a class="auth-link" href="../auth/login.html">Login</a>
+<span>|</span>
+<a class="auth-link" href="../auth/signup.html">Signup</a>
+</div>
+</li>
+</ul>
+</nav>
+</div>
+</header>
+<section class="visit-hero">
+    <div class="container">
+      <h1><i class="fas fa-briefcase"></i> Career Opportunities</h1>
+      <h2>Join Our Caring Team</h2>
+      <p>Make a difference in the lives of our residents. We offer competitive benefits, professional development, and a supportive work environment.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="care-grid">
+        <div class="card clickable-card" onclick="openJobModal('nursing')">
+          <div class="card-icon"><i class="fas fa-user-nurse"></i></div>
+          <h3>Nursing Positions</h3>
+          <p>Registered Nurses, Healthcare Assistants, and Care Workers needed for our nursing homes.</p>
+          <div class="job-details">
+            <span><i class="fas fa-map-marker-alt"></i> All Locations</span>
+            <span><i class="fas fa-clock"></i> Full/Part Time</span>
+          </div>
+        </div>
+        
+        <div class="card clickable-card" onclick="openJobModal('admin')">
+          <div class="card-icon"><i class="fas fa-briefcase"></i></div>
+          <h3>Administrative Roles</h3>
+          <p>Reception, Administration, Management, and Support Services positions available.</p>
+          <div class="job-details">
+            <span><i class="fas fa-map-marker-alt"></i> Cardiff & Barry</span>
+            <span><i class="fas fa-clock"></i> Full Time</span>
+          </div>
+        </div>
+        
+        <div class="card clickable-card" onclick="openJobModal('kitchen')">
+          <div class="card-icon"><i class="fas fa-utensils"></i></div>
+          <h3>Kitchen & Catering</h3>
+          <p>Chefs, Kitchen Assistants, and Catering Staff to provide nutritious meals for residents.</p>
+          <div class="job-details">
+            <span><i class="fas fa-map-marker-alt"></i> All Locations</span>
+            <span><i class="fas fa-clock"></i> Various Shifts</span>
+          </div>
+        </div>
+        
+        <div class="card clickable-card" onclick="openJobModal('maintenance')">
+          <div class="card-icon"><i class="fas fa-tools"></i></div>
+          <h3>Maintenance & Facilities</h3>
+          <p>Maintenance Technicians, Housekeeping, and Facilities Management roles.</p>
+          <div class="job-details">
+            <span><i class="fas fa-map-marker-alt"></i> All Locations</span>
+            <span><i class="fas fa-clock"></i> Full Time</span>
+          </div>
+        </div>
+        
+        <div class="card clickable-card" onclick="openJobModal('activities')">
+          <div class="card-icon"><i class="fas fa-palette"></i></div>
+          <h3>Activities & Therapy</h3>
+          <p>Activities Coordinators, Physiotherapists, and Occupational Therapists wanted.</p>
+          <div class="job-details">
+            <span><i class="fas fa-map-marker-alt"></i> Cardiff & Waverley</span>
+            <span><i class="fas fa-clock"></i> Full/Part Time</span>
+          </div>
+        </div>
+        
+        <div class="card clickable-card" onclick="openJobModal('volunteer')">
+          <div class="card-icon"><i class="fas fa-hand-holding-heart"></i></div>
+          <h3>Volunteer Opportunities</h3>
+          <p>Make a difference in your community by volunteering your time and skills.</p>
+          <div class="job-details">
+            <span><i class="fas fa-map-marker-alt"></i> All Locations</span>
+            <span><i class="fas fa-clock"></i> Flexible</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Job Application Modal -->
+  <div class="modal-overlay" id="jobModal" onclick="closeJobModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="jobModalTitle">Apply for Position</h3>
+        <button class="modal-close" onclick="closeJobModal()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="visit-form" id="jobApplicationForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" class="form-control" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" class="form-control" required>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" class="form-control" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" class="form-control" required>
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="position">Position Applied For *</label>
+              <input type="text" id="position" class="form-control" readonly>
+            </div>
+            <div class="form-group">
+              <label for="location">Preferred Location</label>
+              <select id="location" class="form-control">
+                <option value="">Any Location</option>
+                <option value="cardiff">Cardiff Bay</option>
+                <option value="barry">Barry Seaside</option>
+                <option value="waverley">Waverley Centre</option>
+                <option value="college-fields">College Fields</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label for="experience">Relevant Experience *</label>
+            <textarea id="experience" class="form-control" rows="3" placeholder="Please describe your relevant experience and qualifications..." required></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="availability">Availability</label>
+            <textarea id="availability" class="form-control" rows="2" placeholder="Please let us know your availability (days, hours, start date)..."></textarea>
+          </div>
+          
+          <div class="form-group">
+            <label for="cv">Upload CV/Resume</label>
+            <input type="file" id="cv" class="form-control" accept=".pdf,.doc,.docx">
+          </div>
+          
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-paper-plane"></i> Submit Application
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+<!-- Accessibility Statement -->
+<section class="accessibility animate__animated animate__fadeInUp">
+  <div class="container">
+    <h2 class="section-title">Accessibility</h2>
+    <p>Our home is fully wheelchair accessible and equipped with lifts, handrails, and accessible bathrooms throughout.</p>
+  </div>
+</section>
+<footer>
+<div class="container">
+<div class="footer-container">
+<div class="footer-col">
+<h3>Bellavista Nursing Homes</h3>
+<p>Providing exceptional care with a focus on comfort, dignity, and personalized attention in a beautiful, serene environment.</p>
+<div class="social-links">
+<a aria-label="Facebook" href="#"><i class="fab fa-facebook-f"></i></a>
+<a aria-label="Twitter" href="#"><i class="fab fa-twitter"></i></a>
+<a aria-label="Instagram" href="#"><i class="fab fa-instagram"></i></a>
+<a aria-label="LinkedIn" href="#"><i class="fab fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="footer-col">
+<h3>Quick Links</h3>
+<ul class="footer-links">
+<li><a href="#">Home</a></li>
+<li><a href="#">About Us</a></li>
+<li><a href="#">Services</a></li>
+<li><a href="#">Gallery</a></li>
+<li><a href="#">Testimonials</a></li>
+<li><a href="#">Contact</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h3>Our Services</h3>
+<ul class="footer-links">
+<li><a href="#">Residential Care</a></li>
+<li><a href="#">Nursing Care</a></li>
+<li><a href="#">Dementia Care</a></li>
+<li><a href="#">Respite Care</a></li>
+<li><a href="#">Activities &amp; Wellness</a></li>
+</ul>
+</div>
+<div class="footer-col">
+<h3>Contact Info</h3>
+<ul class="footer-links">
+<li><i class="fas fa-map-marker-alt"></i> 123 Elegant Avenue, Serenity Hills, CA 90210</li>
+<li><i class="fas fa-phone"></i> (555) 123-4567</li>
+<li><i class="fas fa-envelope"></i> info@bellavistanursinghome.com</li>
+</ul>
+</div>
+</div>
+<div class="newsletter">
+<h3>Subscribe to Our Newsletter</h3>
+<p>Stay updated with the latest news and events from Bellavista Nursing Homes</p>
+<div class="newsletter-form">
+<input class="newsletter-input" placeholder="Enter your email" type="email"/>
+<button class="newsletter-btn" type="submit">Subscribe</button>
+</div>
+</div>
+<div class="copyright">
+<p>© 2024 Bellavista Nursing Homes. All Rights Reserved.</p>
+</div>
+</div>
+</footer>
+<script src="../../assets/js/main.js"></script>
+  <script>
+    function openJobModal(jobType) {
+      const modal = document.getElementById('jobModal');
+      const title = document.getElementById('jobModalTitle');
+      const positionField = document.getElementById('position');
+      
+      const jobTitles = {
+        nursing: 'Nursing Position',
+        admin: 'Administrative Role',
+        kitchen: 'Kitchen & Catering Position',
+        maintenance: 'Maintenance & Facilities Role',
+        activities: 'Activities & Therapy Position',
+        volunteer: 'Volunteer Opportunity'
+      };
+      
+      title.textContent = `Apply for ${jobTitles[jobType]}`;
+      positionField.value = jobTitles[jobType];
+      
+      modal.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeJobModal() {
+      const modal = document.getElementById('jobModal');
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+      document.getElementById('jobApplicationForm').reset();
+    }
+    
+    document.getElementById('jobApplicationForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        position: document.getElementById('position').value,
+        location: document.getElementById('location').value,
+        experience: document.getElementById('experience').value,
+        availability: document.getElementById('availability').value,
+        timestamp: new Date().toISOString()
+      };
+      
+      const applications = JSON.parse(localStorage.getItem('job-applications') || '[]');
+      applications.push(formData);
+      localStorage.setItem('job-applications', JSON.stringify(applications));
+      
+      alert('Thank you for your application! We will review your submission and contact you within 5 business days.');
+      closeJobModal();
+    });
+  </script>
+
+
+
+</body>
+</html>

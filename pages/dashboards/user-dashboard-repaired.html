@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Portal - Bellavista Care Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/dashboard-enhanced.css">
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --primary-orange: #ff9500;
+            --primary-green: #06ffa5;
+            --primary-purple: #8b5cf6;
+            --primary-pink: #ec4899;
+            --white: #ffffff;
+            --bg-light: #f8f9fa;
+            --bg-medium: #e9ecef;
+            --text-dark: #2c3e50;
+            --text-medium: #6c757d;
+            --text-light: #adb5bd;
+            --border-light: #f0f0f0;
+            --success-bg: #f0fff4;
+            --warning-bg: #fffbf0;
+            --info-bg: #f0f9ff;
+        }
+        
+        /* Fix sidebar navigation */
+        .dashboard-nav ul {
+            display: flex !important;
+            flex-direction: column !important;
+            list-style: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        
+        .dashboard-nav li {
+            margin: 0 !important;
+            margin-bottom: 5px !important;
+            width: 100% !important;
+        }
+        
+        /* Fixed header on zoom */
+        header {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 1000 !important;
+            width: 100% !important;
+        }
+        
+        body {
+            padding-top: 80px !important;
+        }
+        
+        .sidebar {
+            top: 80px !important;
+            height: calc(100vh - 80px) !important;
+        }
+    </style>
+</head>
+<body>
+    <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-home"></i></div>
+                <div class="logo-text-group">
+                    <div class="logo-text">Bellavista <span>Nursing Homes</span></div>
+                    <div class="tagline">Family Portal</div>
+                </div>
+            </div>
+            <div class="header-actions">
+                <button class="btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="dashboard-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>Family Portal</h3>
+                <p>Welcome, <span id="familyName">Loading...</span></p>
+            </div>
+            <nav class="dashboard-nav">
+                <ul>
+                    <li><a href="#overview" class="nav-link active" onclick="showSection('overview')"><i class="fas fa-home"></i> Overview</a></li>
+                    <li><a href="#care-updates" class="nav-link" onclick="showSection('care-updates')"><i class="fas fa-heart"></i> Care Updates</a></li>
+                    <li><a href="#photos" class="nav-link" onclick="showSection('photos')"><i class="fas fa-camera"></i> Photos</a></li>
+                    <li><a href="#visits" class="nav-link" onclick="showSection('visits')"><i class="fas fa-calendar-check"></i> Visit Schedule</a></li>
+                    <li><a href="#billing" class="nav-link" onclick="showSection('billing')"><i class="fas fa-file-invoice"></i> Billing</a></li>
+                    <li><a href="#messages" class="nav-link" onclick="showSection('messages')"><i class="fas fa-comments"></i> Messages</a></li>
+                    <li><a href="#feedback" class="nav-link" onclick="showSection('feedback')"><i class="fas fa-star"></i> Feedback</a></li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="dashboard-main">
+            <section id="overview" class="dashboard-section active">
+                <h2>Margaret's Care Overview</h2>
+                
+                <div class="profile-card">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=200&h=200&fit=crop&crop=face" alt="Margaret" class="profile-avatar">
+                    <div class="profile-info">
+                        <h3>Margaret Johnson</h3>
+                        <p><strong>Room:</strong> 12A - Cardiff Wing</p>
+                        <p><strong>Care Level:</strong> Nursing Care</p>
+                        <p><strong>Primary Nurse:</strong> Sarah Wilson, RN</p>
+                        <span class="tag success">Doing Well</span>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <i class="fas fa-heart" style="color: var(--primary-pink);"></i>
+                        <h3>98.2°F</h3>
+                        <p>Current Temperature</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-pills" style="color: var(--primary-blue);"></i>
+                        <h3>5</h3>
+                        <p>Daily Medications</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-utensils" style="color: var(--primary-green);"></i>
+                        <h3>Good</h3>
+                        <p>Appetite Today</p>
+                    </div>
+                    <div class="stat-card">
+                        <i class="fas fa-bed" style="color: var(--primary-purple);"></i>
+                        <h3>8h 30m</h3>
+                        <p>Sleep Last Night</p>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Recent Highlights</h3>
+                    <p><i class="fas fa-smile"></i> Margaret enjoyed today's music therapy session and was very engaged.</p>
+                    <p><i class="fas fa-walking"></i> Completed daily physiotherapy with excellent progress.</p>
+                    <p><i class="fas fa-phone"></i> Had a lovely phone call with granddaughter Emma this morning.</p>
+                </div>
+
+                <div class="panel">
+                    <h3>Quick Actions</h3>
+                    <div class="resident-actions">
+                        <button class="btn" onclick="showSection('visits')">
+                            <i class="fas fa-calendar-plus"></i> Schedule Visit
+                        </button>
+                        <button class="btn ghost" onclick="showSection('messages')">
+                            <i class="fas fa-envelope"></i> Send Message
+                        </button>
+                        <button class="btn success" onclick="showSection('feedback')">
+                            <i class="fas fa-star"></i> Leave Feedback
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="care-updates" class="dashboard-section">
+                <h2>Daily Care Updates</h2>
+                
+                <div class="panel success">
+                    <h4><i class="fas fa-heartbeat"></i> Health Update - Today, 2:30 PM</h4>
+                    <p><strong>Physiotherapy Session:</strong> Margaret showed excellent progress in mobility exercises. She was able to walk 15 meters with minimal assistance and her balance has improved significantly.</p>
+                    <small>Posted by: Sarah Wilson, RN</small>
+                </div>
+
+                <div class="panel info">
+                    <h4><i class="fas fa-utensils"></i> Meal Update - Today, 1:00 PM</h4>
+                    <p><strong>Lunch:</strong> Margaret enjoyed her full meal today - roast chicken with vegetables. She particularly liked the mashed potatoes and asked for seconds!</p>
+                    <small>Posted by: Kitchen Staff</small>
+                </div>
+
+                <div class="panel">
+                    <h4><i class="fas fa-pills"></i> Medication - Today, 9:00 AM</h4>
+                    <p><strong>Morning Medications:</strong> All medications administered as prescribed. No adverse reactions noted. Blood pressure: 130/80 (normal range).</p>
+                    <small>Posted by: Nurse Jennifer</small>
+                </div>
+
+                <div class="panel">
+                    <h4><i class="fas fa-moon"></i> Night Report - Yesterday, 11:00 PM</h4>
+                    <p><strong>Sleep Quality:</strong> Margaret had a peaceful night with 8 hours of uninterrupted sleep. She woke up refreshed and in good spirits.</p>
+                    <small>Posted by: Night Staff</small>
+                </div>
+            </section>
+
+            <section id="photos" class="dashboard-section">
+                <h2>Recent Photos</h2>
+                
+                <div class="photo-grid">
+                    <div class="photo-card">
+                        <img src="https://images.unsplash.com/photo-1581833971358-2c8b550f87b3?w=400&h=300&fit=crop" alt="Arts & Crafts">
+                        <div class="photo-card-content">
+                            <h4>Arts & Crafts Session</h4>
+                            <p>Margaret creating a beautiful watercolor painting</p>
+                            <small><i class="fas fa-clock"></i> Today, 2:00 PM</small>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-card">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop" alt="Music Therapy">
+                        <div class="photo-card-content">
+                            <h4>Music Therapy</h4>
+                            <p>Enjoying the weekly music therapy session</p>
+                            <small><i class="fas fa-clock"></i> Yesterday, 11:00 AM</small>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-card">
+                        <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=400&h=300&fit=crop" alt="Garden Visit">
+                        <div class="photo-card-content">
+                            <h4>Garden Walk</h4>
+                            <p>Beautiful afternoon in the memory garden</p>
+                            <small><i class="fas fa-clock"></i> 2 days ago, 3:30 PM</small>
+                        </div>
+                    </div>
+                    
+                    <div class="photo-card">
+                        <img src="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=400&h=300&fit=crop" alt="Birthday">
+                        <div class="photo-card-content">
+                            <h4>Birthday Celebration</h4>
+                            <p>Margaret's 78th birthday party with friends</p>
+                            <small><i class="fas fa-clock"></i> Last week</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="visits" class="dashboard-section">
+                <h2>Visit Schedule</h2>
+                
+                <div style="margin-bottom: 20px;">
+                    <button class="btn" onclick="toggleVisitForm()">
+                        <i class="fas fa-plus"></i> Schedule New Visit
+                    </button>
+                </div>
+
+                <div id="visitForm" class="panel" style="display: none;">
+                    <h3>Schedule a Visit</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                        <div>
+                            <label>Date:</label>
+                            <input type="date" class="form-control" id="visitDate" style="margin-top: 5px;">
+                        </div>
+                        <div>
+                            <label>Time:</label>
+                            <input type="time" class="form-control" id="visitTime" style="margin-top: 5px;">
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label>Visitors:</label>
+                        <input type="text" class="form-control" id="visitVisitors" style="margin-top: 5px;" placeholder="Names of visitors">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label>Special Notes:</label>
+                        <textarea class="form-control" id="visitNotes" rows="3" placeholder="Any special requirements or notes..."></textarea>
+                    </div>
+                    <div>
+                        <button class="btn" onclick="scheduleVisit()">Schedule Visit</button>
+                        <button class="btn ghost" onclick="toggleVisitForm()">Cancel</button>
+                    </div>
+                </div>
+                
+                <div id="visitsList">
+                    <div class="visit-item">
+                        <div class="visit-info">
+                            <h4>Family Visit - Johnson Family</h4>
+                            <p><i class="fas fa-calendar"></i> Sunday, August 25, 2024 at 2:00 PM</p>
+                            <p><i class="fas fa-users"></i> 4 visitors expected</p>
+                        </div>
+                        <div>
+                            <button class="btn ghost small" onclick="rescheduleVisit(1)">Reschedule</button>
+                            <button class="btn warn small" onclick="cancelVisit(1)">Cancel</button>
+                        </div>
+                    </div>
+
+                    <div class="visit-item">
+                        <div class="visit-info">
+                            <h4>Doctor Visit - Dr. Smith</h4>
+                            <p><i class="fas fa-calendar"></i> Tuesday, August 27, 2024 at 10:00 AM</p>
+                            <p><i class="fas fa-stethoscope"></i> Routine checkup</p>
+                        </div>
+                        <span class="tag info">Scheduled</span>
+                    </div>
+                </div>
+            </section>
+
+            <section id="billing" class="dashboard-section">
+                <h2>Billing & Payments</h2>
+                
+                <div class="billing-card">
+                    <h3>Current Month - August 2024</h3>
+                    <div class="billing-summary">
+                        <span>Care Services</span>
+                        <span>£1,850.00</span>
+                    </div>
+                    <div class="billing-summary">
+                        <span>Medications</span>
+                        <span>£125.00</span>
+                    </div>
+                    <div class="billing-summary">
+                        <span>Physiotherapy</span>
+                        <span>£175.00</span>
+                    </div>
+                    <div class="billing-summary">
+                        <span><strong>Total Amount</strong></span>
+                        <span class="billing-amount">£2,150.00</span>
+                    </div>
+                    <div style="margin-top: 20px;">
+                        <button class="btn success" style="width: 100%; margin-bottom: 10px;" onclick="processPayment()">
+                            <i class="fas fa-credit-card"></i> Pay Now
+                        </button>
+                        <button class="btn ghost" style="width: 100%;" onclick="downloadInvoice()">
+                            <i class="fas fa-download"></i> Download Invoice
+                        </button>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <h3>Payment History</h3>
+                    <div style="border-left: 3px solid var(--primary-green); padding-left: 15px; margin: 15px 0;">
+                        <p><strong>July 2024</strong> - £2,150.00</p>
+                        <p style="color: var(--primary-green);">✓ Paid on July 30, 2024</p>
+                    </div>
+                    <div style="border-left: 3px solid var(--primary-green); padding-left: 15px; margin: 15px 0;">
+                        <p><strong>June 2024</strong> - £2,150.00</p>
+                        <p style="color: var(--primary-green);">✓ Paid on June 28, 2024</p>
+                    </div>
+                    <div style="border-left: 3px solid var(--primary-green); padding-left: 15px; margin: 15px 0;">
+                        <p><strong>May 2024</strong> - £2,075.00</p>
+                        <p style="color: var(--primary-green);">✓ Paid on May 31, 2024</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="messages" class="dashboard-section">
+                <h2>Messages</h2>
+                
+                <div style="margin-bottom: 20px;">
+                    <button class="btn" onclick="toggleMessageForm()">
+                        <i class="fas fa-plus"></i> Send New Message
+                    </button>
+                </div>
+
+                <div id="messageForm" class="panel" style="display: none;">
+                    <h3>Send Message to Care Team</h3>
+                    <div style="margin-bottom: 15px;">
+                        <label>To:</label>
+                        <select class="form-control" id="messageTo" style="margin-top: 5px;">
+                            <option>Primary Nurse - Sarah Wilson</option>
+                            <option>Care Manager</option>
+                            <option>Doctor - Dr. Smith</option>
+                            <option>Activities Coordinator</option>
+                        </select>
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label>Subject:</label>
+                        <input type="text" class="form-control" id="messageSubject" style="margin-top: 5px;" placeholder="Message subject">
+                    </div>
+                    <div style="margin-bottom: 15px;">
+                        <label>Message:</label>
+                        <textarea class="form-control" id="messageContent" rows="4" placeholder="Type your message here..."></textarea>
+                    </div>
+                    <div>
+                        <button class="btn" onclick="sendMessage()">Send Message</button>
+                        <button class="btn ghost" onclick="toggleMessageForm()">Cancel</button>
+                    </div>
+                </div>
+
+                <div id="messagesList">
+                    <div class="message-item unread">
+                        <div class="message-header">
+                            <h4>Weekly Update from Sarah Wilson, RN</h4>
+                            <small>Today, 4:30 PM</small>
+                        </div>
+                        <p>Dear Johnson Family, I wanted to update you on Margaret's wonderful progress this week. She has been very active in all her activities and her mobility continues to improve...</p>
+                        <button class="btn ghost small" onclick="replyMessage(1)">Reply</button>
+                    </div>
+
+                    <div class="message-item">
+                        <div class="message-header">
+                            <h4>Medication Update</h4>
+                            <small>Yesterday, 2:15 PM</small>
+                        </div>
+                        <p>Dr. Smith has adjusted Margaret's blood pressure medication. The new dosage will begin tomorrow morning. All other medications remain the same.</p>
+                        <button class="btn ghost small" onclick="replyMessage(2)">Reply</button>
+                    </div>
+
+                    <div class="message-item">
+                        <div class="message-header">
+                            <h4>Activity Photos Available</h4>
+                            <small>2 days ago, 5:00 PM</small>
+                        </div>
+                        <p>New photos from this week's activities have been uploaded to the Photos section. Margaret looked wonderful at the arts & crafts session!</p>
+                        <button class="btn ghost small" onclick="showSection('photos')">View Photos</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="feedback" class="dashboard-section">
+                <h2>Feedback & Satisfaction</h2>
+                
+                <div class="panel">
+                    <h3>Rate Our Care This Month</h3>
+                    <p>How satisfied are you with the care Margaret is receiving?</p>
+                    
+                    <div style="margin: 20px 0;">
+                        <p><strong>Overall Care Quality:</strong></p>
+                        <div class="star-rating" id="overallRating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <p><strong>Communication:</strong></p>
+                        <div class="star-rating" id="communicationRating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <p><strong>Activities & Engagement:</strong></p>
+                        <div class="star-rating" id="activitiesRating">
+                            <span class="star" data-rating="1">★</span>
+                            <span class="star" data-rating="2">★</span>
+                            <span class="star" data-rating="3">★</span>
+                            <span class="star" data-rating="4">★</span>
+                            <span class="star" data-rating="5">★</span>
+                        </div>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <label><strong>Additional Comments:</strong></label>
+                        <textarea class="form-control" id="feedbackComments" rows="4" placeholder="Please share any additional feedback or suggestions..."></textarea>
+                    </div>
+                    
+                    <button class="btn success" onclick="submitFeedback()">
+                        <i class="fas fa-paper-plane"></i> Submit Feedback
+                    </button>
+                </div>
+
+                <div class="panel">
+                    <h3>Previous Feedback</h3>
+                    <div style="background: var(--success-bg); padding: 15px; border-radius: 8px; border-left: 4px solid var(--primary-green);">
+                        <p><strong>July 2024 Feedback:</strong></p>
+                        <p>Overall Rating: ⭐⭐⭐⭐⭐ (5/5)</p>
+                        <p>"Excellent care and communication. Margaret is very happy and we feel completely at ease knowing she's in such good hands."</p>
+                        <small style="color: var(--text-medium);">Submitted on July 31, 2024</small>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="../../assets/js/auth/auth-system.js"></script>
+    <script src="../../assets/js/demo-data.js"></script>
+    <script>
+        // Initialize the dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeDashboard();
+            showSection('overview');
+            initializeStarRatings();
+        });
+
+        // Initialize dashboard with user data
+        function initializeDashboard() {
+            const currentUser = getCurrentUser();
+            if (currentUser) {
+                document.getElementById('familyName').textContent = currentUser.name || 'Family Member';
+            } else {
+                // Redirect to login if not authenticated
+                window.location.href = '../auth/login.html';
+            }
+        }
+
+        // Get current user from auth system
+        function getCurrentUser() {
+            const users = JSON.parse(localStorage.getItem('users') || '[]');
+            const currentUserEmail = localStorage.getItem('currentUser');
+            return users.find(user => user.email === currentUserEmail);
+        }
+
+        // Navigation functionality
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.dashboard-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show target section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+            
+            // Update navigation active state
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Find and activate the correct nav link
+            const activeLink = document.querySelector(`[onclick="showSection('${sectionId}')"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+            
+            // Close mobile menu if open
+            const sidebar = document.getElementById('sidebar');
+            if (sidebar.classList.contains('active')) {
+                sidebar.classList.remove('active');
+            }
+        }
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Toggle visit form
+        function toggleVisitForm() {
+            const visitForm = document.getElementById('visitForm');
+            visitForm.style.display = visitForm.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Toggle message form
+        function toggleMessageForm() {
+            const messageForm = document.getElementById('messageForm');
+            messageForm.style.display = messageForm.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Initialize star ratings
+        function initializeStarRatings() {
+            const starRatings = document.querySelectorAll('.star-rating');
+            
+            starRatings.forEach(rating => {
+                const stars = rating.querySelectorAll('.star');
+                
+                stars.forEach(star => {
+                    star.addEventListener('click', function() {
+                        const ratingValue = parseInt(this.dataset.rating);
+                        const ratingStars = this.parentNode.querySelectorAll('.star');
+                        
+                        ratingStars.forEach((s, index) => {
+                            if (index < ratingValue) {
+                                s.classList.add('active');
+                            } else {
+                                s.classList.remove('active');
+                            }
+                        });
+                    });
+                    
+                    star.addEventListener('mouseenter', function() {
+                        const ratingValue = parseInt(this.dataset.rating);
+                        const ratingStars = this.parentNode.querySelectorAll('.star');
+                        
+                        ratingStars.forEach((s, index) => {
+                            if (index < ratingValue) {
+                                s.style.color = 'var(--primary-orange)';
+                            } else {
+                                s.style.color = 'var(--bg-medium)';
+                            }
+                        });
+                    });
+                });
+                
+                rating.addEventListener('mouseleave', function() {
+                    const stars = this.querySelectorAll('.star');
+                    stars.forEach(star => {
+                        if (star.classList.contains('active')) {
+                            star.style.color = 'var(--primary-orange)';
+                        } else {
+                            star.style.color = 'var(--bg-medium)';
+                        }
+                    });
+                });
+            });
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('currentUser');
+                localStorage.removeItem('users');
+                window.location.href = '../../index.html';
+            }
+        }
+
+        // Schedule visit
+        function scheduleVisit() {
+            const date = document.getElementById('visitDate').value;
+            const time = document.getElementById('visitTime').value;
+            const visitors = document.getElementById('visitVisitors').value;
+            const notes = document.getElementById('visitNotes').value;
+            
+            if (date && time && visitors) {
+                alert('Visit scheduled successfully!');
+                toggleVisitForm();
+                document.getElementById('visitDate').value = '';
+                document.getElementById('visitTime').value = '';
+                document.getElementById('visitVisitors').value = '';
+                document.getElementById('visitNotes').value = '';
+            } else {
+                alert('Please fill in all required fields');
+            }
+        }
+
+        // Send message
+        function sendMessage() {
+            const to = document.getElementById('messageTo').value;
+            const subject = document.getElementById('messageSubject').value;
+            const content = document.getElementById('messageContent').value;
+            
+            if (subject && content) {
+                alert('Message sent successfully!');
+                toggleMessageForm();
+                document.getElementById('messageSubject').value = '';
+                document.getElementById('messageContent').value = '';
+            } else {
+                alert('Please fill in all fields');
+            }
+        }
+
+        // Submit feedback
+        function submitFeedback() {
+            const comments = document.getElementById('feedbackComments').value;
+            const overallRating = document.querySelectorAll('#overallRating .star.active').length;
+            const communicationRating = document.querySelectorAll('#communicationRating .star.active').length;
+            const activitiesRating = document.querySelectorAll('#activitiesRating .star.active').length;
+            
+            if (overallRating > 0 && communicationRating > 0 && activitiesRating > 0) {
+                alert('Thank you for your feedback!');
+                document.getElementById('feedbackComments').value = '';
+                document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
+            } else {
+                alert('Please provide ratings in all categories');
+            }
+        }
+
+        // Reschedule visit
+        function rescheduleVisit(visitId) {
+            alert(`Rescheduling visit ${visitId}`);
+        }
+
+        // Cancel visit
+        function cancelVisit(visitId) {
+            if (confirm('Are you sure you want to cancel this visit?')) {
+                alert(`Visit ${visitId} cancelled`);
+            }
+        }
+
+        // Reply to message
+        function replyMessage(messageId) {
+            toggleMessageForm();
+            document.getElementById('messageSubject').value = `Re: Message ${messageId}`;
+        }
+
+        // Process payment
+        function processPayment() {
+            alert('Redirecting to secure payment portal...');
+        }
+
+        // Download invoice
+        function downloadInvoice() {
+            alert('Downloading invoice...');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            if (sidebar.classList.contains('active') && 
+                !sidebar.contains(e.target) && 
+                !menuToggle.contains(e.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Simulate real-time updates (in a real app, this would come from a server)
+        setInterval(function() {
+            const timeElements = document.querySelectorAll('small');
+            timeElements.forEach(element => {
+                if (element.textContent.includes('Today')) {
+                    // Update relative time stamps
+                }
+            });
+        }, 60000); // Update every minute
+    </script>
+</body>
+</html>
