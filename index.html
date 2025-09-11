@@ -19,6 +19,13 @@
 <link rel="stylesheet" href="assets/css/mobile-news-fix.css">
 <style>
 @media (max-width: 768px) {
+  * { box-sizing: border-box !important; }
+  body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+  .container { padding: 0 0.5rem !important; max-width: 100% !important; width: 100% !important; margin: 0 !important; }
+  section { width: 100% !important; padding: 2rem 0 !important; }
+  .our-homes, .news, .activities, .care-promise, .facilities { width: 100% !important; }
+  .our-homes .container, .news .container, .activities .container, .care-promise .container, .facilities .container { padding: 0 0.5rem !important; width: 100% !important; }
+  .btn-download { background: linear-gradient(135deg, #00d4aa, #0066cc) !important; color: white !important; border: none !important; }
   .news-grid.modern { 
     display: flex !important;
     overflow-x: auto !important;
@@ -176,6 +183,9 @@
 <a class="btn btn-outline" href="./pages/info/enquiry.html">
 <i class="fas fa-heart"></i> Care Enquiry
 </a>
+<button class="btn btn-download" id="installBtn" onclick="installPWA()" style="display:none;">
+<i class="fas fa-download"></i> Install App
+</button>
 </div>
 <div class="hero-stats">
 <div class="stat-item">
@@ -864,10 +874,31 @@
 <script src="./assets/js/home.js"></script>
 <script src="./assets/js/auto-tabs.js"></script>
 <script>
+// PWA Install functionality
+let installPrompt;
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  installPrompt = e;
+  document.getElementById('installBtn').style.display = 'inline-block';
+});
+
+function installPWA() {
+  if (installPrompt) {
+    installPrompt.prompt();
+    installPrompt.userChoice.then((result) => {
+      if (result.outcome === 'accepted') {
+        document.getElementById('installBtn').style.display = 'none';
+      }
+      installPrompt = null;
+    });
+  }
+}
+
 // Register Service Worker for PWA
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
+    navigator.serviceWorker.register('./sw.js')
       .then(registration => console.log('SW registered'))
       .catch(error => console.log('SW registration failed'));
   });
