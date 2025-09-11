@@ -15,7 +15,48 @@
 <link rel="stylesheet" href="assets/css/nav-modern.css">
 <link rel="stylesheet" href="assets/css/inline-styles.css">
 <link rel="stylesheet" href="assets/css/mobile-enhancements.css">
-<link rel="manifest" href="./assets/js/manifest.json">
+<link rel="stylesheet" href="assets/css/auto-tabs.css">
+<link rel="stylesheet" href="assets/css/mobile-news-fix.css">
+<style>
+@media (max-width: 768px) {
+  .news-grid.modern { 
+    display: flex !important;
+    overflow-x: auto !important;
+    gap: 0.6rem !important;
+    padding-bottom: 0.5rem !important;
+    scroll-snap-type: x mandatory !important;
+  }
+  .news-card.modern { 
+    flex: 0 0 240px !important;
+    height: 180px !important;
+    margin-bottom: 0 !important;
+    scroll-snap-align: start !important;
+  }
+  .news-card.modern .news-image { height: 70px !important; }
+  .news-card.modern .news-content { padding: 0.4rem !important; height: 110px !important; overflow: hidden !important; }
+  .news-card.modern .news-content h4 { font-size: 0.8rem !important; margin-bottom: 0.2rem !important; line-height: 1.1 !important; }
+  .news-card.modern .news-content p { font-size: 0.65rem !important; line-height: 1.1 !important; margin-bottom: 0.3rem !important; display: -webkit-box !important; -webkit-line-clamp: 2 !important; -webkit-box-orient: vertical !important; overflow: hidden !important; }
+  .news-engagement { font-size: 0.6rem !important; margin-bottom: 0.3rem !important; }
+  .news-link.modern { font-size: 0.65rem !important; padding: 2px 4px !important; }
+  .news-category { font-size: 0.55rem !important; padding: 1px 3px !important; margin-bottom: 0.2rem !important; }
+  
+  .homes-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    gap: 1rem !important;
+    padding-bottom: 0.5rem !important;
+    scroll-snap-type: x mandatory !important;
+  }
+  
+  .home-card.modern {
+    flex: 0 0 250px !important;
+    scroll-snap-align: start !important;
+    display: block !important;
+  }
+}
+
+</style>
+<link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#0066cc">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -239,7 +280,7 @@
 </div>
 <div class="home-card modern" onclick="window.location.href='./pages/homes/barry.html'">
 <div class="home-image">
-<img alt="Bellavista Barry" src="./assets/images/bellavista-barry"/>
+<img alt="Bellavista Barry" src="./assets/images/bellavista-cardiff.jpeg"/>
 <div class="home-badge new">🆕 Recently Renovated</div>
 <div class="home-overlay">
 <div class="home-features">
@@ -821,6 +862,17 @@
 
 <script src="./assets/js/main.js"></script>
 <script src="./assets/js/home.js"></script>
+<script src="./assets/js/auto-tabs.js"></script>
+<script>
+// Register Service Worker for PWA
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(registration => console.log('SW registered'))
+      .catch(error => console.log('SW registration failed'));
+  });
+}
+</script>
 <script>
 // Modern interactions
 document.addEventListener('DOMContentLoaded', function() {
