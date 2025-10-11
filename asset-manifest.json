@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/bellavista-react-converted/static/css/main.36004d2e.css",
-    "main.js": "/bellavista-react-converted/static/js/main.dfbabbb4.js",
+    "main.js": "/bellavista-react-converted/static/js/main.a375ec16.js",
     "static/css/481.fff0a39c.chunk.css": "/bellavista-react-converted/static/css/481.fff0a39c.chunk.css",
     "static/js/481.73568d77.chunk.js": "/bellavista-react-converted/static/js/481.73568d77.chunk.js",
     "static/js/243.525a9d7a.chunk.js": "/bellavista-react-converted/static/js/243.525a9d7a.chunk.js",
@@ -50,6 +50,6 @@
   },
   "entrypoints": [
     "static/css/main.36004d2e.css",
-    "static/js/main.dfbabbb4.js"
+    "static/js/main.a375ec16.js"
   ]
 }
