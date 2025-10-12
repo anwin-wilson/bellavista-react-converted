@@ -9,6 +9,14 @@ if (window.location.search.startsWith('/?')) {
   window.history.replaceState(null, null, path);
 }
 
+// Additional redirect handling for direct page loads
+if (window.location.pathname.startsWith('/bellavista-react-converted/') && window.location.pathname !== '/bellavista-react-converted/') {
+  const path = window.location.pathname.replace('/bellavista-react-converted', '');
+  if (path) {
+    window.history.replaceState(null, null, path);
+  }
+}
+
 // Register service worker for PWA functionality
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
