@@ -1,0 +1,272 @@
+import React, { useState } from 'react';
+
+const ScheduleTour = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    tourDate: '',
+    tourTime: '',
+    homeLocation: '',
+    notes: ''
+  });
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [bookingId, setBookingId] = useState('');
+  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrors({});
+    setIsSubmitting(true);
+    
+    try {
+      const response = await fetch('https://bellavista-backend-production.up.railway.app/api/tours/book/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          first_name: formData.firstName,
+          last_name: formData.lastName,
+          email: formData.email,
+          phone_number: formData.phone,
+          preferred_home: formData.homeLocation || 'cardiff',
+          preferred_date: formData.tourDate,
+          preferred_time: formData.tourTime,
+          notes: formData.notes
+        })
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setBookingId(data.booking_id);
+        setShowSuccess(true);
+        
+        // Show email status message
+        if (data.email_sent) {
+          alert('A confirmation email has been sent to your email address.');
+        } else {
+          alert('Your tour has been scheduled, but there was an issue sending the confirmation email. Our team will contact you shortly.');
+        }
+      } else {
+        setErrors(data.errors || { general: data.message || 'Failed to submit booking' });
+      }
+    } catch (error) {
+      console.error('Error submitting booking:', error);
+      setErrors({ general: 'Failed to connect to server. Please try again.' });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const returnHome = () => {
+    window.location.href = '/';
+  };
+
+  return (
+    <section style={{ padding: '60px 0', background: 'var(--bg-light)' }}>
+      <div className="container">
+        <div className="tour-container">
+          {!showSuccess ? (
+            <div>
+              <h2 className="section-title">Schedule a Tour</h2>
+              <p style={{ textAlign: 'center', marginBottom: '30px', color: 'var(--text-medium)' }}>
+                Book a personalized tour of our facilities and meet our caring staff.
+              </p>
+              
+              <form onSubmit={handleSubmit} style={{ maxWidth: '600px', margin: '0 auto', background: 'white', padding: '40px', borderRadius: '15px', boxShadow: 'var(--shadow)' }}>
+                {errors.general && (
+                  <div style={{ background: '#fee', color: '#c33', padding: '10px', borderRadius: '5px', marginBottom: '20px', border: '1px solid #fcc' }}>
+                    {errors.general}
+                  </div>
+                )}
+                
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>First Name *</label>
+                  <input 
+                    type="text" 
+                    name="firstName"
+                    className="form-control" 
+                    value={formData.firstName}
+                    onChange={handleInputChange}
+                    style={{ width: '100%', padding: '12px 15px', border: `2px solid ${errors.first_name ? '#e74c3c' : '#e0e0e0'}`, borderRadius: '8px' }}
+                    required 
+                  />
+                  {errors.first_name && (
+                    <div style={{ color: '#e74c3c', fontSize: '14px', marginTop: '5px' }}>
+                      {errors.first_name[0]}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>Last Name</label>
+                  <input 
+                    type="text" 
+                    name="lastName"
+                    className="form-control" 
+                    value={formData.lastName}
+                    onChange={handleInputChange}
+                    style={{ width: '100%', padding: '12px 15px', border: `2px solid ${errors.last_name ? '#e74c3c' : '#e0e0e0'}`, borderRadius: '8px' }}
+                  />
+                  {errors.last_name && (
+                    <div style={{ color: '#e74c3c', fontSize: '14px', marginTop: '5px' }}>
+                      {errors.last_name[0]}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>Email Address *</label>
+                  <input 
+                    type="email" 
+                    name="email"
+                    className="form-control" 
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    style={{ width: '100%', padding: '12px 15px', border: `2px solid ${errors.email ? '#e74c3c' : '#e0e0e0'}`, borderRadius: '8px' }}
+                    required 
+                  />
+                  {errors.email && (
+                    <div style={{ color: '#e74c3c', fontSize: '14px', marginTop: '5px' }}>
+                      {errors.email[0]}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>Phone Number *</label>
+                  <input 
+                    type="tel" 
+                    name="phone"
+                    className="form-control"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    style={{ width: '100%', padding: '12px 15px', border: `2px solid ${errors.phone_number ? '#e74c3c' : '#e0e0e0'}`, borderRadius: '8px' }}
+                    required
+                  />
+                  {errors.phone_number && (
+                    <div style={{ color: '#e74c3c', fontSize: '14px', marginTop: '5px' }}>
+                      {errors.phone_number[0]}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>Preferred Tour Date *</label>
+                  <input 
+                    type="date" 
+                    name="tourDate"
+                    className="form-control" 
+                    value={formData.tourDate}
+                    onChange={handleInputChange}
+                    style={{ width: '100%', padding: '12px 15px', border: `2px solid ${errors.preferred_date ? '#e74c3c' : '#e0e0e0'}`, borderRadius: '8px' }}
+                    required 
+                  />
+                  {errors.preferred_date && (
+                    <div style={{ color: '#e74c3c', fontSize: '14px', marginTop: '5px' }}>
+                      {errors.preferred_date[0]}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>Preferred Time *</label>
+                  <select 
+                    name="tourTime"
+                    className="form-control" 
+                    value={formData.tourTime}
+                    onChange={handleInputChange}
+                    style={{ width: '100%', padding: '12px 15px', border: `2px solid ${errors.preferred_time ? '#e74c3c' : '#e0e0e0'}`, borderRadius: '8px' }}
+                    required
+                  >
+                    <option value="">Select a time</option>
+                    <option value="09:00">9:00 AM</option>
+                    <option value="10:00">10:00 AM</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="14:00">2:00 PM</option>
+                    <option value="15:00">3:00 PM</option>
+                    <option value="16:00">4:00 PM</option>
+                  </select>
+                  {errors.preferred_time && (
+                    <div style={{ color: '#e74c3c', fontSize: '14px', marginTop: '5px' }}>
+                      {errors.preferred_time[0]}
+                    </div>
+                  )}
+                </div>
+                
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>Location *</label>
+                  <select 
+                    name="homeLocation"
+                    className="form-control"
+                    value={formData.homeLocation}
+                    onChange={handleInputChange}
+                    style={{ width: '100%', padding: '12px 15px', border: '2px solid #e0e0e0', borderRadius: '8px' }}
+                    required
+                  >
+                    <option value="">Select location</option>
+                    <option value="cardiff">Cardiff</option>
+                    <option value="barry">Barry</option>
+                    <option value="waverley">Waverley</option>
+                    <option value="college-fields">College Fields</option>
+                  </select>
+                </div>
+                
+                <div className="form-group" style={{ marginBottom: '20px' }}>
+                  <label style={{ display: 'block', marginBottom: '5px', fontWeight: '600' }}>Notes</label>
+                  <textarea 
+                    name="notes"
+                    className="form-control" 
+                    rows="3" 
+                    placeholder="Any specific requirements or questions..."
+                    value={formData.notes}
+                    onChange={handleInputChange}
+                    style={{ width: '100%', padding: '12px 15px', border: '2px solid #e0e0e0', borderRadius: '8px', resize: 'vertical' }}
+                  ></textarea>
+                </div>
+                
+                <button 
+                  type="submit" 
+                  className="btn" 
+                  disabled={isSubmitting}
+                  style={{ width: '100%', marginTop: '20px', background: isSubmitting ? '#ccc' : 'var(--gradient)', color: 'white', border: 'none', padding: '14px 32px', borderRadius: '30px', fontWeight: '700', cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
+                >
+                  {isSubmitting ? (
+                    <><i className="fas fa-spinner fa-spin"></i> Submitting...</>
+                  ) : (
+                    <><i className="fas fa-calendar-check"></i> Schedule Tour</>
+                  )}
+                </button>
+              </form>
+            </div>
+          ) : (
+            <div className="booking-success" style={{ textAlign: 'center', background: 'white', padding: '60px 40px', borderRadius: '15px', boxShadow: 'var(--shadow)', maxWidth: '500px', margin: '0 auto' }}>
+              <i className="fas fa-check-circle" style={{ fontSize: '48px', color: 'var(--primary-green)', marginBottom: '20px' }}></i>
+              <h3>Tour Scheduled Successfully!</h3>
+              <p>Your booking ID is:</p>
+              <div className="booking-id" style={{ background: 'var(--bg-light)', padding: '15px', borderRadius: '8px', fontWeight: '700', fontSize: '18px', margin: '20px 0' }}>{bookingId}</div>
+              <p style={{ marginTop: '20px' }}>We'll contact you within 24 hours to confirm your tour details.</p>
+              <button className="btn" onClick={returnHome} style={{ marginTop: '20px', background: 'var(--gradient)', color: 'white', border: 'none', padding: '14px 32px', borderRadius: '30px', fontWeight: '700' }}>
+                Return to Home
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ScheduleTour;
