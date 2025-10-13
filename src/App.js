@@ -131,7 +131,7 @@ const AppContent = () => {
 
 function App() {
   return (
-    <Router basename="/bellavista-react-converted">
+    <Router>
       <AppContent />
     </Router>
   );

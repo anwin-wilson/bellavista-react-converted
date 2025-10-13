@@ -1,7 +1,65 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { HOMES_DATA } from '../../utils/constants';
 import '../../styles/homes-scroll.css';
+
+const HOMES_DATA = [
+  {
+    name: 'Cardiff Bay',
+    description: 'Modern nursing home with stunning Cardiff Bay views. Purpose-built with state-of-the-art facilities.',
+    image: `${process.env.PUBLIC_URL}/images/bellavista-cardiff.jpeg`,
+    badge: { type: 'featured', text: '⭐ Featured' },
+    rating: '4.9',
+    link: '/homes/cardiff',
+    htmlLink: 'cardiff.html',
+    features: [
+      { icon: 'fas fa-water', text: 'Bay Views' },
+      { icon: 'fas fa-shield-alt', text: '24/7 Care' },
+      { icon: 'fas fa-utensils', text: 'Fine Dining' }
+    ]
+  },
+  {
+    name: 'Barry Seaside',
+    description: 'Coastal care home with spectacular sea views and therapeutic seaside environment.',
+    image: `${process.env.PUBLIC_URL}/images/bellavista-college-fields.jpeg`,
+    badge: { type: 'new', text: '🆕 Recently Renovated' },
+    rating: '4.8',
+    link: '/homes/barry',
+    htmlLink: 'barry.html',
+    features: [
+      { icon: 'fas fa-water', text: 'Sea Views' },
+      { icon: 'fas fa-leaf', text: 'Therapeutic' },
+      { icon: 'fas fa-users', text: 'Family Focused' }
+    ]
+  },
+  {
+    name: 'Waverley Centre',
+    description: 'Peaceful suburban care home with beautiful gardens and community-focused environment.',
+    image: `${process.env.PUBLIC_URL}/images/bellavista-waverly.jpeg`,
+    badge: '',
+    rating: '4.9',
+    link: '/homes/waverley',
+    htmlLink: 'waverley.html',
+    features: [
+      { icon: 'fas fa-home', text: 'Home Comfort' },
+      { icon: 'fas fa-leaf', text: 'Gardens' },
+      { icon: 'fas fa-heart', text: 'Dementia Care' }
+    ]
+  },
+  {
+    name: 'College Fields',
+    description: 'Rural care home surrounded by countryside, offering peaceful environment and nature therapy.',
+    image: `${process.env.PUBLIC_URL}/images/bellavista-college-fields.jpeg`,
+    badge: '',
+    rating: '4.7',
+    link: '/homes/college-fields',
+    htmlLink: 'college-fields.html',
+    features: [
+      { icon: 'fas fa-tree', text: 'Countryside' },
+      { icon: 'fas fa-spa', text: 'Wellness' },
+      { icon: 'fas fa-users', text: 'Community' }
+    ]
+  }
+];
 
 const OurHomes = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
