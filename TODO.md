@@ -1,10 +1,13 @@
-# Repository Cleanup Tasks
+# Map Integration for Finding Nearest Home
 
-- [x] Remove duplicate files: src/pages/Home.js, src/pages/AdminConsole.js
-- [x] Confirm and remove unused files: src/pages/general/OurNews.js (content moved to Home.js)
-- [x] Check and remove unused utils/ files (search for imports)
-- [x] Remove duplicate assets: assets/ folder if images are duplicates of public/images/
-- [x] Clean unused imports in JS files
-- [x] Identify and remove unused CSS files (search for links in components)
-- [x] Update any broken references
-- [x] Test the app with npm start
+## Tasks
+- [ ] Create constants file in Django for home locations with coordinates
+- [ ] Add new view in tours/views.py for nearest home calculation using Nominatim geocoding and Haversine distance
+- [ ] Add URL pattern for the new view in tours/urls.py
+- [ ] Update Home.js to call the backend API instead of using random data
+- [ ] Add navigation button to open Google Maps with directions
+- [ ] Test the integration
+
+## Completed
+- [x] Analyze existing code structure
+- [x] Plan the implementation using free OpenStreetMap Nominatim API

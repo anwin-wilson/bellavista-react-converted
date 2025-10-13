@@ -13,8 +13,20 @@ const Home = () => {
   // eslint-disable-next-line no-unused-vars
   const [showMap, setShowMap] = useState(false);
   const [nearestHome, setNearestHome] = useState('');
+  const [showResults, setShowResults] = useState(false);
+  const [selectedHome, setSelectedHome] = useState({});
+  const [userLocationLabel, setUserLocationLabel] = useState('Your Location');
   const [modalOpen, setModalOpen] = useState(false);
   const [modalContent, setModalContent] = useState({});
+
+  // Care homes data (unused but kept for potential future use)
+  // eslint-disable-next-line no-unused-vars
+  const careHomes = [
+    { name: 'Bellavista Cardiff', distance: '2.3 miles', duration: '8 minutes', phone: '029 2000 0000' },
+    { name: 'Bellavista Barry', distance: '3.1 miles', duration: '12 minutes', phone: '01446 700 000' },
+    { name: 'Waverley Care Centre', distance: '1.8 miles', duration: '6 minutes', phone: '029 2100 0000' },
+    { name: 'College Fields', distance: '4.2 miles', duration: '15 minutes', phone: '029 2200 0000' }
+  ];
 
   const slides = [
     `${process.env.PUBLIC_URL}/images/hero-care-staff.jpg`,
@@ -30,29 +42,93 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [slides.length]);
 
-  const findNearestHome = () => {
+  const findNearestHome = async () => {
     const locationInput = document.getElementById('locationInput');
     const location = locationInput.value.trim();
-    
+
     if (!location) {
       alert('Please enter your location');
       return;
     }
 
-    const homes = ['Cardiff Bay', 'Barry Seaside', 'Waverley Centre', 'College Fields'];
-    const randomHome = homes[Math.floor(Math.random() * homes.length)];
-    
-    setNearestHome(randomHome);
-    setShowMap(true);
-    
-    document.getElementById('findHomeLayout').style.gridTemplateColumns = '1fr 1fr';
-    document.getElementById('mapContainer').style.display = 'block';
+    try {
+      // Call the backend API
+      const response = await fetch(`https://bellavista-backend-production.up.railway.app/api/tours/find-nearest-home/?location=${encodeURIComponent(location)}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.error || 'Error finding nearest home');
+        return;
+      }
+
+      setNearestHome(data.nearest_home);
+      setUserLocationLabel(location);
+      setSelectedHome({
+        name: data.nearest_home,
+        distance: data.distance,
+        duration: data.duration,
+        phone: data.phone,
+        maps_url: data.maps_url
+      });
+      setShowResults(true);
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error connecting to server. Please try again.');
+    }
+  };
+
+  const useCurrentLocation = async () => {
+    if (!navigator.geolocation) {
+      alert('Geolocation is not supported by this browser.');
+      return;
+    }
+
+    try {
+      const position = await new Promise((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 300000 // 5 minutes
+        });
+      });
+
+      const { latitude, longitude } = position.coords;
+
+      // Call the backend API with coordinates
+      const response = await fetch(`https://bellavista-backend-production.up.railway.app/api/tours/find-nearest-home/?lat=${latitude}&lon=${longitude}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.error || 'Error finding nearest home');
+        return;
+      }
+
+      setNearestHome(data.nearest_home);
+      setUserLocationLabel('Current Location');
+      setSelectedHome({
+        name: data.nearest_home,
+        distance: data.distance,
+        duration: data.duration,
+        phone: data.phone,
+        maps_url: data.maps_url
+      });
+      setShowResults(true);
+    } catch (error) {
+      if (error.code === error.PERMISSION_DENIED) {
+        alert('Location access denied. Please enable location permissions and try again.');
+      } else if (error.code === error.POSITION_UNAVAILABLE) {
+        alert('Location information is unavailable. Please try entering your location manually.');
+      } else if (error.code === error.TIMEOUT) {
+        alert('Location request timed out. Please try again.');
+      } else {
+        console.error('Error:', error);
+        alert('Error getting your location. Please try entering your location manually.');
+      }
+    }
   };
 
   const closeMap = () => {
-    setShowMap(false);
-    document.getElementById('findHomeLayout').style.gridTemplateColumns = '1fr';
-    document.getElementById('mapContainer').style.display = 'none';
+    setShowResults(false);
   };
 
 
@@ -124,7 +200,7 @@ const Home = () => {
         `
       }
     };
-    
+
     const service = serviceDetails[serviceType];
     setModalContent(service);
     setModalOpen(true);
@@ -236,16 +312,20 @@ const Home = () => {
 
       <section className="find-home">
         <div className="container">
-          <div className="find-home-layout" id="findHomeLayout">
-            <div className="find-home-content" id="findHomeContent">
+          <div className={`find-home-layout ${showResults ? 'map-active' : ''}`} id="findHomeLayout">
+            <div className={`find-home-content ${showResults ? 'hidden' : ''}`} id="findHomeContent">
               <h2 className="section-title">Find Your Nearby Home</h2>
               <p>Enter your location to find the closest Bellavista home to you</p>
               <div className="find-home-search">
                 <input className="search-input" id="locationInput" placeholder="Enter your postcode or city" type="text"/>
                 <button className="search-btn" onClick={findNearestHome}><i className="fas fa-search"></i></button>
+                <button className="location-btn" onClick={useCurrentLocation} title="Use current location">
+                  <i className="fas fa-map-marker-alt"></i>
+                </button>
               </div>
+              <div id="results" style={{display: showResults ? 'block' : 'none', marginTop: '20px'}}></div>
             </div>
-            <div className="map-container" id="mapContainer" style={{display: 'none'}}>
+            <div className={`map-container ${showResults ? 'show' : ''}`} id="mapContainer">
               <div className="demo-map">
                 <div className="map-header">
                   <i className="fas fa-map-marked-alt"></i> Route to Nearest Care Home
@@ -257,22 +337,33 @@ const Home = () => {
                   <div className="route-line"></div>
                   <div className="location-marker user-marker">
                     <i className="fas fa-map-marker-alt"></i>
-                    <span>Your Location</span>
+                    <span>{userLocationLabel}</span>
                   </div>
                   <div className="location-marker home-marker">
                     <i className="fas fa-home"></i>
-                    <span>{nearestHome || 'Care Home'}</span>
+                    <span id="nearestHomeName">{nearestHome || 'Care Home'}</span>
                   </div>
                 </div>
                 <div className="map-info">
                   <div className="info-item">
                     <i className="fas fa-route"></i>
-                    <span>2.3 miles</span>
+                    <span id="distance">{selectedHome ? selectedHome.distance : '2.3 miles'}</span>
                   </div>
                   <div className="info-item">
                     <i className="fas fa-clock"></i>
-                    <span>8 minutes</span>
+                    <span id="duration">{selectedHome ? selectedHome.duration : '8 minutes'}</span>
                   </div>
+                  {selectedHome && selectedHome.maps_url && (
+                    <div className="info-item">
+                      <button
+                        className="btn btn-primary btn-sm"
+                        onClick={() => window.open(selectedHome.maps_url, '_blank')}
+                        style={{ marginTop: '10px', fontSize: '12px', padding: '5px 10px' }}
+                      >
+                        <i className="fas fa-directions"></i> Get Directions
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
