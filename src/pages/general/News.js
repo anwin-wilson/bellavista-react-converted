@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import '../../styles/news-modern.css';
+import '../../styles/modern-styles.css';
 
 const News = () => {
   const [activeFilter, setActiveFilter] = useState('all');

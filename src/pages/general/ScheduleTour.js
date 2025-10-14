@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { bookTour } from '../../utils/api';
 
 const ScheduleTour = () => {
   const [formData, setFormData] = useState({
@@ -30,41 +31,52 @@ const ScheduleTour = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('https://bellavista-backend-production.up.railway.app/api/tours/book/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          first_name: formData.firstName,
-          last_name: formData.lastName,
-          email: formData.email,
-          phone_number: formData.phone,
-          preferred_home: formData.homeLocation || 'cardiff',
-          preferred_date: formData.tourDate,
-          preferred_time: formData.tourTime,
-          notes: formData.notes
-        })
-      });
+      const bookingData = {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        email: formData.email,
+        phone_number: formData.phone,
+        preferred_home: formData.homeLocation || 'cardiff',
+        preferred_date: formData.tourDate,
+        preferred_time: formData.tourTime,
+        notes: formData.notes
+      };
       
-      const data = await response.json();
+      const result = await bookTour(bookingData);
       
-      if (data.success) {
-        setBookingId(data.booking_id);
+      if (result.success && result.data.success) {
+        setBookingId(result.data.booking_id);
         setShowSuccess(true);
         
-        // Show email status message
-        if (data.email_sent) {
-          alert('A confirmation email has been sent to your email address.');
-        } else {
-          alert('Your tour has been scheduled, but there was an issue sending the confirmation email. Our team will contact you shortly.');
-        }
+        // Show email status
+        setTimeout(() => {
+          if (result.data.email_sent) {
+            alert('✅ Confirmation email sent to your inbox!');
+          } else {
+            alert('✅ Tour booked! Email failed to send, but we\'ll contact you within 24 hours.');
+          }
+        }, 500);
       } else {
-        setErrors(data.errors || { general: data.message || 'Failed to submit booking' });
+        const errorMsg = result.data?.message || 'Failed to submit booking';
+        const fieldErrors = result.data?.errors || {};
+        
+        setErrors({ 
+          general: errorMsg,
+          ...fieldErrors 
+        });
       }
     } catch (error) {
-      console.error('Error submitting booking:', error);
-      setErrors({ general: 'Failed to connect to server. Please try again.' });
+      console.error('Booking submission error:', error);
+      
+      if (error.message.includes('timeout')) {
+        setErrors({ 
+          general: 'Server is slow (Railway may be sleeping). Please wait 30 seconds and try again.' 
+        });
+      } else {
+        setErrors({ 
+          general: 'Connection failed. Please check your internet or try again in a moment.' 
+        });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -241,25 +253,49 @@ const ScheduleTour = () => {
                   type="submit" 
                   className="btn" 
                   disabled={isSubmitting}
-                  style={{ width: '100%', marginTop: '20px', background: isSubmitting ? '#ccc' : 'var(--gradient)', color: 'white', border: 'none', padding: '14px 32px', borderRadius: '30px', fontWeight: '700', cursor: isSubmitting ? 'not-allowed' : 'pointer' }}
+                  style={{ 
+                    width: '100%', 
+                    marginTop: '20px', 
+                    background: isSubmitting ? '#ccc' : 'var(--gradient)', 
+                    color: 'white', 
+                    border: 'none', 
+                    padding: '14px 32px', 
+                    borderRadius: '30px', 
+                    fontWeight: '700', 
+                    cursor: isSubmitting ? 'not-allowed' : 'pointer'
+                  }}
                 >
                   {isSubmitting ? (
-                    <><i className="fas fa-spinner fa-spin"></i> Submitting...</>
+                    <><i className="fas fa-spinner fa-spin"></i> Booking Tour...</>
                   ) : (
                     <><i className="fas fa-calendar-check"></i> Schedule Tour</>
                   )}
                 </button>
+                
+                {isSubmitting && (
+                  <div style={{ 
+                    textAlign: 'center', 
+                    marginTop: '15px', 
+                    padding: '10px',
+                    background: '#e3f2fd',
+                    borderRadius: '5px',
+                    color: '#1976d2', 
+                    fontSize: '14px' 
+                  }}>
+                    ⏳ Please wait... Railway server may take 10-30 seconds to wake up
+                  </div>
+                )}
               </form>
             </div>
           ) : (
             <div className="booking-success" style={{ textAlign: 'center', background: 'white', padding: '60px 40px', borderRadius: '15px', boxShadow: 'var(--shadow)', maxWidth: '500px', margin: '0 auto' }}>
-              <i className="fas fa-check-circle" style={{ fontSize: '48px', color: 'var(--primary-green)', marginBottom: '20px' }}></i>
-              <h3>Tour Scheduled Successfully!</h3>
-              <p>Your booking ID is:</p>
-              <div className="booking-id" style={{ background: 'var(--bg-light)', padding: '15px', borderRadius: '8px', fontWeight: '700', fontSize: '18px', margin: '20px 0' }}>{bookingId}</div>
-              <p style={{ marginTop: '20px' }}>We'll contact you within 24 hours to confirm your tour details.</p>
-              <button className="btn" onClick={returnHome} style={{ marginTop: '20px', background: 'var(--gradient)', color: 'white', border: 'none', padding: '14px 32px', borderRadius: '30px', fontWeight: '700' }}>
-                Return to Home
+              <i className="fas fa-check-circle" style={{ fontSize: '48px', color: '#28a745', marginBottom: '20px' }}></i>
+              <h3>✅ Tour Scheduled Successfully!</h3>
+              <div className="booking-id" style={{ background: '#f8f9fa', padding: '15px', borderRadius: '8px', fontWeight: '700', fontSize: '18px', margin: '20px 0', border: '2px solid #28a745' }}>Booking ID: #{bookingId}</div>
+              <p style={{ marginTop: '20px', fontSize: '16px' }}>📧 Confirmation email sent!</p>
+              <p style={{ color: '#666' }}>We'll contact you within 24 hours to confirm details.</p>
+              <button className="btn" onClick={returnHome} style={{ marginTop: '20px', background: 'linear-gradient(135deg, #28a745, #20c997)', color: 'white', border: 'none', padding: '14px 32px', borderRadius: '30px', fontWeight: '700' }}>
+                🏠 Return to Home
               </button>
             </div>
           )}

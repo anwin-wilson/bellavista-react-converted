@@ -1,3 +1,6 @@
+// Main App Component for Bellavista Care Homes
+// Clean routing structure with lazy loading for performance
+
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
@@ -5,67 +8,82 @@ import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
 import ChatWidget from './components/ChatWidget';
 
+// =============================================================================
+// LAZY LOADED COMPONENTS FOR PERFORMANCE
+// =============================================================================
+
+// Main Pages
 const Home = lazy(() => import('./pages/general/Home'));
-const OurHomes = lazy(() => import('./pages/general/OurHomes'));
-const Contact = lazy(() => import('./pages/general/Contact'));
 const About = lazy(() => import('./pages/general/About'));
+const Contact = lazy(() => import('./pages/general/Contact'));
 const Services = lazy(() => import('./pages/general/Services'));
 const ScheduleTour = lazy(() => import('./pages/general/ScheduleTour'));
 const Enquiry = lazy(() => import('./pages/general/Enquiry'));
+
+// Care Home Locations
+const OurHomes = lazy(() => import('./pages/general/OurHomes'));
+const Barry = lazy(() => import('./pages/locations/Barry'));
+const Cardiff = lazy(() => import('./pages/locations/Cardiff'));
+const CollegeFields = lazy(() => import('./pages/locations/CollegeFields'));
+const Waverley = lazy(() => import('./pages/locations/Waverley'));
+
+// Additional Pages
 const Activities = lazy(() => import('./pages/general/Activities'));
 const Facilities = lazy(() => import('./pages/general/Facilities'));
 const News = lazy(() => import('./pages/general/News'));
 const Testimonials = lazy(() => import('./pages/general/Testimonials'));
 const FAQ = lazy(() => import('./pages/general/FAQ'));
 const Career = lazy(() => import('./pages/general/Career'));
-const Barry = lazy(() => import('./pages/locations/Barry'));
-const Cardiff = lazy(() => import('./pages/locations/Cardiff'));
-const CollegeFields = lazy(() => import('./pages/locations/CollegeFields'));
-const Waverley = lazy(() => import('./pages/locations/Waverley'));
-const CareAssessment = lazy(() => import('./pages/general/CareAssessment'));
-const CareResources = lazy(() => import('./pages/general/CareResources'));
-const OurCare = lazy(() => import('./pages/general/OurCare'));
 const Gallery = lazy(() => import('./pages/general/Gallery'));
-const QualityDashboard = lazy(() => import('./pages/general/QualityDashboard'));
-const CovidUpdate = lazy(() => import('./pages/general/CovidUpdate'));
-const MobileApp = lazy(() => import('./pages/general/MobileApp'));
+const ApiTestPage = lazy(() => import('./pages/general/ApiTest'));
+const EmailTest = lazy(() => import('./pages/general/EmailTest'));
+
+// Admin Pages
 const AdminConsole = lazy(() => import('./pages/admin/AdminConsole'));
-const CardiffAdmin = lazy(() => import('./pages/admin/CardiffAdmin'));
 const Login = lazy(() => import('./pages/admin/Login'));
-const Signup = lazy(() => import('./pages/admin/Signup'));
-const StaffDashboard = lazy(() => import('./pages/admin/StaffDashboard'));
-const UserDashboard = lazy(() => import('./pages/admin/UserDashboard'));
-const BarryEnquiry = lazy(() => import('./pages/locations/BarryEnquiry'));
-const BarryNews = lazy(() => import('./pages/locations/BarryNews'));
-const BarryScheduleVisit = lazy(() => import('./pages/locations/BarryScheduleVisit'));
-const CardiffEnquiry = lazy(() => import('./pages/locations/CardiffEnquiry'));
-const CardiffNews = lazy(() => import('./pages/locations/CardiffNews'));
-const CardiffScheduleVisit = lazy(() => import('./pages/locations/CardiffScheduleVisit'));
-const CollegeFieldsEnquiry = lazy(() => import('./pages/locations/CollegeFieldsEnquiry'));
-const CollegeFieldsNews = lazy(() => import('./pages/locations/CollegeFieldsNews'));
-const CollegeFieldsScheduleVisit = lazy(() => import('./pages/locations/CollegeFieldsScheduleVisit'));
-const WaverleyEnquiry = lazy(() => import('./pages/locations/WaverleyEnquiry'));
-const WaverleyNews = lazy(() => import('./pages/locations/WaverleyNews'));
-const WaverleyScheduleVisit = lazy(() => import('./pages/locations/WaverleyScheduleVisit'));
+
+// =============================================================================
+// LOADING AND ERROR COMPONENTS
+// =============================================================================
+
+const LoadingSpinner = () => (
+  <div style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '200px',
+    fontSize: '18px'
+  }}>
+    <i className="fas fa-spinner fa-spin" style={{ marginRight: '10px' }}></i>
+    Loading...
+  </div>
+);
 
 const NotFound = () => (
-  <div style={{padding: '50px', textAlign: 'center'}}>
-    <h2>Page Not Found</h2>
-    <p>This page is coming soon.</p>
+  <div style={{ padding: '100px 20px', textAlign: 'center', background: 'var(--bg-light)' }}>
+    <div className="container">
+      <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', color: 'var(--primary)' }}>Page Not Found</h2>
+      <p style={{ fontSize: '1.2rem', marginBottom: '30px', color: 'var(--text-medium)' }}>The page you're looking for doesn't exist.</p>
+      <a href="/" className="btn" style={{ background: 'var(--gradient)', color: 'white', padding: '12px 30px', borderRadius: '25px', textDecoration: 'none' }}>
+        Return Home
+      </a>
+    </div>
   </div>
 );
 
 const AppContent = () => {
   const location = useLocation();
-  const isAdminRoute = location.pathname === '/admin-console' || location.pathname === '/cardiff-admin';
+  const isAdminRoute = location.pathname.startsWith('/admin') || location.pathname === '/admin-console';
 
   if (isAdminRoute) {
     return (
       <div className="App">
-        <Suspense fallback={<div className="loading-spinner">Loading...</div>}>
+        <Suspense fallback={<LoadingSpinner />}>
           <Routes>
+            <Route path="/admin" element={<AdminConsole />} />
             <Route path="/admin-console" element={<AdminConsole />} />
-            <Route path="/cardiff-admin" element={<CardiffAdmin />} />
+            <Route path="/admin/login" element={<Login />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </Suspense>
       </div>
@@ -76,48 +94,46 @@ const AppContent = () => {
     <div className="App">
       <Header />
       <main>
-        <Suspense fallback={<div className="loading-spinner">Loading...</div>}>
+        <Suspense fallback={<LoadingSpinner />}>
           <Routes>
+            {/* Main Pages */}
             <Route path="/" element={<Home />} />
-            <Route path="/our-homes" element={<OurHomes />} />
-            <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/services" element={<Services />} />
-            <Route path="/activities" element={<Activities />} />
-            <Route path="/facilities" element={<Facilities />} />
-            <Route path="/enquiry" element={<Enquiry />} />
+            
+            {/* Booking & Enquiry */}
             <Route path="/schedule-tour" element={<ScheduleTour />} />
-            <Route path="/testimonials" element={<Testimonials />} />
-            <Route path="/news" element={<News />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/career" element={<Career />} />
+            <Route path="/enquiry" element={<Enquiry />} />
+            
+            {/* Care Homes */}
+            <Route path="/our-homes" element={<OurHomes />} />
+            <Route path="/homes/barry" element={<Barry />} />
+            <Route path="/homes/cardiff" element={<Cardiff />} />
+            <Route path="/homes/college-fields" element={<CollegeFields />} />
+            <Route path="/homes/waverley" element={<Waverley />} />
+            
+            {/* Legacy location routes (redirect) */}
             <Route path="/barry" element={<Barry />} />
             <Route path="/cardiff" element={<Cardiff />} />
             <Route path="/college-fields" element={<CollegeFields />} />
             <Route path="/waverley" element={<Waverley />} />
-            <Route path="/care-assessment" element={<CareAssessment />} />
-            <Route path="/care-resources" element={<CareResources />} />
-            <Route path="/our-care" element={<OurCare />} />
+            
+            {/* Additional Pages */}
+            <Route path="/activities" element={<Activities />} />
+            <Route path="/facilities" element={<Facilities />} />
+            <Route path="/news" element={<News />} />
+            <Route path="/testimonials" element={<Testimonials />} />
+            <Route path="/faq" element={<FAQ />} />
+            <Route path="/career" element={<Career />} />
             <Route path="/gallery" element={<Gallery />} />
-            <Route path="/quality-dashboard" element={<QualityDashboard />} />
-            <Route path="/covid-update" element={<CovidUpdate />} />
-            <Route path="/mobile-app" element={<MobileApp />} />
+            
+            {/* Admin & Auth Pages */}
             <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/staff-dashboard" element={<StaffDashboard />} />
-            <Route path="/user-dashboard" element={<UserDashboard />} />
-            <Route path="/barry-enquiry" element={<BarryEnquiry />} />
-            <Route path="/barry-news" element={<BarryNews />} />
-            <Route path="/barry-schedule-visit" element={<BarryScheduleVisit />} />
-            <Route path="/cardiff-enquiry" element={<CardiffEnquiry />} />
-            <Route path="/cardiff-news" element={<CardiffNews />} />
-            <Route path="/cardiff-schedule-visit" element={<CardiffScheduleVisit />} />
-            <Route path="/college-fields-enquiry" element={<CollegeFieldsEnquiry />} />
-            <Route path="/college-fields-news" element={<CollegeFieldsNews />} />
-            <Route path="/college-fields-schedule-visit" element={<CollegeFieldsScheduleVisit />} />
-            <Route path="/waverley-enquiry" element={<WaverleyEnquiry />} />
-            <Route path="/waverley-news" element={<WaverleyNews />} />
-            <Route path="/waverley-schedule-visit" element={<WaverleyScheduleVisit />} />
+            <Route path="/api-test" element={<ApiTestPage />} />
+            <Route path="/email-test" element={<EmailTest />} />
+            
+            {/* 404 Page */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>

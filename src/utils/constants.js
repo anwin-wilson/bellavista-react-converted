@@ -16,7 +16,6 @@ export const HOMES_DATA = [
     image: `${process.env.PUBLIC_URL}/images/bellavista-cardiff.jpeg`,
     rating: '4.9',
     link: '/homes/cardiff',
-    htmlLink: 'cardiff.html',
     features: [
       { icon: 'fas fa-bed', text: '45 Rooms' },
       { icon: 'fas fa-leaf', text: 'Garden Views' },
@@ -31,7 +30,6 @@ export const HOMES_DATA = [
     image: `${process.env.PUBLIC_URL}/images/bellavista-cardiff.jpeg`,
     rating: '4.8',
     link: '/homes/barry',
-    htmlLink: 'barry.html',
     features: [
       { icon: 'fas fa-bed', text: '38 Rooms' },
       { icon: 'fas fa-water', text: 'Seaside' },
@@ -46,7 +44,6 @@ export const HOMES_DATA = [
     image: `${process.env.PUBLIC_URL}/images/bellavista-waverly.jpeg`,
     rating: '4.9',
     link: '/homes/waverley',
-    htmlLink: 'waverley.html',
     features: [
       { icon: 'fas fa-bed', text: '42 Rooms' },
       { icon: 'fas fa-heart', text: 'Dementia Care' },
@@ -61,7 +58,6 @@ export const HOMES_DATA = [
     image: `${process.env.PUBLIC_URL}/images/bellavista-college-fields.jpeg`,
     rating: '4.7',
     link: '/homes/college-fields',
-    htmlLink: 'college-fields.html',
     features: [
       { icon: 'fas fa-bed', text: '35 Rooms' },
       { icon: 'fas fa-tree', text: 'Parkland' },

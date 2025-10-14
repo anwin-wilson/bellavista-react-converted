@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import '../../styles/modern-styles.css';
 import '../../styles/homes-scroll.css';
 
 const HOMES_DATA = [

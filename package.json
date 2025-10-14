@@ -2,7 +2,7 @@
   "name": "bellavista-care-homes",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://anwin-wilson.github.io/",
+  "homepage": ".",
   "description": "Bellavista Care Homes - Premium residential & nursing care across South Wales",
   "keywords": ["care homes", "nursing care", "south wales", "elderly care", "residential care"],
   "dependencies": {
@@ -17,7 +17,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "analyze": "npm run build && npx serve -s build"
   },
   "eslintConfig": {
     "extends": [

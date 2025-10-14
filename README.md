@@ -1,130 +1,154 @@
-# Bellavista Care Homes - React App
+# 🏠 Bellavista Care Homes - Frontend
 
-A modern, responsive React application for Bellavista Care Homes, converted from the original HTML/CSS/JavaScript implementation.
-
-## ✨ Features
-
-- **Modern React Architecture** - Built with React 18, hooks, and functional components
-- **Responsive Design** - Mobile-first approach with optimized layouts
-- **Performance Optimized** - Lazy loading, code splitting, and error boundaries
-- **SEO Friendly** - Proper meta tags and semantic HTML structure
-- **Accessible** - WCAG compliant with proper ARIA labels
-- **Clean Code** - Well-organized components and reusable utilities
-- **PWA Ready** - Progressive Web App capabilities
+Modern React application for Bellavista Care Homes with tour booking functionality.
 
 ## 🚀 Quick Start
 
-1. **Install dependencies:**
+### Development
 ```bash
 npm install
-```
-
-2. **Start development server:**
-```bash
 npm start
 ```
 
-3. **Build for production:**
+### Production Build
 ```bash
 npm run build
 ```
 
-## 📦 GitHub Pages Deployment
-
-1. **Update homepage in package.json:**
-```json
-"homepage": "https://yourusername.github.io/repository-name"
-```
-
-2. **Deploy to GitHub Pages:**
-```bash
-npm run deploy
-```
+## 🌐 Live Demo
+- **Production**: [Your deployed URL]
+- **Backend API**: https://bellavista-backend-production.up.railway.app
 
 ## 📁 Project Structure
 
 ```
 src/
-├── components/     # Reusable UI components
-│   ├── Header.js
-│   ├── Footer.js
-│   ├── BackToTop.js
-│   └── ChatWidget.js
-├── pages/         # Route-based page components
-│   ├── Home.js
-│   ├── OurHomes.js
-│   ├── Services.js
-│   ├── About.js
-│   ├── Contact.js
-│   ├── ScheduleTour.js
-│   ├── Enquiry.js
-│   ├── Activities.js
-│   ├── Facilities.js
-│   ├── News.js
-│   ├── Testimonials.js
-│   ├── FAQ.js
-│   └── Career.js
-├── utils/         # Helper functions and constants
-│   └── constants.js
-├── App.js         # Main application component
-├── index.js       # Application entry point
-└── index.css      # Global styles
+├── components/          # Reusable UI components
+│   ├── Header.js       # Navigation header
+│   ├── Footer.js       # Site footer
+│   ├── BackToTop.js    # Scroll to top button
+│   └── ChatWidget.js   # Chat functionality
+├── pages/              # Page components
+│   ├── general/        # Main site pages
+│   ├── locations/      # Care home specific pages
+│   └── admin/          # Admin dashboard pages
+├── styles/             # CSS stylesheets
+├── utils/              # Utilities and configuration
+│   ├── api.js         # API endpoints and functions
+│   ├── constants.js   # Site configuration
+│   └── news.js        # News data
+└── App.js             # Main app component
 ```
 
-## 📱 Pages
+## 🔗 API Integration
 
-- **Home** - Hero slideshow, statistics, homes preview, news, activities, care promise, facilities
-- **Our Homes** - Detailed information about all care facilities
-- **Services** - Comprehensive care services overview
-- **About** - Company mission, vision, and values
-- **Contact** - Contact form and location information
-- **Schedule Tour** - Tour booking form (localStorage-based)
-- **Enquiry** - Care enquiry form
-- **Activities** - Activities and events information
-- **Facilities** - Facilities and amenities details
-- **News** - Latest news and updates
-- **Testimonials** - Customer testimonials
-- **FAQ** - Frequently asked questions
-- **Career** - Career opportunities
+The frontend connects to the Django backend API:
 
-## 🛠 Technologies
+### Main Endpoints Used:
+- `POST /api/tours/book/` - Create tour booking
+- `GET /api/tours/available-slots/` - Get available time slots
+- `GET /api/tours/test/` - Test API connection
 
-- **React 18** - Latest React with concurrent features
-- **React Router DOM** - Client-side routing
-- **CSS3** - Modern CSS with custom properties
-- **Font Awesome** - Icon library
-- **Google Fonts** - Typography (Inter & Playfair Display)
+### API Configuration:
+- Production: `https://bellavista-backend-production.up.railway.app`
+- Development: `http://localhost:8000`
 
-## 🎨 Design System
+## 🎯 Key Features
 
-- **Colors** - Professional blue/teal gradient theme
-- **Typography** - Inter for body text, Playfair Display for headings
-- **Layout** - CSS Grid and Flexbox for responsive layouts
-- **Components** - Modular, reusable component architecture
+### ✅ Tour Booking System
+- Interactive booking form
+- Real-time validation
+- Email confirmation
+- Available time slots
 
-## 🔧 Development
+### ✅ Care Home Locations
+- Cardiff Bay
+- Barry Seaside  
+- Waverley Centre
+- College Fields
 
-- Follow the existing code style and component patterns
-- Test responsiveness across different screen sizes
-- Ensure accessibility compliance
-- All forms use localStorage for data persistence
+### ✅ Modern UI/UX
+- Responsive design
+- Lazy loading
+- Clean navigation
+- Mobile-friendly
 
-## 📦 Build & Deploy
+## 🛠️ Technologies
 
-The app builds to static files in the `build/` directory, ready for deployment to GitHub Pages or any static hosting service.
+- **React 18** - Modern React with hooks
+- **React Router 6** - Client-side routing
+- **CSS3** - Custom styling with CSS variables
+- **Font Awesome** - Icons
+- **Fetch API** - HTTP requests
 
-## 🔄 Conversion Notes
+## 📱 Responsive Design
 
-This React application was converted from the original HTML/CSS/JavaScript implementation while maintaining:
-- All original functionality and features
-- Responsive design and mobile optimization
-- Visual design and styling
-- Interactive elements and animations
-- Form functionality (using localStorage)
-- PWA capabilities
+- ✅ Mobile (320px+)
+- ✅ Tablet (768px+)
+- ✅ Desktop (1024px+)
+- ✅ Large screens (1440px+)
 
-The conversion provides:
-- Better code organization and maintainability
-- Modern React patterns and best practices
-- Improved performance through code splitting
-- Enhanced developer experience
+## 🔧 Environment Variables
+
+```bash
+# App Configuration
+REACT_APP_NAME=Bellavista Care Homes
+REACT_APP_VERSION=1.0.0
+
+# API URLs
+REACT_APP_API_BASE_URL=https://bellavista-backend-production.up.railway.app/api/tours
+REACT_APP_LOCAL_API_URL=http://localhost:8000/api/tours
+```
+
+## 🚀 Deployment
+
+### Netlify (Recommended)
+1. Connect GitHub repository
+2. Build command: `npm run build`
+3. Publish directory: `build`
+4. Add environment variables
+
+### Vercel
+1. Import GitHub repository
+2. Framework preset: Create React App
+3. Add environment variables
+
+## 📋 Available Scripts
+
+- `npm start` - Development server
+- `npm run build` - Production build
+- `npm test` - Run tests
+- `npm run eject` - Eject from Create React App
+
+## 🎨 Styling
+
+Uses CSS custom properties for consistent theming:
+
+```css
+:root {
+  --primary: #2c5530;
+  --primary-light: #4a7c59;
+  --secondary: #8b4513;
+  --accent: #d4af37;
+  --bg-light: #f8f9fa;
+  --text-dark: #2c3e50;
+  --gradient: linear-gradient(135deg, #2c5530, #4a7c59);
+}
+```
+
+## 🔍 SEO Optimized
+
+- Meta tags for all pages
+- Semantic HTML structure
+- Alt text for images
+- Structured data markup
+
+## 📞 Support
+
+For technical support or questions:
+- Email: info@bellavista.com
+- Phone: (555) 123-4567
+
+---
+
+**Built with ❤️ for Bellavista Care Homes**
