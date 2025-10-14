@@ -36,7 +36,6 @@ const FAQ = lazy(() => import('./pages/general/FAQ'));
 const Career = lazy(() => import('./pages/general/Career'));
 const Gallery = lazy(() => import('./pages/general/Gallery'));
 const ApiTestPage = lazy(() => import('./pages/general/ApiTest'));
-const EmailTest = lazy(() => import('./pages/general/EmailTest'));
 
 // Admin Pages
 const AdminConsole = lazy(() => import('./pages/admin/AdminConsole'));
@@ -131,7 +130,6 @@ const AppContent = () => {
             {/* Admin & Auth Pages */}
             <Route path="/login" element={<Login />} />
             <Route path="/api-test" element={<ApiTestPage />} />
-            <Route path="/email-test" element={<EmailTest />} />
             
             {/* 404 Page */}
             <Route path="*" element={<NotFound />} />
