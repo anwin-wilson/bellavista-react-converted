@@ -1,2 +1,2 @@
+/api/*  https://bellavista-backend-production.up.railway.app/api/:splat  200
 /*    /index.html   200
-/*    /bellavista-react-converted/index.html   200
