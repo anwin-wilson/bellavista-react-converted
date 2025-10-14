@@ -55,14 +55,14 @@ const MobileApp = () => {
             <h3>Download Now</h3>
             <p>Available for both iOS and Android devices</p>
             <div className="download-buttons">
-              <a href="#" className="download-btn">
+              <a href="https://apps.apple.com/app/bellavista-care-homes" className="download-btn" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-apple"></i>
                 <div>
                   <span>Download on the</span>
                   <strong>App Store</strong>
                 </div>
               </a>
-              <a href="#" className="download-btn">
+              <a href="https://play.google.com/store/apps/developer?id=Bellavista+Care+Homes" className="download-btn" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-google-play"></i>
                 <div>
                   <span>Get it on</span>

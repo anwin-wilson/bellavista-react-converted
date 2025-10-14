@@ -79,7 +79,7 @@ const Header = () => {
         <nav>
           <ul>
             <li className="has-dropdown">
-              <a href="#">Our Homes <i className="fas fa-chevron-down"></i></a>
+              <Link to="/our-homes">Our Homes <i className="fas fa-chevron-down"></i></Link>
               <ul className="dropdown-menu">
                 <li><Link to="/cardiff">Cardiff</Link></li>
                 <li><Link to="/barry">Barry</Link></li>
@@ -88,7 +88,7 @@ const Header = () => {
               </ul>
             </li>
             <li className="has-dropdown">
-              <a href="#">Services <i className="fas fa-chevron-down"></i></a>
+              <Link to="/services">Services <i className="fas fa-chevron-down"></i></Link>
               <ul className="dropdown-menu">
                 <li><Link to="/services">Care Services</Link></li>
                 <li><Link to="/activities">Activities</Link></li>

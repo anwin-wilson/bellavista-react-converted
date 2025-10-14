@@ -11,10 +11,10 @@ const Footer = () => {
             <h3>Bellavista Nursing Homes</h3>
             <p>Providing exceptional care with a focus on comfort, dignity, and personalized attention in a beautiful, serene environment.</p>
             <div className="social-links">
-              <a aria-label="Facebook" href="#"><i className="fab fa-facebook-f"></i></a>
-              <a aria-label="Twitter" href="#"><i className="fab fa-twitter"></i></a>
-              <a aria-label="Instagram" href="#"><i className="fab fa-instagram"></i></a>
-              <a aria-label="LinkedIn" href="#"><i className="fab fa-linkedin-in"></i></a>
+              <a aria-label="Facebook" href="https://facebook.com/bellavista" target="_blank" rel="noopener noreferrer"><i className="fab fa-facebook-f"></i></a>
+              <a aria-label="Twitter" href="https://twitter.com/bellavista" target="_blank" rel="noopener noreferrer"><i className="fab fa-twitter"></i></a>
+              <a aria-label="Instagram" href="https://instagram.com/bellavista" target="_blank" rel="noopener noreferrer"><i className="fab fa-instagram"></i></a>
+              <a aria-label="LinkedIn" href="https://linkedin.com/company/bellavista" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin-in"></i></a>
             </div>
           </div>
           <div className="footer-col">
