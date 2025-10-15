@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../../styles/AdminConsole.css';
 
 const AdminConsole = () => {
+  const navigate = useNavigate();
   const [activeView, setActiveView] = useState('add-home');
   const [globalSearch, setGlobalSearch] = useState('');
   const [state, setState] = useState({ homes: [], news: [], faqs: [], users: [], tours: [] });
@@ -98,9 +100,7 @@ const AdminConsole = () => {
 
   const logout = () => {
     if (window.confirm('Are you sure you want to logout?')) {
-      localStorage.removeItem('currentUser');
-      localStorage.removeItem('users');
-      window.location.href = '/';
+      navigate('/');
     }
   };
 
