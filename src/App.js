@@ -2,7 +2,7 @@
 // Clean routing structure with lazy loading for performance
 
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
@@ -63,7 +63,7 @@ const NotFound = () => (
     <div className="container">
       <h2 style={{ fontSize: '2.5rem', marginBottom: '20px', color: 'var(--primary)' }}>Page Not Found</h2>
       <p style={{ fontSize: '1.2rem', marginBottom: '30px', color: 'var(--text-medium)' }}>The page you're looking for doesn't exist.</p>
-      <a href="/" className="btn" style={{ background: 'var(--gradient)', color: 'white', padding: '12px 30px', borderRadius: '25px', textDecoration: 'none' }}>
+      <a href="#/" className="btn" style={{ background: 'var(--gradient)', color: 'white', padding: '12px 30px', borderRadius: '25px', textDecoration: 'none' }}>
         Return Home
       </a>
     </div>
