@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -12,7 +14,7 @@ const Login = () => {
     // Check for admin credentials
     if (formData.email === 'admin@bellavista.com' && formData.password === '1234') {
       // Redirect to admin console
-      window.location.href = '/bellavista-react-converted/admin-console';
+      navigate('/admin-console');
     } else {
       alert('Invalid credentials');
     }
