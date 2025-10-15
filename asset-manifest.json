@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/bellavista-react-converted/static/css/main.e72358a1.css",
-    "main.js": "/bellavista-react-converted/static/js/main.fd3e5360.js",
+    "main.js": "/bellavista-react-converted/static/js/main.fd55ce7e.js",
     "static/css/219.2add9fed.chunk.css": "/bellavista-react-converted/static/css/219.2add9fed.chunk.css",
     "static/js/219.5ed1ec11.chunk.js": "/bellavista-react-converted/static/js/219.5ed1ec11.chunk.js",
     "static/js/264.5bb5cdc2.chunk.js": "/bellavista-react-converted/static/js/264.5bb5cdc2.chunk.js",
@@ -27,11 +27,11 @@
     "static/js/153.1acd786f.chunk.js": "/bellavista-react-converted/static/js/153.1acd786f.chunk.js",
     "static/css/695.64e9e1fb.chunk.css": "/bellavista-react-converted/static/css/695.64e9e1fb.chunk.css",
     "static/js/695.e5e91703.chunk.js": "/bellavista-react-converted/static/js/695.e5e91703.chunk.js",
-    "static/js/763.aa5f948f.chunk.js": "/bellavista-react-converted/static/js/763.aa5f948f.chunk.js",
+    "static/js/763.67ccffb0.chunk.js": "/bellavista-react-converted/static/js/763.67ccffb0.chunk.js",
     "index.html": "/bellavista-react-converted/index.html"
   },
   "entrypoints": [
     "static/css/main.e72358a1.css",
-    "static/js/main.fd3e5360.js"
+    "static/js/main.fd55ce7e.js"
   ]
 }
