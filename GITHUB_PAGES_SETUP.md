@@ -8,19 +8,20 @@ Replace `yourusername` with your actual GitHub username:
 "homepage": "https://anwin-wilson.github.io/bellavista-react-converted"
 ```
 
-### 2. Deploy to GitHub Pages
+### 2. Manual Deploy (Due to Billing Issue)
 ```bash
 npm run build
 npm run deploy
 ```
 
 ### 3. Enable GitHub Pages
-1. Go to your repository on GitHub
-2. Click Settings → Pages
-3. Source: Deploy from a branch
-4. Branch: gh-pages
-5. Folder: / (root)
-6. Save
+1. Go to https://github.com/anwin-wilson/bellavista-react-converted/settings/pages
+2. Source: Deploy from a branch
+3. Branch: gh-pages
+4. Folder: / (root)
+5. Save
+
+**Note**: GitHub Actions disabled due to billing. Use manual deployment only.
 
 ## What Was Fixed
 
