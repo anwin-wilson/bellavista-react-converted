@@ -2,8 +2,8 @@
 // Centralized API endpoints and utilities
 
 // API Base URLs
-const PRIMARY_API_URL = 'https://bellavista-backend-production.up.railway.app/api/tours';
-const FALLBACK_API_URL = 'http://localhost:8000/api/tours';
+const PRIMARY_API_URL = 'https://bellavista-backend-3.onrender.com/api/tours';
+const FALLBACK_API_URL = 'https://bellavista-backend-production.up.railway.app/api/tours';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || PRIMARY_API_URL;
 
@@ -42,7 +42,7 @@ export const apiRequest = async (url, options = {}) => {
   try {
     // Create AbortController for timeout
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 45000); // 45 second timeout for Railway cold starts
+    const timeoutId = setTimeout(() => controller.abort(), 15000); // 15 second timeout for Render
     
     const response = await fetch(url, { 
       ...defaultOptions, 
@@ -64,7 +64,7 @@ export const apiRequest = async (url, options = {}) => {
     if (error.name === 'AbortError') {
       return { 
         success: false, 
-        data: { message: 'Request timeout (45s). Railway server may be sleeping - please try again.' }, 
+        data: { message: 'Request timeout (15s). Server may be busy - please try again.' }, 
         status: 0 
       };
     }
@@ -79,13 +79,6 @@ export const apiRequest = async (url, options = {}) => {
 
 // Specific API functions
 export const bookTour = async (bookingData) => {
-  // Wake up Railway server first
-  try {
-    await fetch(API_ENDPOINTS.TEST_CONNECTION, { method: 'GET' });
-  } catch (e) {
-    // Ignore wake-up errors
-  }
-  
   return apiRequest(API_ENDPOINTS.BOOK_TOUR, {
     method: 'POST',
     body: JSON.stringify(bookingData),
