@@ -3,7 +3,7 @@
 
 // API Base URLs
 const PRIMARY_API_URL = 'https://bellavista-backend-3.onrender.com/api/tours';
-const FALLBACK_API_URL = 'https://bellavista-backend-production.up.railway.app/api/tours';
+const FALLBACK_API_URL = 'https://bellavista-backend-3.onrender.com/api/tours';
 
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || PRIMARY_API_URL;
 

@@ -289,7 +289,7 @@ const ScheduleTour = () => {
                     color: '#1976d2', 
                     fontSize: '14px' 
                   }}>
-                    ⏳ Please wait... Railway server may take 10-30 seconds to wake up
+                    ⏳ Please wait... Render server may take 10-30 seconds to wake up
                   </div>
                 )}
               </form>
