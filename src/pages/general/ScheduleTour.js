@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { bookTour } from '../../utils/api';
 
 const ScheduleTour = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -89,7 +91,7 @@ const ScheduleTour = () => {
   };
 
   const returnHome = () => {
-    window.location.href = '/';
+    navigate('/');
   };
 
   return (
