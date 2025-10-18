@@ -1,2 +1,3 @@
-/api/*  https://bellavista-backend-production.up.railway.app/api/:splat  200
+# Netlify redirects file
+/api/*  https://bellavista-backend-3.onrender.com/api/:splat  200
 /*    /index.html   200
