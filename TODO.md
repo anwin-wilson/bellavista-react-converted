@@ -11,7 +11,7 @@
 ### ✅ **API Integration**
 - Created centralized API configuration (`src/utils/api.js`)
 - Updated environment variables
-- Connected to production backend: `https://bellavista-backend-production.up.railway.app`
+- Connected to production backend: `https://bellavista-backend-3.onrender.com`
 - Implemented proper error handling
 
 ### ✅ **Code Quality**
@@ -45,7 +45,7 @@ The frontend is now:
 
 All booking functionality connects to:
 ```
-Base URL: https://bellavista-backend-production.up.railway.app/api/tours
+Base URL: https://bellavista-backend-3.onrender.com/api/tours
 ```
 
 ### Available Endpoints:

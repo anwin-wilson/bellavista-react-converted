@@ -53,7 +53,7 @@ const Home = () => {
 
     try {
       // Call the backend API
-      const response = await fetch(`https://bellavista-backend-production.up.railway.app/api/tours/find-nearest-home/?location=${encodeURIComponent(location)}`);
+      const response = await fetch(`https://bellavista-backend-3.onrender.com/api/tours/find-nearest-home/?location=${encodeURIComponent(location)}`);
       const data = await response.json();
 
       if (!response.ok) {
@@ -95,7 +95,7 @@ const Home = () => {
       const { latitude, longitude } = position.coords;
 
       // Call the backend API with coordinates
-      const response = await fetch(`https://bellavista-backend-production.up.railway.app/api/tours/find-nearest-home/?lat=${latitude}&lon=${longitude}`);
+      const response = await fetch(`https://bellavista-backend-3.onrender.com/api/tours/find-nearest-home/?lat=${latitude}&lon=${longitude}`);
       const data = await response.json();
 
       if (!response.ok) {

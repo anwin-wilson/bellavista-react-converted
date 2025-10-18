@@ -12,7 +12,7 @@
 ### **🌐 API Integration:**
 ```javascript
 // Production API
-https://bellavista-backend-production.up.railway.app/api/tours
+https://bellavista-backend-3.onrender.com/api/tours
 
 // Main Endpoints Working:
 ✅ POST /book/ - Tour booking
@@ -57,7 +57,7 @@ npm run deploy
 
 ### **📋 Environment Variables:**
 ```bash
-REACT_APP_API_BASE_URL=https://bellavista-backend-production.up.railway.app/api/tours
+REACT_APP_API_BASE_URL=https://bellavista-backend-3.onrender.com/api/tours
 REACT_APP_LOCAL_API_URL=http://localhost:8000/api/tours
 ```
 
@@ -68,7 +68,7 @@ REACT_APP_LOCAL_API_URL=http://localhost:8000/api/tours
 - ✅ **Responsive** - Mobile-friendly
 
 ### **📞 Live URLs:**
-- **Backend API**: https://bellavista-backend-production.up.railway.app
+- **Backend API**: https://bellavista-backend-3.onrender.com
 - **Frontend**: Ready for deployment!
 
 ---

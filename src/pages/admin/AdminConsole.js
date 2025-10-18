@@ -16,7 +16,7 @@ const AdminConsole = () => {
   const fetchTours = async (silent = false) => {
     if (!silent) setLoading(true);
     try {
-      const response = await fetch('https://bellavista-backend-production.up.railway.app/api/tours/bookings/');
+      const response = await fetch('https://bellavista-backend-3.onrender.com/api/tours/bookings/');
       const data = await response.json();
       setState(prev => ({ ...prev, tours: data }));
     } catch (error) {
@@ -29,7 +29,7 @@ const AdminConsole = () => {
   // Update tour status
   const updateTourStatus = async (bookingId, status) => {
     try {
-      const response = await fetch(`https://bellavista-backend-production.up.railway.app/api/tours/bookings/${bookingId}/status/`, {
+      const response = await fetch(`https://bellavista-backend-3.onrender.com/api/tours/bookings/${bookingId}/status/`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ const AdminConsole = () => {
   const exportToExcel = async (status) => {
     try {
       console.log('Exporting status:', status);
-      const response = await fetch(`https://bellavista-backend-production.up.railway.app/api/tours/export/?status=${status}`);
+      const response = await fetch(`https://bellavista-backend-3.onrender.com/api/tours/export/?status=${status}`);
       
       if (response.ok) {
         const blob = await response.blob();

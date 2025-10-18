@@ -17,8 +17,7 @@ npm run build
 
 ## 🌐 Live Demo
 - **Production**: [Your deployed URL]
-- **Backend API**: https://bellavista-backend-production.up.railway.app
-
+- **Backend API**: https://bellavista-backend-3.onrender.com
 ## 📁 Project Structure
 
 ```
@@ -50,7 +49,7 @@ The frontend connects to the Django backend API:
 - `GET /api/tours/test/` - Test API connection
 
 ### API Configuration:
-- Production: `https://bellavista-backend-production.up.railway.app`
+- Production: `https://bellavista-backend-3.onrender.com`
 - Development: `http://localhost:8000`
 
 ## 🎯 Key Features
@@ -96,7 +95,7 @@ REACT_APP_NAME=Bellavista Care Homes
 REACT_APP_VERSION=1.0.0
 
 # API URLs
-REACT_APP_API_BASE_URL=https://bellavista-backend-production.up.railway.app/api/tours
+REACT_APP_API_BASE_URL=https://bellavista-backend-3.onrender.com/api/tours
 REACT_APP_LOCAL_API_URL=http://localhost:8000/api/tours
 ```
 
