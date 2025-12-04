@@ -1635,12 +1635,26 @@ h1, h2, h3, h4, h5 {
         scroll-snap-type: x mandatory !important;
         padding: 5px 15px 15px 15px !important;
         margin: 0 -15px !important;
-        scrollbar-width: none !important;
-        -ms-overflow-style: none !important;
+        scrollbar-width: thin !important;
+        scrollbar-color: #0066cc #f0f0f0 !important;
     }
 
     .activity-grid::-webkit-scrollbar {
-        display: none !important;
+        height: 8px !important;
+    }
+    
+    .activity-grid::-webkit-scrollbar-track {
+        background: #f0f0f0 !important;
+        border-radius: 4px !important;
+    }
+    
+    .activity-grid::-webkit-scrollbar-thumb {
+        background: #0066cc !important;
+        border-radius: 4px !important;
+    }
+    
+    .activity-grid::-webkit-scrollbar-thumb:hover {
+        background: #00509f !important;
     }
     
     .activity-card {
@@ -1697,6 +1711,26 @@ h1, h2, h3, h4, h5 {
         gap: 12px !important;
         padding: 5px 12px 12px 12px !important;
         margin: 0 -12px !important;
+        scrollbar-width: thin !important;
+        scrollbar-color: #0066cc #f0f0f0 !important;
+    }
+    
+    .activity-grid::-webkit-scrollbar {
+        height: 8px !important;
+    }
+    
+    .activity-grid::-webkit-scrollbar-track {
+        background: #f0f0f0 !important;
+        border-radius: 4px !important;
+    }
+    
+    .activity-grid::-webkit-scrollbar-thumb {
+        background: #0066cc !important;
+        border-radius: 4px !important;
+    }
+    
+    .activity-grid::-webkit-scrollbar-thumb:hover {
+        background: #00509f !important;
     }
 
     .activity-card {

@@ -465,28 +465,28 @@ const Home = () => {
           <div className="activity-grid">
             <div className="activity-card">
               <div className="activity-icon physical">
-                <i className="fas fa-heartbeat" style={{fontSize: '30px'}}></i>
+                <i className="fas fa-dumbbell" style={{fontSize: '30px'}}></i>
               </div>
               <h4>Physical Wellness</h4>
               <p>Chair exercises, physiotherapy, gentle yoga</p>
             </div>
             <div className="activity-card">
               <div className="activity-icon creative">
-                <i className="fas fa-palette" style={{fontSize: '30px'}}></i>
+                <i className="fas fa-brush" style={{fontSize: '30px'}}></i>
               </div>
               <h4>Creative Arts</h4>
               <p>Painting, crafts, pottery, creative writing</p>
             </div>
             <div className="activity-card">
               <div className="activity-icon social">
-                <i className="fas fa-users" style={{fontSize: '30px'}}></i>
+                <i className="fas fa-gamepad" style={{fontSize: '30px'}}></i>
               </div>
               <h4>Social & Games</h4>
               <p>Bingo, quiz nights, social hours, outings</p>
             </div>
             <div className="activity-card">
               <div className="activity-icon therapeutic">
-                <i className="fas fa-leaf" style={{fontSize: '30px'}}></i>
+                <i className="fas fa-spa" style={{fontSize: '30px'}}></i>
               </div>
               <h4>Therapeutic Care</h4>
               <p>Pet therapy, aromatherapy, meditation</p>
