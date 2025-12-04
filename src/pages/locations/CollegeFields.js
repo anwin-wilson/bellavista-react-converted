@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../../styles/cardiff.css';
 
 const CollegeFields = () => {
   const [heroExpanded, setHeroExpanded] = useState(false);
