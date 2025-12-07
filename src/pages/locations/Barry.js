@@ -11,6 +11,8 @@ const Barry = () => {
   const [distance, setDistance] = useState('');
   const [duration, setDuration] = useState('');
   const [newsFilter, setNewsFilter] = useState('all');
+  const [activitiesExpanded, setActivitiesExpanded] = useState(false);
+  const [facilitiesExpanded, setFacilitiesExpanded] = useState(false);
 
   const toggleHeroContent = () => {
     setHeroExpanded(!heroExpanded);
@@ -89,6 +91,42 @@ const Barry = () => {
             <p>Our seaside setting provides a naturally restorative environment that benefits both temporary and permanent residents.</p>
           </div>
         `
+      },
+      chc: {
+        title: 'CHC Nursing Care',
+        content: `
+          <div class="service-detail">
+            <h4><i class="fas fa-heartbeat"></i> Continuing Healthcare Support</h4>
+            <p>Specialist nursing care for residents eligible for Continuing Healthcare (CHC), delivered with comprehensive clinical oversight and coordinated multi-disciplinary support.</p>
+            <h4><i class="fas fa-file-medical"></i> Clinical Coordination</h4>
+            <ul>
+              <li>Personalised CHC care plans and ongoing reviews</li>
+              <li>Close liaison with NHS teams and commissioners</li>
+              <li>Advanced medication management and monitoring</li>
+              <li>Support for complex and long-term clinical needs</li>
+            </ul>
+            <h4><i class="fas fa-water"></i> Therapeutic Environment</h4>
+            <p>Care delivered in our calming seaside setting that promotes comfort, stability and wellbeing for residents with high clinical needs.</p>
+          </div>
+        `
+      },
+      endOfLife: {
+        title: 'End-of-Life Care',
+        content: `
+          <div class="service-detail">
+            <h4><i class="fas fa-dove"></i> Compassionate Palliative Support</h4>
+            <p>Dignified, person-centred palliative care focused on comfort, respect and individual preferences, with sensitive support for residents and families.</p>
+            <h4><i class="fas fa-hand-holding-heart"></i> Comfort & Dignity</h4>
+            <ul>
+              <li>Pain and symptom management with specialist input</li>
+              <li>Private, peaceful spaces for family time</li>
+              <li>Emotional, cultural and spiritual needs respected</li>
+              <li>Personalised care plans and 24/7 attentive support</li>
+            </ul>
+            <h4><i class="fas fa-water"></i> Peaceful Setting</h4>
+            <p>Our tranquil coastal environment supports serenity and comfort, helping residents and families find peace and moments of reflection.</p>
+          </div>
+        `
       }
     };
 
@@ -117,13 +155,21 @@ const Barry = () => {
     setNewsFilter(filter);
   };
 
+  const toggleActivities = () => {
+    setActivitiesExpanded(!activitiesExpanded);
+  };
+
+  const toggleFacilities = () => {
+    setFacilitiesExpanded(!facilitiesExpanded);
+  };
+
   return (
     <div className="page-content">
       {/* Hero Section */}
       <section className={`home-hero ${heroExpanded ? 'expanded' : ''}`} id="heroSection">
         <div className="container">
           <h1>Welcome to Bellavista Barry</h1>
-          <p>A coastal care home with spectacular sea views and therapeutic seaside environment. We provide high-quality residential, nursing, and dementia care in a beautiful seaside setting where the healing power of the ocean enhances our residents' wellbeing.</p>
+          <p>Bellavista Barry is a long-established 39-bedded nursing home providing high-quality, person-centred dementia, nursing, residential, respite, CHC and end-of-life care with trained staff, a supportive environment, and a strong focus on dignity, independence and community.</p>
 
           <button className="read-more-btn" id="readMoreBtn" onClick={toggleHeroContent}>
             <i className="fas fa-chevron-down"></i> {heroExpanded ? 'Read Less' : 'Read More'}
@@ -131,10 +177,11 @@ const Barry = () => {
 
           <div className={`hero-expanded-content ${heroExpanded ? 'expanded' : ''}`} id="heroExpandedContent">
             <div className="expanded-text">
-              <p>Bellavista Barry is uniquely positioned on the beautiful Welsh coast, offering residents the therapeutic benefits of sea air and stunning ocean views. Our home combines modern care facilities with the natural healing environment of the seaside.</p>
-              <p>We believe in the restorative power of coastal living, where residents can enjoy gentle sea breezes, watch the changing tides, and participate in seaside activities that promote both physical and mental wellbeing.</p>
-              <p>Our dedicated team understands the unique advantages of seaside care, incorporating coastal walks, beach therapy, and outdoor activities that take full advantage of our prime waterfront location.</p>
-              <p>The home is registered to provide residential care, nursing care, dementia care, and respite services, all enhanced by our beautiful coastal setting that provides a naturally calming and therapeutic environment.</p>
+              <p>Bellavista Barry is a long-established quality nursing home situated in the seaside of Barry with spectacular views over the Bristol channel and has been running since 2007 to enable elderly people to continue living as independently as possible by receiving care and support consistent with their needs.</p>
+              <p>Bellavista Barry is a 39-bedded registered care home providing accommodation and nursing care for older people. Our main aim is to provide a continuum of care, which takes account of increasing needs and frailty. The privacy, dignity, independence, rights and choices of our clients are central throughout their stay in Bellavista. Individual care needs are carefully identified and a personalised care program created. We aim to nurture the social care needs of our clients and maintain the strong links with the local community. Above all, we work to ensure that the home has a relaxed and happy environment.</p>
+              <p>We offer professional social care and nursing services for the elderly. The home is registered to provide high level of  dementia nursing , Dementia Residential,General Nursing,  Respite ,CHC Nursing and End of Life care . We offer you and your loved ones the perfect mix of peace and tranquillity, privacy and companionship, all within a safe, secure and High-Quality Nursing caring environment. All staff within are appropriately qualified to deliver good standards of care. A continuous staff-training programme has been to ensure that standards are maintained in line with the legislation and regulations and with the requirements of the Care Inspectorate for Wales (CIW).</p>
+              <p>All residents are assured that they will be treated with respect and dignity according to their individual needs and wishes. Our cheerful and highly qualified staff are on hand 24-hours a day to enable the very best quality of life for our residents.We have a dedicated activity team who tailored person centred activity to our residents. We trying to improve our quality of care  and support our staff through various training and development programs .</p>
+              <p className="dining-announcement">We are delighted to announce the opening of our brand new dining area in our Barry Bellavista ,which indeed reflects in each and every corner of the room to create a Dementia Friendly Dining Experience in a warm and welcoming environment for our beloved and well-deserved Residents. We are very proud of our new dining facilities and staff here at Bellavista Nursing Home Barry</p>
             </div>
           </div>
 
@@ -239,6 +286,16 @@ const Barry = () => {
               <h4>Seaside Respite</h4>
               <p>Short-term coastal breaks providing families with peace of mind</p>
             </div>
+            <div className="card clickable-card" onClick={() => openModal('chc')}>
+              <i className="fas fa-heartbeat" style={{ fontSize: '3rem', color: 'var(--primary-teal)', marginBottom: '20px' }}></i>
+              <h4>CHC Nursing Care</h4>
+              <p>Specialist CHC support with coordinated clinical oversight</p>
+            </div>
+            <div className="card clickable-card" onClick={() => openModal('endOfLife')}>
+              <i className="fas fa-dove" style={{ fontSize: '3rem', color: 'var(--primary-pink)', marginBottom: '20px' }}></i>
+              <h4>End-of-Life Care</h4>
+              <p>Compassionate, dignified palliative care for residents and families</p>
+            </div>
           </div>
         </div>
       </section>
@@ -248,6 +305,7 @@ const Barry = () => {
         <div className="container">
           <h2 className="section-title">Our Seaside Team</h2>
           <p className="section-subtitle">Experienced professionals who understand the benefits of coastal care</p>
+          <p>Bellavista Barry has 35 members of staff working in our nursing home and we’re extremely proud of all of them. We select our staff because of their caring attitude, and we train them in all aspects of care so you have peace of mind that your loved one is in good hands. Most of them have been with us for a long time, forming a well‑knit team dedicated to providing care of the highest standard. Our wonderful team comprises nurses, nursing assistants, carers, activities coordinator, chefs, kitchen assistants, housekeepers, maintenance, and more — all here to ensure residents enjoy their time at the home and are supported to live life to the fullest.</p>
           <div className="team-grid">
             <div className="card">
               <img src="https://picsum.photos/seed/barry-manager/200/200" alt="Michael Davies" />
@@ -273,6 +331,115 @@ const Barry = () => {
               <p>Physiotherapist</p>
               <p>Specializing in coastal walks and sea air therapy</p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">Activities at Bellavista Barry</h2>
+          <p className="section-subtitle">Encouraging active, stimulating, and social experiences every day</p>
+          <p>At Bellavista Nursing Home Barry, we believe encouraging our clients to be as active as possible is a key part of maintaining good physical and mental wellbeing.</p>
+          <button className="toggle-btn" onClick={toggleActivities}>{activitiesExpanded ? 'Show Less' : 'Read More'}</button>
+          <div className={`section-expanded-content ${activitiesExpanded ? 'expanded' : ''}`}>
+            <div className="section-expanded">
+              <p>We have a dedicated in‑house Activities Coordinator who arranges a varied activity program for all of our residents. As an organisation, we encourage residents to take part in stimulating activities and events in their day‑to‑day life. The activities are stimulating, fun and promote socialisation amongst those in our care.</p>
+              <p>Bellavista Nursing Home Barry has in‑house musical performances from artists of varied genres as well as theatre productions and choice performances. We host coffee mornings and welcome families to join us to share their views on life at Bellavista Barry. Weather permitting, we make the most of our lovely outdoor patio areas and adjoining gardens. We also encourage strong links with local communities, providing entertainment such as sing‑alongs and performances that engage with the nostalgia residents enjoy reminiscing over.</p>
+              <p>We look at each of the residents who are participating to see whether there are any adjustments we need to make to help them get the most out of sessions. Although we want to encourage our residents to push themselves, it’s essential that they don’t feel uncomfortable at any time. The dignity of our residents and our respect for them is at the centre of everything we do — especially in the activities department. We often review and assess the activities designed by the coordinator whilst also providing on‑going training and development.</p>
+
+              <h3>Activities We Offer</h3>
+              <ul>
+                <li>Flower arranging</li>
+                <li>Arts and crafts</li>
+                <li>Bingo</li>
+                <li>Meals out</li>
+                <li>Sensory therapy</li>
+                <li>Playing cards</li>
+                <li>Sing‑along / Karaoke</li>
+                <li>Board games</li>
+                <li>Painting competitions</li>
+                <li>Trips out</li>
+                <li>Baking & cooking</li>
+                <li>Massage</li>
+                <li>Gardening</li>
+                <li>Sewing</li>
+                <li>Singers and musicians performing</li>
+                <li>Local schools visiting</li>
+                <li>Church service</li>
+                <li>Armchair exercises</li>
+                <li>Garden activities</li>
+                <li>Newspaper reading</li>
+                <li>Seasonal activities</li>
+                <li>Film days</li>
+                <li>1‑to‑1 reminiscing</li>
+              </ul>
+
+              <h3>Our Activities Gallery</h3>
+              <div className="gallery-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginTop: '12px' }}>
+                <img alt="Activity Room" src={`${process.env.PUBLIC_URL}/images/activity-room.jpg`} />
+                <img alt="Music Therapy" src={`${process.env.PUBLIC_URL}/images/music-therapy.jpeg`} />
+                <img alt="Outdoor Terrace" src={`${process.env.PUBLIC_URL}/images/outdoor-terrace.jpg`} />
+                <img alt="Garden Activities" src={`${process.env.PUBLIC_URL}/images/garden-facility.jpeg`} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">Facilities & Services</h2>
+          <p>Bellavista Barry is a 39‑bedded registered care home providing accommodation and nursing care for older people.</p>
+          <button className="toggle-btn" onClick={toggleFacilities}>{facilitiesExpanded ? 'Show Less' : 'Read More'}</button>
+          <div className={`section-expanded-content ${facilitiesExpanded ? 'expanded' : ''}`}>
+            <div className="section-expanded">
+              <p>Our main aim is to provide a continuum of care, which takes account of increasing needs and frailty.</p>
+              <p>All bedrooms are connected to a nurse call system and have privacy locks on doors with a lockable facility to secure valuables and personal items. All room sizes meet or exceed the national minimum standard.</p>
+              <p>We attach high importance to our residents’ meals and our cooks spend time with them to learn their tastes and preferences and in deciding how best to present their meals. We have varied menus to accommodate everyone’s taste and need. We take care to help people when they need it and to do so sensitively. We encourage relatives to join us for meals.</p>
+              <p className="dining-announcement">We are delighted to announce the opening of our brand new dining area in our Barry Bellavista, which reflects in every corner of the room to create a Dementia‑Friendly Dining Experience in a warm and welcoming environment for our beloved and well‑deserved residents. We are very proud of our new dining facilities and staff here at Bellavista Nursing Home Barry.</p>
+
+              <h3>Facilities</h3>
+              <ul>
+                <li>Ground‑floor lounge hosting music mornings, games afternoons, singers, and music therapy</li>
+                <li>Communal lounges and dining rooms</li>
+                <li>Wheelchair‑friendly, landscaped gardens for gentle strolls and relaxing walks</li>
+                <li>Cinema lounge with big projector cinema</li>
+                <li>Gardens and patio area</li>
+                <li>Hairdressing facilities</li>
+                <li>Dining room supporting arts & crafts, painting, gardening club and bingo</li>
+                <li>Regular pet therapy sessions</li>
+                <li>Dedicated housekeeping and laundry team</li>
+                <li>On‑site laundry for washing and drying</li>
+              </ul>
+
+              <h3>Our Facilities Gallery</h3>
+              <div className="gallery-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px', marginTop: '12px' }}>
+                <img alt="Communal Lounge" src={`${process.env.PUBLIC_URL}/images/lounge-area.jpg`} />
+                <img alt="Dining Room" src={`${process.env.PUBLIC_URL}/images/dining-room.jpg`} />
+                <img alt="Cinema Lounge" src={`${process.env.PUBLIC_URL}/images/cinema-facility.jpeg`} />
+                <img alt="Kitchen Area" src={`${process.env.PUBLIC_URL}/images/kitchen-area.jpg`} />
+                <img alt="Landscaped Garden" src={`${process.env.PUBLIC_URL}/images/garden-facility.jpeg`} />
+              </div>
+
+              <div style={{ marginTop: '20px' }}>
+                <a className="btn" href={`${process.env.PUBLIC_URL}/ciw-report-barry.pdf`} target="_blank" rel="noopener noreferrer">
+                  <i className="fas fa-file-pdf"></i>&nbsp; View CIW Report (PDF)
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container">
+          <h2 className="section-title">Photo Gallery</h2>
+          <div className="gallery-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
+            <img alt="Private Room" src={`${process.env.PUBLIC_URL}/images/private-room.jpg`} />
+            <img alt="Reception" src={`${process.env.PUBLIC_URL}/images/reception-facility.jpeg`} />
+            <img alt="Therapy Room" src={`${process.env.PUBLIC_URL}/images/therapy-room.jpg`} />
+            <img alt="Library" src={`${process.env.PUBLIC_URL}/images/library-facility.jpeg`} />
+            <img alt="Outdoor Patio" src={`${process.env.PUBLIC_URL}/images/outdoor-terrace.jpg`} />
           </div>
         </div>
       </section>
@@ -398,26 +565,22 @@ const Barry = () => {
       <section className="section">
         <div className="container">
           <h2 className="section-title">Contact Information</h2>
-          <div className="contact-info">
-            <div className="contact-item">
-              <i className="fas fa-map-marker-alt"></i>
-              <span>Barry Seaside, Vale of Glamorgan - Waterfront location with beach access</span>
+          <div className="care-grid">
+            <div className="card">
+              <i className="fas fa-home" style={{ fontSize: '2rem', color: 'var(--primary-blue)' }}></i>
+              <h4>Bellavista Barry</h4>
+              <p>106-108 Tynewydd Road</p>
+              <p>Barry, CF62 8BB</p>
             </div>
-            <div className="contact-item">
-              <i className="fas fa-phone"></i>
-              <span>01446 735 200</span>
+            <div className="card">
+              <i className="fas fa-phone" style={{ fontSize: '2rem', color: 'var(--primary-green)' }}></i>
+              <h4>Call Us</h4>
+              <p>01446 743893</p>
             </div>
-            <div className="contact-item">
-              <i className="fas fa-envelope"></i>
-              <span>barry@bellavistanursinghome.com</span>
-            </div>
-            <div className="contact-item">
-              <i className="fas fa-clock"></i>
-              <span>Visiting Hours: 9:00 AM - 8:00 PM Daily (Extended for sunset viewing)</span>
-            </div>
-            <div className="contact-item">
-              <i className="fas fa-wheelchair"></i>
-              <span>Fully accessible with beach access ramps and coastal pathways</span>
+            <div className="card">
+              <i className="fas fa-envelope" style={{ fontSize: '2rem', color: 'var(--primary-orange)' }}></i>
+              <h4>Email</h4>
+              <p>admin@bellavistanursinghome.com</p>
             </div>
           </div>
         </div>
